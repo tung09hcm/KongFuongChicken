@@ -5,7 +5,6 @@ body {
 
 .navbar {
     background-color: #fff;
-    border-bottom: 1px solid #ddd;
 }
 
 .navbar-brand-logo {
@@ -18,6 +17,25 @@ body {
     font-size: 18px !important;
     font-weight: bold;
 }
+
+/* Thiết lập gạch chân cho thẻ nav-item khi ở trạng thái active */
+.navbar-nav .nav-link.active {
+    text-decoration: underline #E53631;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8.5px;
+}
+
+/* Khi hover vào nav-link, thêm gạch chân nếu không phải là thẻ active
+.navbar-nav .nav-link:not(.active):hover {
+    text-decoration: underline #E53631;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3.5px;
+} */
+
+/* Xóa gạch chân khi hover vào thẻ active */
+/* .navbar-nav .nav-link.active:hover {
+    text-decoration: none;
+} */
 
 .nav-link-icon {
     font-size: 25px !important;
@@ -41,7 +59,7 @@ body {
     transition: opacity 300ms, transform 300ms;
 }
 
-.navbar-nav-list a:hover::after, 
+.navbar-nav-list a:not(.active):hover::after, 
 .navbar-nav-list a:focus::after {
     opacity: 1;
     transform: translate3d(0, 0.2em, 0);
@@ -52,14 +70,10 @@ body {
     transform-origin: center;
 }
 
-.navbar-nav-list a:hover::after,
+.navbar-nav-list a:not(.active):hover::after,
 .navbar-nav-list a:focus::after{
     transform: scale(1);
 }
-
-/* .navbar-nav .nav-link:hover {
-    color: #d32f2f;
-} */
 
 .navbar-nav .btn {
     background-color: #ffffff;

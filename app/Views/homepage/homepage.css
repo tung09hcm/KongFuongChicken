@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.top-bar {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 10px 0;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.icon-at-home {
+    background: url(https://static.kfcvietnam.com.vn/images/web/sprite.png?v=5.0) no-repeat;
+    background-position: -143px -771px;
+    width: 27px;
+    height: 23px;
+    margin-right: 5px;
+    display: inline-block;
+    align-items: center;
+}
+
+.icon-at-pickup {
+    background: url(https://static.kfcvietnam.com.vn/images/web/sprite.png?v=5.0) no-repeat;
+    background-position: -190px -771px;
+    width: 27px;
+    height: 23px;
+    margin-right: 5px;
+    display: inline-block;
+    align-items: center;
+}
+
+.top-bar .btn {
+    background-color: #E53631;
+    color: white;
+    font-weight: bold;
+    border-radius: 45px;
+    padding: 10px 20px;
+}
+
+.top-bar .btn:hover {
+    background-color: #bd2c27;
+}
+
+.top-bar .icon-text {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.top-bar .icon-text img {
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Navbar */
+.navbar-main {
+    justify-content: center;
+}
+
+.navbar-main .navbar-nav-main { 
+    overflow-x: auto; 
+    white-space: nowrap; 
+    flex-wrap: nowrap; 
+}
+
+.navbar-main .nav-link-main { 
+    font-size: 20px;
+    color: #7F7F7F;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-main .nav-link-main:hover {
+    color: rgb(0, 0, 0) !important;
+}
+
+.navbar-main .nav-link-main.active {
+    color: rgb(0, 0, 0);
+    text-decoration: underline #E53631;
+    text-decoration-thickness: 5px;
+    text-underline-offset: 5.5px;
+}
+
+/* Main Content */
+.card {
+    width: 280px !important;
+    height: 415px;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 10px 16px 10px 16px !important;
+}
+
+.category-title {
+    font-weight: bold;
+}
+
+.card-img {
+    width: 260px;
+    height: 220px; 
+    object-fit: cover; 
+    margin-bottom: 10px;
+}
+
+.product-title { 
+    font-size: 20px !important;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-title:hover { 
+    cursor: pointer;
+}
+
+.description {
+    min-height: 2rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.price { 
+    font-size: 19px !important;
+    font-weight: bold; 
+    color: #333; 
+    margin-bottom: 10px;
+}
+        
+.btn-add {
+    background-color: #E53631 !important;
+    color: #ffffff !important;
+    border: 1px solid #E53631 !important;
+}
+
+.btn-add:hover {
+    background-color: #c92f2a !important;
+    border: 1px solid #c92f2a !important;
+    cursor: pointer;
+}
