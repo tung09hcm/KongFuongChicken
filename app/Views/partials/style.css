@@ -1,0 +1,286 @@
+/* Header */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand-logo {
+    width: 80px;
+    height: 80px;
+}
+
+.navbar-nav .nav-link {
+    color: #000;
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+.nav-link-icon {
+    font-size: 25px !important;
+}
+
+.navbar-nav-list a {
+    display: block;
+    position: relative;
+    padding: 0.2em 0;
+}
+
+.navbar-nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: #E53631;
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.navbar-nav-list a:hover::after, 
+.navbar-nav-list a:focus::after {
+    opacity: 1;
+    transform: translate3d(0, 0.2em, 0);
+}
+
+.navbar-nav-list a::after {
+    transform: scale(0);
+    transform-origin: center;
+}
+
+.navbar-nav-list a:hover::after,
+.navbar-nav-list a:focus::after{
+    transform: scale(1);
+}
+
+/* .navbar-nav .nav-link:hover {
+    color: #d32f2f;
+} */
+
+.navbar-nav .btn {
+    background-color: #ffffff;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding-top: 1rem;
+}
+
+.sidebar.show {
+    right: 0;
+}
+
+/* Close button styling */
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+}
+
+/* Sidebar list styling */
+.sidebar h5 {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.sidebar ul {
+    padding-left: 0;
+}
+
+.sidebar li {
+    list-style: none;
+}
+
+.sidebar a {
+    display: block;
+    font-size: 15px !important;
+    color: #333;
+    padding: 0.1rem 0.5rem;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    text-decoration: underline #E53631;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3.5px;
+}
+
+.sidebar-footer {
+    background-color: #202124;
+    overflow: hidden;
+}
+
+.sidebar-social-icons {
+    display: flex;
+    justify-content: center !important;
+    margin-top: 30px !important;
+}
+
+.sidebar-social-icons a {
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 45px;
+    margin: 0 0 2em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the icon within the circle */
+    width: 46px;
+    height: 46px;
+    border-radius: 50%; /* Makes the container fully circular */
+    outline: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    margin: 0 1em; /* Adds spacing between icons */
+}
+
+.sidebar-social-icons a:hover {
+    text-decoration: none !important;
+    border: 1px solid #fff;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388; 
+}
+
+.sidebar-social-icons i {
+    font-size: 20px; /* Adjusts the icon size */
+    color: #ddd;
+    margin: 0; /* Removes any default margin */
+}
+
+.sidebar-social-icons i:hover {
+    color: #fff;
+}
+
+.sidebar-footer p {
+    display: flex;
+    color: #ABABAB;
+    font-size: 15px;
+    justify-content: center;
+}
+
+hr {
+    margin: 20px 15px !important;
+    border: 0 !important;
+    border-top: 1.5px solid #a9a8a8 !important;
+}
+
+/* Footer */
+.footer {
+    background-color: #202124; 
+    color: #ABABAB;
+    padding: 40px 0;
+}
+
+.footer h6 {
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer p,
+.footer a {
+    color: #ABABAB;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.footer a:hover {
+    color: #FFFFFF;
+}
+
+.footer .app-badges {
+    display: flex;
+    align-items: center;
+}
+
+.footer .app-badges img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.footer .social-icons {
+    display: flex;
+    justify-content: center !important;
+}
+
+.social-icons a {
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 45px;
+    margin: 0 0 2em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the icon within the circle */
+    width: 46px;
+    height: 46px;
+    border-radius: 50%; /* Makes the container fully circular */
+    outline: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    margin: 0 1em; /* Adds spacing between icons */
+}
+
+.social-icons a:hover {
+    border: 1px solid #fff;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388; 
+}
+
+.footer .social-icons i {
+    font-size: 20px; /* Adjusts the icon size */
+    color: #ddd;
+    margin: 0; /* Removes any default margin */
+}
+
+.footer .social-icons i:hover {
+    color: #fff;
+}
+
+.footer-copyright {
+    display: flex;
+    justify-content: center;
+    font-size: 12px !important;
+    margin-top: 30px !important;
+}
+
+.footer .company-info {
+    font-size: 14px;
+    color: #ABABAB;
+}
+
+.company-info-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ABABAB;
+}
+
+.footer .company-info p {
+    margin-bottom: 5px;
+}
