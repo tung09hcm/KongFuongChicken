@@ -1,0 +1,127 @@
+<!-- Này chỉ cần load menu ra là được -->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        function loadNavbar() {
+            fetch("navBar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navBar").innerHTML = data;
+                    const homeLink = document.getElementById("menus");
+                    if (homeLink) {
+                        homeLink.classList.add("active");
+                    }
+                }
+            );
+        }
+
+        window.onload = loadNavbar();
+    </script>
+</head>
+<body>
+    <div id="navBar"></div>
+
+    <div class="container">
+        <h1>Menu</h1>
+
+        <!-- /*menu*/ -->
+        <div class="contain2" style="margin-top: 0px;">
+            <div class="link">
+                <a id="add-dish" href="dish.html">Thêm món</a>
+            </div>
+            <div class="card-items">
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+                <div class="item" onclick="window.location.href='dish.html'">
+                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                    <h4>Combo 1 người</h4>
+                    <div class="info">
+                        <h5>Orders <span>15</span></h5>
+                        <h5>150.000đ</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="footer">
+                <div class="footer-item">
+                    <h3>Liên hệ</h3>
+                    <p>Hotline: 19006886</p>
+                    <p>Email:
+                        <a href="mailto:linh.nguyenhathuy8023@hcmut.edu.vn">Quản lý cấp cao</a>
+                    </p>
+                </div>
+                <div class="footer-item">
+                    <h3>Địa chỉ</h3>
+                    <p>Trường Đại học Bách Khoa Tp.HCM</p>
+                    <p>268 Lý Thường Kiệt, Phường 14, Quận 10, Tp.HCM</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    
+</body>
+</html>

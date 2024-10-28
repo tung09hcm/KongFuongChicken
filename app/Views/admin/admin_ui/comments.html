@@ -1,0 +1,136 @@
+<!-- Load comment và lưu comment theo id của từng comment -->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        function loadNavbar() {
+            fetch("navBar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navBar").innerHTML = data;
+                    const homeLink = document.getElementById("comments");
+                    if (homeLink) {
+                        homeLink.classList.add("active");
+                    }
+                }
+            );
+        }
+
+        window.onload = loadNavbar();
+    </script>
+</head>
+<body>
+    <div id="navBar"></div>
+
+    <div class="container">
+        <h1>Bình luận</h1>
+
+        <!-- /*comment*/ -->
+        <div class="contain2" style="margin-top: 0px;">
+            <div class="comments">
+                <div class="comment" id="c-002"">
+                    <div class="item">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                        <h4>Combo 1 người</h4>
+                        <div class="info">
+                            <h5>Orders <span>15</span></h5>
+                            <h5>150.000đ</h5>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3>Cao Huệ Chi</h3>
+                        <p style="color: #00000082; margin-bottom: 10px;">6:50 23/10/2024</p>
+                        <p>Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình, cjnjewnjj thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê, mốt hông ăn nữa!!! Món này hơi bình thường, mà mắc ghê, sao dị ta!!! Món này hơi bình thường, mà mắc ghê! </p>
+                        <div class="answer"></div>
+                        <div class="answer-input">
+                            <input type="text" placeholder="Trả lời bình luận...">
+                            <button onclick="answerComments('c-002')">Gửi</button>
+                        </div>
+                    </div> 
+                </div>
+                <div class="comment" id="c-003"">
+                    <div class="item">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                        <h4>Combo 1 người</h4>
+                        <div class="info">
+                            <h5>Orders <span>15</span></h5>
+                            <h5>150.000đ</h5>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3>Cao Huệ Chi</h3>
+                        <p style="color: #00000082; margin-bottom: 10px;">6:50 23/10/2024</p>
+                        <p>Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình, cjnjewnjj thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê, mốt hông ăn nữa!!! Món này hơi bình thường, mà mắc ghê, sao dị ta!!! Món này hơi bình thường, mà mắc ghê! </p>
+                        <div class="answer"></div>
+                        <div class="answer-input">
+                            <input type="text" placeholder="Trả lời bình luận...">
+                            <button onclick="answerComments('c-003')">Gửi</button>
+                        </div>
+                    </div> 
+                </div>
+                <div class="comment" id="c-004"">
+                    <div class="item">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
+                        <h4>Combo 1 người</h4>
+                        <div class="info">
+                            <h5>Orders <span>15</span></h5>
+                            <h5>150.000đ</h5>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3>Cao Huệ Chi</h3>
+                        <p style="color: #00000082; margin-bottom: 10px;">6:50 23/10/2024</p>
+                        <p>Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê!!! Món này hơi bình, cjnjewnjj thường, mà mắc ghê!!! Món này hơi bình thường, mà mắc ghê, mốt hông ăn nữa!!! Món này hơi bình thường, mà mắc ghê, sao dị ta!!! Món này hơi bình thường, mà mắc ghê! </p>
+                        <div class="answer"></div>
+                        <div class="answer-input">
+                            <input type="text" placeholder="Trả lời bình luận...">
+                            <button onclick="answerComments('c-004')">Gửi</button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer">
+                <div class="footer-item">
+                    <h3>Liên hệ</h3>
+                    <p>Hotline: 19006886</p>
+                    <p>Email:
+                        <a href="mailto:linh.nguyenhathuy8023@hcmut.edu.vn">Quản lý cấp cao</a>
+                    </p>
+                </div>
+                <div class="footer-item">
+                    <h3>Địa chỉ</h3>
+                    <p>Trường Đại học Bách Khoa Tp.HCM</p>
+                    <p>268 Lý Thường Kiệt, Phường 14, Quận 10, Tp.HCM</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function answerComments(id) {
+                // Get the input value
+                let value = document.getElementById(id).getElementsByTagName('input')[0].value;
+
+                document.querySelectorAll('#'+id+'.comment .content .answer')[0].innerHTML += 
+                `
+                    <div class="answer-item">
+                        <h3>Quản lý cấp cao</h3>
+                        <p>${value}</p>
+                    </div>
+                `;
+                
+                document.getElementById(id).getElementsByTagName('input')[0].value = '';
+            }
+        </script>
+    </div>
+
+    
+</body>
+</html>
