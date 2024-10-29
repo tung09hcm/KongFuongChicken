@@ -35,12 +35,15 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
+                        <!-- User icon -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"> <i class="nav-link-icon fa-solid fa-user"></i> </a>
+                            <a class="nav-link" href="../../Views/auth/login.php"> <i class="nav-link-icon fa-solid fa-user"></i> </a>
                         </li>
+                        <!-- Card icon -->
                         <li class="nav-item">
                             <a class="nav-link" href="#"> <i class="nav-link-icon fa-solid fa-cart-shopping"></i> 0</a>
                         </li>
+                        <!-- Category icon -->
                         <li class="nav-item">
                             <button id="menuButton" class="nav-link btn text-dark">
                                 <i class="nav-link-icon fa-solid fa-bars"></i>

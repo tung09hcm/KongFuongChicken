@@ -1,0 +1,154 @@
+/* Longin */
+.container-login {
+    margin-bottom: 0px !important;
+    margin-left: 120px !important;
+    margin-right: 120px !important;
+}
+
+.left-section {
+    height: 100%;
+}
+
+.right-section {
+    padding-top: 50px;
+}
+
+.right-section h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-bottom: 20px !important;
+}
+
+.btn-login {
+    background-color: #4CA846 !important;
+    color: white !important;
+    width: 100% !important;
+    height: 45px;
+    margin-bottom: 20px !important;
+    border-radius: 20px !important;
+}
+
+.btn-login:hover {
+    background-color: #4CA846 !important;
+    color: white !important;
+}
+
+.appico {
+    background: url(https://static.kfcvietnam.com.vn/images/web/spritefr.png?v=1.0) no-repeat;
+    background-position: -257px -353px !important;
+    height: 26px !important;
+    width: 30px !important;
+    display: inline-block;
+    vertical-align: middle !important;
+}
+
+.btn-apple {
+    background-color: #000000 !important;
+    color: white !important;
+    width: 100% !important;
+    height: 45px;
+    margin-bottom: 10px;
+    border-radius: 20px !important;
+}
+
+.btn-apple:hover {
+    background-color: #000000;
+    color: white !important;
+}
+
+.btn-google {
+    background-color: #E53631 !important;
+    color: white !important;
+    width: 100% !important;
+    height: 45px !important;
+    border-radius: 20px !important;
+}
+
+.btn-google:hover {
+    background-color: #E53631 !important;
+    color: white !important;
+}
+
+.btn-google-item {
+    font-size: 20px !important;
+}
+
+.form-text {
+    text-align: right !important;
+}
+
+.form-text a {
+    text-decoration: none;
+    color: #000 !important;
+}
+
+.register-text {
+    text-align: center !important;
+    margin-top: 20px !important;
+}
+
+.register-text a {
+    color: #000;
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
+
+.register-text a:hover {
+    color: #000;
+    text-decoration: none !important;
+}
+
+/* Register */
+.form-container {
+    width: 100%;
+}
+
+.form-container h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-container .form-check-label {
+    font-size: 15px !important;
+    color: black;
+}
+
+.form-container .form-check-label a {
+    color: black;
+    font-weight: bold !important;;
+    text-decoration: underline;
+}
+
+.form-container .btn-primary {
+    background-color: #E4002B;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 20px !important;
+}
+
+.form-container .btn-primary:hover {
+    background-color: #c30024;
+}
+
+.form-container .form-text-register {
+    text-align: center !important;
+}
+
+.form-container .form-text-register a {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.form-container .form-text-register a:hover {
+    color: black;
+    font-weight: bold;
+    text-decoration: none !important;
+}

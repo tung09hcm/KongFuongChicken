@@ -43,8 +43,10 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar-main navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFFFFF !important;">
-        <div class="container-fluid">
+    <nav class="navbar-product navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFFFFF !important;">
+        <div class="container-fluid navbar-product-main">
+            <div class="navbar-product-overlay navbar-product-left"></div>
+            <div class="navbar-product-overlay navbar-product-right"></div>
             <div class="navbar-collapse">
                 <ul class="navbar-nav navbar-nav-main mx-auto">
                     <li class="nav-item"><a class="nav-link-main nav-link active" href="#uudai">ƯU ĐÃI</a></li>
@@ -54,7 +56,7 @@
                     <li class="nav-item"><a class="nav-link-main nav-link" href="#garan">GÀ RÁN - GÀ QUAY</a></li>
                     <li class="nav-item"><a class="nav-link-main nav-link" href="#burgercom">BURGER - CƠM - MÌ Ý</a></li>
                     <li class="nav-item"><a class="nav-link-main nav-link" href="#thucan">THỨC ĂN NHẸ</a></li>
-                    <li class="nav-item"><a class="nav-link-main nav-link" href="#thucuong">THỨC UỐNG & TRÁNG MIỆNG</a></li>
+                    <li class="nav-item"><a class="nav-link-main nav-link" href="#thucuong">THỨC UỐNG &amp; TRÁNG MIỆNG</a></li>
                 </ul>
             </div>
         </div>
@@ -63,58 +65,58 @@
     <hr style="border-top: 2px solid #E5E5E5; margin-top: 0px !important; margin-bottom: 35px !important;">
 
     <!-- Main Content -->
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="uudai">
-            <h3 class="mb-4 category-title">ƯU ĐÃI</h3>
+            <h3 class="mb-4 category-product-title">ƯU ĐÃI</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -122,59 +124,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="monmoi">
-            <h3 class="mb-4 category-title">MÓN MỚI</h3>
+            <h3 class="mb-4 category-product-title">MÓN MỚI</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -182,59 +184,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="combo1nguoi">
-            <h3 class="mb-4 category-title">COMBO 1 NGƯỜI</h3>
+            <h3 class="mb-4 category-product-title">COMBO 1 NGƯỜI</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -242,59 +244,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="combonhom">
-            <h3 class="mb-4 category-title">COMBO NHÓM</h3>
+            <h3 class="mb-4 category-product-title">COMBO NHÓM</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -302,59 +304,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="garan">
-            <h3 class="mb-4 category-title">GÀ RÁN - GÀ QUAY</h3>
+            <h3 class="mb-4 category-product-title">GÀ RÁN - GÀ QUAY</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -362,59 +364,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="burgercom">
-            <h3 class="mb-4 category-title">BURGER - CƠM - MÌ Ý</h3>
+            <h3 class="mb-4 category-product-title">BURGER - CƠM - MÌ Ý</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -422,59 +424,59 @@
         </section>
     </div>
 
-    <div class="container mt-4 mb-3">
+    <div class="container container-product mt-4 mb-3">
         <section id="thucan">
-            <h3 class="mb-4 category-title">THỨC ĂN NHẸ</h3>
+            <h3 class="mb-4 category-product-title">THỨC ĂN NHẸ</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -482,59 +484,59 @@
         </section>
     </div>
 
-    <div class="container mt-4" style="margin-bottom: 50px;">
+    <div class="container container-product mt-4" style="margin-bottom: 50px;">
         <section id="thucuong">
-            <h3 class="mb-4 category-title">THỨC UỐNG & TRÁNG MIỆNG</h3>
+            <h3 class="mb-4 category-product-title">THỨC UỐNG & TRÁNG MIỆNG</h3>
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 
                 <!-- Combo Item 1 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Burger">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Burger">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Burger</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 2 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Cơm Gà Rán">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Cơm Gà Rán">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Cơm Gà Rán</h5>
-                            <p class="price">78.000đ</p>
-                            <p class="description">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">78.000đ</p>
+                            <p class="description-product">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 3 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm</h5>
-                            <p class="price">148.000đ</p>
-                            <p class="description">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">148.000đ</p>
+                            <p class="description-product">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo Item 4 -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-img" alt="Combo Tối Nhóm 178K">
-                        <div class="card-body">
+                <div class="col col-product">
+                    <div class="card card-product">
+                        <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-product-img" alt="Combo Tối Nhóm 178K">
+                        <div class="card-product-body">
                             <h5 class="product-title">Combo Tối Nhóm 178K</h5>
-                            <p class="price">178.000đ</p>
-                            <p class="description">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                            <button class="btn btn-add w-100">Thêm</button>
+                            <p class="price-product">178.000đ</p>
+                            <p class="description-product">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
+                            <button class="btn btn-product-add w-100">Thêm</button>
                         </div>
                     </div>
                 </div>
