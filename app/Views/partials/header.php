@@ -28,7 +28,7 @@
                             <a class="nav-link" href="../../Views/product/hotdeal.php">KHUYẾN MÃI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">DỊCH VỤ TIỆC</a>
+                            <a class="nav-link" href="../../Views/bookparty/index.php">DỊCH VỤ TIỆC</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">HỆ THỐNG NHÀ HÀNG</a>

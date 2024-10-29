@@ -1,0 +1,110 @@
+.user-edit-sidebar {
+    width: 350px;
+    background-color: #212121;
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.user-edit-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100;
+}
+
+.user-edit-sidebar h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.user-edit-sidebar .user-edit-logout {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.user-edit-sidebar .user-edit-item {
+    font-size: 16px;
+    font-weight: 400;
+    color: #909092;
+    text-decoration: none;
+    padding: 10px 0;
+}
+
+.user-edit-sidebar .user-edit-item:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.user-edit-sidebar .user-edit-item.active {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.form-container {
+    padding: 0 40px 40px 40px;
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+}
+
+.submit-btn {
+    background-color: #ED3833;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+}
+
+.submit-btn:hover {
+    background-color: #e60000;
+}
+
+.no-address {
+    font-size: 25px;
+    font-weight: bold;
+    color: #939599;
+}
+
+.favourite-orders {
+    width: 800px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FAF7F7;
+    border-radius: 10px;
+}
+
+.favourite-orders-title {
+    width: 200px;
+    height: 100%;
+    margin: 100px 20px;
+}
+
+.favourite-orders-title p {
+    font-size: 38px;
+    font-weight: 800;
+
+}
+
+.favourite-orders-img {
+    width: 400px;
+    height: 100%;
+}
