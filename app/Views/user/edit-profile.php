@@ -13,7 +13,7 @@
     <!-- Link css user -->
     <link rel="stylesheet" href="../../Views/user/user.css">
     <!-- Link Fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
     <!-- Header -->
@@ -114,10 +114,20 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="submit-btn mt-3">Cập nhật tài khoản</button>
+                        <button id="updateAccountBtn" type="submit" class="submit-btn mt-3">Cập nhật tài khoản</button>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal overlay -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" id="closeBtn">
+            <i class="fa-solid fa-circle-xmark"></i>
+            </span>
+            <h4>CHI TIẾT TÀI KHOẢN CỦA BẠN ĐÃ ĐƯỢC CẬP NHẬT THÀNH CÔNG</h4>
         </div>
     </div>
 
