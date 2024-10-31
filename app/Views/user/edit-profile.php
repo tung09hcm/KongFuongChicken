@@ -125,7 +125,7 @@
     <div id="modalOverlay" class="modal-overlay">
         <div class="modal-box">
             <span class="close-btn" id="closeBtn">
-            <i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-solid fa-circle-xmark"></i>
             </span>
             <h4>CHI TIẾT TÀI KHOẢN CỦA BẠN ĐÃ ĐƯỢC CẬP NHẬT THÀNH CÔNG</h4>
         </div>

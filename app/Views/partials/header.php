@@ -104,10 +104,10 @@
         </div>
         <div class="sidebar-footer">
             <div class="sidebar-social-icons">
-                <a href="#"><i class="sidebar-footer-icon fab fa-facebook-f"></i></a>
-                <a href="#"><i class="sidebar-footer-icon fab fa-instagram"></i></a>
-                <a href="#"><i class="sidebar-footer-icon fab fa-youtube"></i></a>
-                <a href="#"><i class="sidebar-footer-icon fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/KFCVietnam/"><i class="sidebar-footer-icon fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/kfc_vietnam/"><i class="sidebar-footer-icon fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/KFCVietnam2011"><i class="sidebar-footer-icon fab fa-youtube"></i></a>
+                <a href="https://twitter.com/kfc_vietnam"><i class="sidebar-footer-icon fab fa-twitter"></i></a>
             </div>
             <hr style="border-top: 2px solid #E5E5E5;">
             <div class="sidebar-footer-text">

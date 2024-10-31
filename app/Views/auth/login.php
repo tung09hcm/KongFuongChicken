@@ -38,7 +38,7 @@
                         <label class="form-label" for="password">Mật khẩu *</label>
                         <input class="form-control" id="password" required="" type="password"/>
                         <div class="form-text">
-                            <a href="#">Bạn quên mật khẩu?</a>
+                            <a id="forgotpassword" href="#">Bạn quên mật khẩu?</a>
                         </div>
                     </div>
                     <button class="btn btn-login" type="submit">Đăng nhập</button>
@@ -60,6 +60,25 @@
         </div>
     </div>
 
+    <!-- Modal overlay -->
+    <div id="modalOverlay" class="login-modal-overlay">
+        <div class="login-modal-box">
+            <span class="login-close-btn" id="closeBtn">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </span>
+            <div class="login-modal-header">
+                <h5 class="login-modal-title">Bạn quên mật khẩu?</h5>
+            </div>
+            <div class="login-modal-body">
+                <p class="login-modal-body-title">Đừng lo lắng, bạn có thể đặt lại dễ dàng.</p>
+                <p class="login-modal-body-des">Chúng tôi sẽ gửi cho bạn một email có liên kết để đặt lại mật khẩu của bạn.</p>
+                <label for="email" class="login-modal-body-form-label">Địa chỉ email của bạn *</label>
+                <input type="email" class="login-modal-body-form-control" id="email" placeholder="">
+                <button type="button" class="btn btn-primary login-modal-body-btn mt-3">Gửi Email Đặt lại Mật khẩu</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <?php 
         include '../../Views/partials/footer.php';
@@ -69,5 +88,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="../../Views/auth/auth.js"></script>
 </body>
 </html>

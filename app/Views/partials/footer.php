@@ -65,10 +65,10 @@
 
             <!-- Social Media Icons -->
             <div class="social-icons">
-                <a href="#"><i class="footer-icon fab fa-facebook-f"></i></a>
-                <a href="#"><i class="footer-icon fab fa-instagram"></i></a>
-                <a href="#"><i class="footer-icon fab fa-youtube"></i></a>
-                <a href="#"><i class="footer-icon fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/KFCVietnam/"><i class="footer-icon fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/kfc_vietnam/"><i class="footer-icon fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/KFCVietnam2011"><i class="footer-icon fab fa-youtube"></i></a>
+                <a href="https://twitter.com/kfc_vietnam"><i class="footer-icon fab fa-twitter"></i></a>
             </div>
 
             <p class="footer-copyright">Copyright © 2023 KFC Vietnam</p>

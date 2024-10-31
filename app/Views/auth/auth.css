@@ -152,3 +152,83 @@
     font-weight: bold;
     text-decoration: none !important;
 }
+
+/* Modal overlay */
+.login-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1040;
+}
+
+.login-modal-box {
+    background: white;
+    max-width: 600px;
+    height: fit-content;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px !important;
+    cursor: pointer;
+    color: #000;
+}
+
+.login-modal-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.login-modal-body {
+
+}
+
+.login-modal-body-title {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.login-modal-body-des {
+    font-size: 19px;
+}
+
+.login-modal-body-form-label {
+    display: flex;
+    justify-content: start;
+}
+
+.login-modal-body-form-control {
+
+}
+
+.login-modal-body-btn {
+    width: 100%;
+    background-color: #E4002B !important;
+    border-radius: 15px;
+    border: 1px solid #E4002B !important;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-modal-body-btn:hover {
+    border: 1px solid #c30024 !important;
+    color: white;
+}
