@@ -13,6 +13,7 @@ class AdminController {
 
     public function index() {
         $admins = $this->model->getAllAdmins();
+        return $admins;
     }
 
     public function show($id) {
