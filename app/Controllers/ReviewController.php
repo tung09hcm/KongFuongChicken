@@ -1,34 +1,48 @@
 <?php
-// ReviewController.php
 namespace App\Controllers;
 
+
+
 use App\Models\ReviewModel;
+use App\Models\ProductModel;
 
 class ReviewController {
-    private $model;
-
-    public function __construct() {
-        $this->model = new ReviewModel();
+    public function view($product_id) {
+        $productModel = new ProductModel();
+        $reviewModel = new ReviewModel();
+        $product = $productModel->getProductById($product_id);
+        if (!$product) {
+            echo json_encode(['status' => 'error', 'message' => 'Product not found!']);
+            exit();
+        }
+        $reviews = $reviewModel->getReviewsByProductId($product_id);
+        echo json_encode(['status' => 'success', 'product' => $product, 'reviews' => $reviews]);
+        exit();
     }
 
-    public function index() {
-        $reviews = $this->model->getAllReviews();
+    public function write() {
+        $this->checkAuth('user');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $product_id = intval($_POST['product_id']);
+            $content = trim($_POST['content']);
+            $rating = intval($_POST['rating']);
+            if ($rating >= 1 && $rating <= 5) {
+                $reviewModel = new ReviewModel();
+                $reviewModel->createReview($product_id, $_SESSION['user_id'], $content, $rating);
+                echo json_encode(['status' => 'success', 'message' => 'Đánh giá đã được gửi thành công.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Đánh giá phải từ 1 đến 5 sao.']);
+            }
+            exit();
+        }
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        exit();
     }
 
-    public function show($id) {
-        $review = $this->model->getReviewById($id);
-    }
-
-    public function create($data) {
-        $this->model->createReview($data['product_id'], $data['user_id'], $data['review_text'], $data['rating']);
-    }
-
-    public function update($id, $data) {
-        $this->model->updateReview($id, $data['product_id'], $data['user_id'], $data['review_text'], $data['rating']);
-    }
-
-    public function delete($id) {
-        $this->model->deleteReview($id);
+    private function checkAuth($role) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập để tiếp tục.', 'redirect' => BASE_URL . 'login']);
+            exit();
+        }
     }
 }
-?>
