@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 
@@ -44,10 +42,18 @@ class ReviewModel extends BaseModel {
     }
 
     public function replyToReview($id, $reply) {
-        $stmt = $this->db->prepare("UPDATE Review SET reply = :reply WHERE id = :id");
-        $stmt->bindParam(':reply', $reply);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt = $this->db->prepare("INSERT INTO Review_Reply (review_id, admin_id, reply_content) VALUES (:review_id, :admin_id, :reply_content)");
+        $stmt->bindParam(':review_id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':admin_id', $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':reply_content', $reply);
         $stmt->execute();
-        return $stmt->rowCount();
+        return $this->db->lastInsertId();
+    }
+
+    public function getReplyByReviewId($review_id) {
+        $stmt = $this->db->prepare("SELECT Review_Reply.*, Account.name FROM Review_Reply JOIN Admin ON Review_Reply.admin_id = Admin.account_id JOIN Account ON Admin.account_id = Account.id WHERE Review_Reply.review_id = :review_id");
+        $stmt->bindParam(':review_id', $review_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

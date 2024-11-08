@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 
@@ -20,12 +18,22 @@ class CartModel extends BaseModel {
         return $stmt->fetch();
     }
 
-    public function addProductToCart($cart_id, $product_id) {
-        $stmt = $this->db->prepare("INSERT INTO Cart_Product (cart_id, product_id) VALUES (:cart_id, :product_id)");
+    public function addProductToCart($cart_id, $product_id, $quantity) {
+        $stmt = $this->db->prepare("INSERT INTO Cart_Product (cart_id, product_id, quantity) VALUES (:cart_id, :product_id, :quantity)");
         $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
         $stmt->execute();
         return $this->db->lastInsertId();
+    }
+
+    public function updateQuantity($cart_id, $product_id, $quantity) {
+        $stmt = $this->db->prepare("UPDATE Cart_Product SET quantity = :quantity WHERE cart_id = :cart_id AND product_id = :product_id");
+        $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 
     public function removeProductFromCart($cart_id, $product_id) {

@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 
@@ -19,20 +17,22 @@ class ProductModel extends BaseModel {
         return $stmt->fetch();
     }
 
-    public function createProduct($name, $price, $description) {
-        $stmt = $this->db->prepare("INSERT INTO Product (name, price, description) VALUES (:name, :price, :description)");
+    public function createProduct($name, $price, $description, $imageLink) {
+        $stmt = $this->db->prepare("INSERT INTO Product (name, price, description, imageLink) VALUES (:name, :price, :description, :imageLink)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':imageLink', $imageLink);
         $stmt->execute();
         return $this->db->lastInsertId();
     }
 
-    public function updateProduct($id, $name, $price, $description) {
-        $stmt = $this->db->prepare("UPDATE Product SET name = :name, price = :price, description = :description WHERE id = :id");
+    public function updateProduct($id, $name, $price, $description, $imageLink) {
+        $stmt = $this->db->prepare("UPDATE Product SET name = :name, price = :price, description = :description, imageLink = :imageLink WHERE id = :id");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':imageLink', $imageLink);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount();

@@ -1,13 +1,11 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 
 class AdminPermissionModel extends BaseModel {
     public function setPermissions($admin_id, $permissions) {
-        $stmt = $this->db->prepare("INSERT INTO Admin_Permission (admin_id, can_manage_user, can_manage_review, can_manage_order, can_manage_product, can_manage_discount, can_manage_promotion, can_add_admin, can_delete_admin) VALUES (:admin_id, :can_manage_user, :can_manage_review, :can_manage_order, :can_manage_product, :can_manage_discount, :can_manage_promotion, :can_add_admin, :can_delete_admin) ON DUPLICATE KEY UPDATE can_manage_user = :can_manage_user, can_manage_review = :can_manage_review, can_manage_order = :can_manage_order, can_manage_product = :can_manage_product, can_manage_discount = :can_manage_discount, can_manage_promotion = :can_manage_promotion, can_add_admin = :can_add_admin, can_delete_admin = :can_delete_admin");
+        $stmt = $this->db->prepare("INSERT INTO ADMIN_PERMISSION (admin_id, can_manage_user, can_manage_review, can_manage_order, can_manage_product, can_manage_discount, can_manage_promotion, can_add_admin, can_delete_admin) VALUES (:admin_id, :can_manage_user, :can_manage_review, :can_manage_order, :can_manage_product, :can_manage_discount, :can_manage_promotion, :can_add_admin, :can_delete_admin) ON DUPLICATE KEY UPDATE can_manage_user = :can_manage_user, can_manage_review = :can_manage_review, can_manage_order = :can_manage_order, can_manage_product = :can_manage_product, can_manage_discount = :can_manage_discount, can_manage_promotion = :can_manage_promotion, can_add_admin = :can_add_admin, can_delete_admin = :can_delete_admin");
         $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         $stmt->bindParam(':can_manage_user', $permissions['can_manage_user'], PDO::PARAM_BOOL);
         $stmt->bindParam(':can_manage_review', $permissions['can_manage_review'], PDO::PARAM_BOOL);
@@ -21,10 +19,55 @@ class AdminPermissionModel extends BaseModel {
         return $stmt->rowCount();
     }
 
+    public function setPermissionsByName($admin_id, $permission_name, $value) {
+        $allowed_permissions = [
+            'can_manage_user',
+            'can_manage_review',
+            'can_manage_order',
+            'can_manage_product',
+            'can_manage_discount',
+            'can_manage_promotion',
+            'can_add_admin',
+            'can_delete_admin'
+        ];
+    
+        if (!in_array($permission_name, $allowed_permissions)) {
+            throw new \Exception("Invalid permission name");
+        }
+    
+        $sql = "UPDATE ADMIN_PERMISSION SET $permission_name = :value WHERE admin_id = :admin_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':value', $value, PDO::PARAM_BOOL);
+        $stmt->bindParam(':admin_id', $admin_id);
+        return $stmt->execute();
+    }
+
     public function getPermissions($admin_id) {
         $stmt = $this->db->prepare("SELECT * FROM Admin_Permission WHERE admin_id = :admin_id");
         $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function getPermissionsByName($admin_id, $permission_name) {
+        $allowed_permissions = [
+            'can_manage_user',
+            'can_manage_review',
+            'can_manage_order',
+            'can_manage_product',
+            'can_manage_discount',
+            'can_manage_promotion',
+            'can_add_admin',
+            'can_delete_admin'
+        ];
+    
+        if (!in_array($permission_name, $allowed_permissions)) {
+            throw new \Exception("Invalid permission name");
+        }
+    
+        $stmt = $this->db->prepare("SELECT $permission_name FROM ADMIN_PERMISSION WHERE admin_id = :admin_id");
+        $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 }

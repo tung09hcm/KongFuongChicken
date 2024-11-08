@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 use PDOException;
@@ -10,7 +8,7 @@ class BaseModel {
     protected $db;
 
     public function __construct() {
-        require_once __DIR__ . '/../../config/config.php';
+        require_once BASE_PATH . '/config/config.php';
 
         $host = DB_HOST;
         $port = DB_PORT;

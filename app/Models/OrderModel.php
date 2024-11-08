@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-
+namespace Models;
 
 use PDO;
 
@@ -30,5 +28,12 @@ class OrderModel extends BaseModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function getProductInOrder($order_id) {
+        $stmt = $this->db->prepare("SELECT Product.*, Order_Product.quantity FROM Product JOIN Order_Product ON Product.id = Order_Product.product_id WHERE Order_Product.order_id = :order_id");
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

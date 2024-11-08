@@ -17,8 +17,11 @@ function loadEnv($path) {
         }
     }
 }
+define('BASE_URL', '/KongFuongChicken');
 
-loadEnv(__DIR__ . '/../.env');
+define('BASE_PATH', dirname(dirname(__FILE__)));
+
+loadEnv(BASE_PATH . '/.env');
 
 define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
 define('DB_PORT', $_ENV['DB_PORT'] ?? 3306);
@@ -27,7 +30,6 @@ define('DB_USER', $_ENV['DB_USER'] ?? 'root');
 define('DB_PASSWORD', $_ENV['DB_PASSWORD'] ?? '');
 define('DB_CHARSET', $_ENV['DB_CHARSET'] ?? 'utf8mb4');
 
-define('BASE_URL', '/KongFuongChicken/');
 
 define('TIMEZONE', 'Asia/Ho_Chi_Minh');
 date_default_timezone_set(TIMEZONE);

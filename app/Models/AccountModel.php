@@ -1,68 +1,70 @@
 <?php
-namespace App\Models;
-
-
-
+namespace Models;
 use PDO;
 
 class AccountModel extends BaseModel {
-    public function createAccount($username, $password, $role, $name, $email, $address, $birth_date, $phone) {
-        $stmt = $this->db->prepare("INSERT INTO Account (username, password, role, name, email, address, birth_date, phone) VALUES (:username, :password, :role, :name, :email, :address, :birth_date, :phone)");
+    protected function createAccount($username, $password, $name, $email, $phone, $birth_date) {
+        $sql = "INSERT INTO ACCOUNT (username, password, name, email, phone, birth_date) VALUES (:username, :password, :name, :email, :phone, :birth_date)";
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':role', $role);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':phone', $phone);
         $stmt->bindParam(':birth_date', $birth_date);
+        return $stmt->execute();
+    }
+
+    public function getAccountByUsername($username) {
+        $sql = "SELECT * FROM ACCOUNT WHERE username = :username";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getAccountByEmail($email) {
+        $sql = "SELECT * FROM ACCOUNT WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getAccountById($id) {
+        $sql = "SELECT * FROM ACCOUNT WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updatePassword($id, $password) {
+        $sql = "UPDATE ACCOUNT SET password = :password WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function updateInfo($id, $phone, $address) {
+        $sql = "UPDATE ACCOUNT SET phone = :phone WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':phone', $phone);
-        $stmt->execute();
-        return $this->db->lastInsertId();
-    }
-
-    public function findByEmail($email) {
-        $stmt = $this->db->prepare("SELECT * FROM Account WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
-    public function findById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM Account WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch();
-    }
 
-    public function updatePassword($id, $new_password) {
-        $stmt = $this->db->prepare("UPDATE Account SET password = :password WHERE id = :id");
-        $stmt->bindParam(':password', $new_password);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
-
-    public function updateAccount($id, $name, $email, $address, $phone) {
-        $stmt = $this->db->prepare("UPDATE Account SET name = :name, email = :email, address = :address, phone = :phone WHERE id = :id");
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
+        $sql = "UPDATE USER_ADDRESS SET address = :address, last_used = NOW() WHERE user_id = :user_id ORDER BY last_used DESC LIMIT 1";
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':address', $address);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount();
+        $stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
     public function deleteAccount($id) {
-        $stmt = $this->db->prepare("DELETE FROM Account WHERE id = :id");
+        $sql = "DELETE FROM ACCOUNT WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
-
-    public function getAllAccounts() {
-        $stmt = $this->db->prepare("SELECT * FROM Account");
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->execute();
     }
 }

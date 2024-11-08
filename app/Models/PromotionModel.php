@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace Models;
 use PDO;
 
 class PromotionModel extends BaseModel {
@@ -42,5 +42,11 @@ class PromotionModel extends BaseModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+
+    public function getActivePromotions() {
+        $stmt = $this->db->prepare("SELECT * FROM Promotion WHERE start_date <= CURDATE() AND end_date >= CURDATE()");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }
