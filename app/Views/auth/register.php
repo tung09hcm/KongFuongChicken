@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Link css header -->
     <link rel="stylesheet" href="../../Views/partials/partials.css">
+    <link rel="stylesheet" href="../../Views/partials/partials_responsive.css">
     <!-- Link css homepage -->
     <link rel="stylesheet" href="../../Views/auth/auth.css">
+    <link rel="stylesheet" href="../../Views/auth/auth_responsive.css">
     <!-- Link Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -21,8 +23,63 @@
         include '../../Views/partials/header.php';
     ?>
 
+    <!-- Register mobile -->
+    <div class="container-fluid container-login hide-on-tablet-desktop">
+        <div class="row">
+            <div class="col right-section">
+                <div class="form-container">
+                    <h2>TẠO TÀI KHOẢN</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label" for="lastName">Họ của bạn *</label>
+                            <input class="form-control" id="lastName" required="" type="text"/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="firstName">Tên của bạn *</label>
+                            <input class="form-control" id="firstName" required="" type="text"/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="phone">Số điện thoại *</label>
+                            <input class="form-control" id="phone" required="" type="tel"/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Địa chỉ email của bạn *</label>
+                            <input class="form-control" id="email" required="" type="email"/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Mật khẩu *</label>
+                            <input class="form-control" id="password" required="" type="password"/>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" id="terms" required="" type="checkbox"/>
+                            <label class="form-check-label" for="terms">
+                                Tôi đã đọc và đồng ý với các
+                                <a href="#">Chính Sách Hoạt Động</a>
+                                và
+                                <a href="#">Chính Sách Bảo Mật Thông Tin của KFC Việt Nam</a>
+                                .
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Tạo Tài Khoản</button>
+                    </form>
+
+                    <p class="form-text-register mt-3">
+                        Bạn đã có tài khoản?
+                        <a href="../../Views/auth/login.php">Đăng nhập</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col left-section">
+                <img class="login-image" src="https://static.kfcvietnam.com.vn/images/web/signin/lg/signin.jpg?v=gqGP8L" style="height: 745px;" alt="signin">
+            </div>
+        </div>
+    </div>
+
     <!-- Main -->
-    <div class="container-fluid container-login">
+    <div class="container-fluid container-login hide-on-mobile">
         <div class="row">
             <div class="col-md-6 left-section">
                 <img class="login-image" src="https://static.kfcvietnam.com.vn/images/web/signin/lg/signin.jpg?v=gqGP8L" style="height: 745px;" alt="signin">

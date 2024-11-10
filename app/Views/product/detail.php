@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Link css header -->
     <link rel="stylesheet" href="../../Views/partials/partials.css">
+    <link rel="stylesheet" href="../../Views/partials/partials_responsive.css">
     <!-- Link css homepage -->
-    <link rel="stylesheet" href="../../Views/homepage/homepage.css">
+    <!-- <link rel="stylesheet" href="../../Views/homepage/homepage.css"> -->
     <!-- Link css product detail -->
     <link rel="stylesheet" href="../../Views/product/product.css">
+    <link rel="stylesheet" href="../../Views/product/product_responsive.css">
     <!-- Link Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -24,10 +26,10 @@
     ?>
 
     <!-- Main -->
-    <div class="top-bar d-flex justify-content-center">
+    <div class="top-bar top-bar-on-mobile d-flex justify-content-center">
         <div class="container d-flex justify-content-center align-items-center">
         <div class="d-flex">
-            <span class="icon-text">
+            <span class="icon-text hide-on-mobile">
                 Đặt Ngay
             </span>
             <span class="icon-text">
@@ -45,8 +47,44 @@
         </div>
     </div>
 
+    <!-- Product detail mobile -->
+    <div class="container mt-3 product-detail hide-on-tablet-desktop">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center product-detail-image">
+                <img alt="Burger Bánh Mì with fries and a can of Pepsi" class="product-detail-image-item" height="500" src="https://static.kfcvietnam.com.vn/images/items/lg/HD_A.jpg?v=gqGP8L" width="500"/>
+            </div>
+        </div>    
+
+        <hr style="border-top: 2px solid #B6B6B6 !important; margin-top: 15px !important; margin-bottom: 10px !important;">
+        
+        <div class="row justify-content-center mt-3">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#">Món Mới</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="#">Burger Bánh Mì HDA</a>
+                        </li>
+                    </ol>
+                </nav>
+
+                <div class="col-md-6 product-detail-card">
+                    <div class="product-detail-card-item">
+                        <h5>BURGER BÁNH MÌ HDA</h5>
+                        <p>
+                            1 Burger Bánh Mì + 1 Khoai Tây Chiên (vừa) + 1 Lon Pepsi
+                        </p>
+                        <button class="btn product-detail-btn">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Product detail -->
-    <div class="container mt-4 product-detail">
+    <div class="container mt-4 product-detail hide-on-mobile">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">

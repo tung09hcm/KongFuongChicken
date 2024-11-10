@@ -1,0 +1,327 @@
+/* Điện thoại nhỏ (<= 480px) */
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    /* Top bar */
+    .top-bar-on-mobile {
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        z-index: 999;
+    }
+
+    .top-bar-on-mobile .container {
+        flex-direction: column;
+    }
+
+    .top-bar-on-mobile .btn {
+        margin-top: 10px;
+    }
+
+    /* Theme Image */
+    .theme-img-on-mobile {
+        width: 100%; 
+        height: 375px;
+    }
+
+    .theme-img-on-mobile .carousel-item img {
+        width: 100%;
+        height: 375px;
+        object-fit: cover;
+    }
+    
+    .theme-img-on-mobile .carousel-control-prev, .carousel-control-next {
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .theme-img-on-mobile .carousel-control-prev i,
+    .theme-img-on-mobile .carousel-control-next i {
+        color: rgba(225, 225, 225, 0.946);
+        font-size: 30px;
+        margin-left: 20px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        border-radius: 100%;
+        background-color: #80808099;
+    }
+
+    .theme-img-on-mobile .carousel-control-next i {
+        margin-right: 20px;
+    }
+
+    /* Food list */
+    .container-food-list {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 15px;
+    }
+
+    .food-list-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .food-list-col {
+        width: 170px !important;
+        height: 180px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .card-food-list {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Product recommend */
+    .container-recommend {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 15px;
+        overflow-x: hidden;
+    }
+
+    .container-recommend-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .recommend-icon-avatar {
+        width: 65px;
+        height: 80px;
+        margin-right: 10px !important;
+    }
+
+    .container-recommend-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 35px;
+        scroll-behavior: smooth;
+    }
+
+    .container-recommend-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container-recommend-col {
+        flex: 0 0 auto;
+        width: 220px !important;
+        height: 395px !important;
+    }
+    
+    .card-recommend {
+        width: 100% !important;
+        height: 100%;
+    }
+
+    /* Theme image footer */
+    .theme-img-left-main {
+        width: 100%;
+        height: 150px;
+        position: relative;
+    }
+
+    .theme-img-app {
+        display: block;
+        position: absolute;
+    }
+
+    .ng-star-inserted-google-play {
+        position: absolute;
+        top: -80px;
+        right: -165px;
+    }
+
+    .ng-star-inserted-app-store {
+        position: absolute;
+        top: -25px !important;
+        right: -145px !important;
+    }
+}
+
+/* Điện thoại lớn (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    body {
+        overflow-x: hidden !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    /* Top bar */
+    .top-bar-on-mobile {
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        z-index: 999;
+    }
+
+    .top-bar-on-mobile .container {
+        flex-direction: column;
+    }
+
+    .top-bar-on-mobile .btn {
+        margin-top: 10px;
+    }
+
+    /* Theme Image */
+    .theme-img-on-mobile {
+        width: 100%; 
+        height: 375px;
+    }
+
+    .theme-img-on-mobile .carousel-item img {
+        width: 100%;
+        height: 375px;
+        object-fit: cover;
+    }
+    
+    .theme-img-on-mobile .carousel-control-prev, .carousel-control-next {
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .theme-img-on-mobile .carousel-control-prev i,
+    .theme-img-on-mobile .carousel-control-next i {
+        color: rgba(225, 225, 225, 0.946);
+        font-size: 30px;
+        margin-left: 20px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        border-radius: 100%;
+        background-color: #80808099;
+    }
+
+    .theme-img-on-mobile .carousel-control-next i {
+        margin-right: 20px;
+    }
+
+    /* Food list */
+    .container-food-list {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 15px;
+    }
+
+    .food-list-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .food-list-col {
+        width: 170px !important;
+        height: 180px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .card-food-list {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Product recommend */
+    .container-recommend {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 15px;
+        overflow-x: hidden;
+    }
+
+    .container-recommend-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .recommend-icon-avatar {
+        width: 65px;
+        height: 80px;
+        margin-right: 10px !important;
+    }
+
+    .container-recommend-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 35px;
+        scroll-behavior: smooth;
+    }
+
+    .container-recommend-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container-recommend-col {
+        flex: 0 0 auto;
+        width: 220px !important;
+        height: 395px !important;
+    }
+    
+    .card-recommend {
+        width: 100% !important;
+        height: 100%;
+    }
+
+    /* Theme image footer */
+    .theme-img-left-main {
+        width: 100%;
+        height: 150px;
+        position: relative;
+    }
+
+    .theme-img-app {
+        display: block;
+        position: absolute;
+    }
+
+    .ng-star-inserted-google-play {
+        position: absolute;
+        top: -80px;
+        right: -165px;
+    }
+
+    .ng-star-inserted-app-store {
+        position: absolute;
+        top: -25px !important;
+        right: -145px !important;
+    }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hide-on-tablet-desktop {
+        display: none !important;
+    }
+}
+
+/* Màn hình máy tính (>= 1025px) */
+@media (min-width: 1025px) {
+    .hide-on-tablet-desktop {
+        display: none !important;
+    }
+}

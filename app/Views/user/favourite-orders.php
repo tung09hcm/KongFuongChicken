@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Link css header -->
     <link rel="stylesheet" href="../../Views/partials/partials.css">
+    <link rel="stylesheet" href="../../Views/partials/partials_responsive.css">
     <!-- Link css user -->
     <link rel="stylesheet" href="../../Views/user/user.css">
+    <link rel="stylesheet" href="../../Views/user/user_responsive.css">
     <!-- Link Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -21,8 +23,51 @@
         include '../../Views/partials/header.php';
     ?>
 
+    <!-- Favourite order mobile -->
+    <div class="container no-products-ordered hide-on-tablet-desktop">
+        <div class="row user-info">
+            <div class="col user-edit-sidebar text-center">
+                <div class="row user-edit-sidebar-info">
+                    <div class="col user-edit-sidebar-info-avt">
+                        <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
+                    </div>
+                    <div class="col user-edit-sidebar-info-name">
+                        <h3>Xin chào, Bảy Nguyễn!</h3>
+                        <a class="user-edit-logout" href="#">Đăng xuất</a>
+                    </div>
+                </div>
+                <nav class="user-select mt-4">
+                    <a class="user-edit-item" href="../../Views/user/previous-orders.php">Đơn hàng đã đặt</a>
+                    <a class="user-edit-item" href="../../Views/user/favourite-orders.php">Đơn hàng yêu thích</a>
+                    <a class="user-edit-item" href="../../Views/user/addresses.php">Địa chỉ của bạn</a>
+                    <a class="user-edit-item active" href="../../Views/user/edit-profile.php">Chi tiết tài khoản</a>
+                    <a class="user-edit-item" href="../../Views/user/reset-password.php">Đặt lại mật khẩu</a>
+                    <a class="user-edit-item" href="../../Views/user/delete.php">Xóa tài khoản</a>
+                </nav>
+            </div>
+        </div>
+        <h2 class="no-products-ordered-title">ĐƠN ĐẶT HÀNG YÊU THÍCH CỦA TÔI</h2>
+        <div class="row no-products-ordered-container">
+            <div class="col">
+                <div class="no-products-ordered-info">
+                    <div class="no-products-ordered-cart-title">
+                        <P>BẮT ĐẦU ĐẶT MÓN!</p>
+                        <button type="submit" class="no-products-ordered-btn mt-3">Bắt đầu đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="no-products-ordered-img">
+                    <div class="no-products-ordered-cart-img">
+                        <img src="https://static.kfcvietnam.com.vn/images/web/empty-cart.png?v=5.0" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main -->
-    <div class="container my-5">
+    <div class="container my-5 hide-on-mobile">
         <div class="row user-edit">
             <div class="col-md-4">
                 <div class="user-edit-sidebar text-center">

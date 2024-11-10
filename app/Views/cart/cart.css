@@ -163,7 +163,6 @@
     cursor: pointer;
 }
 
-
 .summary {
     width: 365px;
     height: fit-content;
@@ -214,39 +213,35 @@
 }
 
 /* Không có hàng trong giỏ */
-.no-products-ordered-container {
-    padding: 0 40px 40px 40px;
+.no-products-ordered {
+    display: none;
 }
 
 .no-products-ordered-title {
     font-size: 28px;
     font-weight: bold;
+    margin-left: auto !important;
     margin-bottom: 20px;
 }
 
-.no-products-ordered {
-    width: 1200px;
-    height: 500px;
+.no-products-ordered-container {
     display: flex;
     justify-content: space-between;
-    background-color: #FAF7F7;
-    border-radius: 10px;
+    align-items: center;
+    width: 100%;
+    background-color: #FBF7F7;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-.no-products-ordered-cart-title {
-    width: 400px;
-    height: 100%;
-    margin: 100px 20px;
+.no-products-ordered-info {
+    display: block;
+    margin-left: 25px;
 }
 
 .no-products-ordered-cart-title p {
     font-size: 38px;
     font-weight: 800;
-}
-
-.no-products-ordered-cart-img {
-    width: 400px;
-    height: 100%;
 }
 
 .no-products-ordered-btn {
