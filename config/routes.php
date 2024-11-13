@@ -1,3 +1,4 @@
+<h1>this is routes.php</h1>
 <?php
 return [
     'login' => ['controller' => 'AuthController', 'method' => 'login'],

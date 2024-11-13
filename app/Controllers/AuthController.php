@@ -1,10 +1,15 @@
 <?php
-namespace App\Controllers;
 
 use App\Models\AccountModel;
 use App\Models\UserModel;
 
 class AuthController {
+    public function index() {
+        require __DIR__ . '/../Views/auth/login.php';
+    }
+    public function registerView() {
+        require __DIR__ . '/../Views/auth/register.php';
+    }
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST)) {
@@ -28,7 +33,7 @@ class AuthController {
                 exit();
             }
         }
-        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method :vvv.']);
         exit();
     }
 

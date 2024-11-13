@@ -9,18 +9,18 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Link css header -->
-    <link rel="stylesheet" href="../../Views/partials/partials.css">
-    <link rel="stylesheet" href="../../Views/partials/partials_responsive.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/partials/partials.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/partials/partials_responsive.css">
     <!-- Link css homepage -->
-    <link rel="stylesheet" href="../../Views/auth/auth.css">
-    <link rel="stylesheet" href="../../Views/auth/auth_responsive.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/auth/auth.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/auth/auth_responsive.css">
     <!-- Link Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <!-- Header -->
     <?php 
-        include '../../Views/partials/header.php';
+        include dirname(__FILE__) . '/../partials/header.php';
     ?>
 
     <!-- Register mobile -->
@@ -87,7 +87,7 @@
             <div class="col-md-6 right-section">
                 <div class="form-container">
                     <h2>TẠO TÀI KHOẢN</h2>
-                    <form>
+                    <form action="index.php?controller=auth&action=register" method="POST">
                         <div class="mb-3">
                             <label class="form-label" for="lastName">Họ của bạn *</label>
                             <input class="form-control" id="lastName" required="" type="text"/>
@@ -123,7 +123,7 @@
 
                     <p class="form-text-register mt-3">
                         Bạn đã có tài khoản?
-                        <a href="../../Views/auth/login.php">Đăng nhập</a>
+                        <a href="index.php?controller=auth&action=index">Đăng nhập</a>
                     </p>
                 </div>
             </div>
@@ -132,7 +132,7 @@
 
     <!-- Footer -->
     <?php 
-        include '../../Views/partials/footer.php';
+         include dirname(__FILE__) . '/../partials/footer.php';
     ?>
 
     <!-- Link Javascript -->
