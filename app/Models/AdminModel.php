@@ -4,10 +4,12 @@ namespace Models;
 use PDO;
 
 class AdminModel extends AccountModel {
-    public function createAccount($username, $password, $name, $email, $phone, $birth_date) {
-        parent::createAccount($username, $password, $name, $email, $phone, $birth_date);
-        $account_id = parent::getAccountByUsername($username)['id'];
-        $this->createAdmin($account_id);
+    public function createAccount($first_name, $last_name, $password, $email, $phone, $birth_date) {
+        parent::createAccount($first_name, $last_name, $password, $email, $phone, $birth_date);
+        $account = parent::getAccountByEmail($email);
+        if ($account) {
+            $this->createAdmin($account['id']);
+        }
     }
 
     public function createAdmin($account_id) {
@@ -18,15 +20,8 @@ class AdminModel extends AccountModel {
     }
 
     public function getAllAdmins() {
-        $stmt = $this->db->prepare("SELECT Account.* FROM Account JOIN Admin ON Account.id = Admin.account_id");
+        $stmt = $this->db->prepare("SELECT ACCOUNT.* FROM ACCOUNT JOIN ADMIN ON ACCOUNT.id = ADMIN.account_id");
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // public function deleteAdmin($account_id) {
-    //     $stmt = $this->db->prepare("DELETE FROM Admin WHERE account_id = :account_id");
-    //     $stmt->bindParam(':account_id', $account_id, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     return $stmt->rowCount();
-    // }
 }
