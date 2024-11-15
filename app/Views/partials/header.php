@@ -10,7 +10,100 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="header">
+    <!-- Mobile header -->
+    <div class="header-mobile hide-on-tablet-desktop">
+        <!-- Category icon -->
+        <div class="header-mobile-category">
+            <button id="openMenu" class="nav-link btn text-dark">
+                <i class="nav-link-icon fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <a href="../../Views/homepage/index.php" class="header-mobile-logo">
+            <img class="header-mobile-logo-item" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo-mobile.svg?v=5.0" alt="">
+        </a>
+
+        <ul class="header-mobile-cart-user">
+            <!-- User icon -->
+            <li class="header-mobile-user">
+                <a class="header-mobile-user-link" href="../../Views/auth/login.php">
+                    <i class="header-mobile-user-link-icon fa-solid fa-user"></i>
+                </a>
+            </li>
+            <!-- Card icon -->
+            <li class="header-mobile-cart">
+                <a class="header-mobile-cart-link" href="../../Views/cart/cart.php"> 
+                    <i class="header-mobile-cart-link-icon fa-solid fa-cart-shopping"></i>
+                    <span class="header-mobile-cart-notice">1</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sidebar mobile-->
+    <div id="sidebar_mobile" class="sidebar-mobile hide-on-tablet-desktop">
+        <div class="sidebar-mobile-header">
+            <button id="closeMenu" class="sidebar-mobile-btn-close btn-close" aria-label="Close"></button>
+            <a class="sidebar-mobile-cart-link" href="../../Views/cart/cart.php"> 
+                <i class="sidebar-mobile-cart-link-icon fa-solid fa-cart-shopping"></i>
+                <span class="sidebar-mobile-cart-notice">1</span>
+            </a>
+        </div>
+        
+        <hr style="margin: 5px 15px !important;">
+
+        <h2 class="sidebar-mobile-tile">BẮT ĐẦU</h2>
+        <span class="sidebar-mobile-login">
+            <a href="../../Views/auth/login.php" class="sidebar-mobile-link">Đăng nhập</a>
+        </span> 
+        / 
+        <span>
+            <a href="../../Views/auth/register.php" class="sidebar-mobile-link">Đăng ký</a>
+        </span>
+
+        <hr>
+
+        <a href="../../Views/product/index.php" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">THỰC ĐƠN</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/menu.png?v=gOqnPL" alt="">
+        </a>
+        <hr>
+        <a href="../../Views/product/hotdeal.php" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">KHUYẾN MÃI</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
+        </a>
+        <hr>
+        <a href="../../Views/bookparty/index.php" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">DỊCH VỤ TIỆC</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/kfc-party.png?v=gOqnPL" alt="">
+        </a>
+        <hr>
+        <a href="" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">HỆ THỐNG NHÀ HÀNG</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/find-kfc.png?v=gOqnPL" alt="">
+        </a>
+        <hr>
+        <a href="" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">VỀ KFC</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/about-kfc.png?v=gOqnPL" alt="">
+        </a>
+        <hr style="margin: 10px 15px !important;">
+
+        <div class="sidebar-mobile-footer">
+            <div class="sidebar-social-icons">
+                <a href="https://www.facebook.com/KFCVietnam/"><i class="sidebar-footer-icon fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/kfc_vietnam/"><i class="sidebar-footer-icon fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/KFCVietnam2011"><i class="sidebar-footer-icon fab fa-youtube"></i></a>
+                <a href="https://twitter.com/kfc_vietnam"><i class="sidebar-footer-icon fab fa-twitter"></i></a>
+            </div>
+            <hr style="border-top: 2px solid #E5E5E5;">
+            <div class="sidebar-footer-text">
+                <p class="sidebar-footer-text-item" style="color: var(--white-color) !important;">Copyright © 2023 KFC Vietnam</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="header hide-on-mobile">
         <nav class="navbar navbar-expand-lg navbar-light navbar-header">
             <div class="container container-header">
                 <a class="navbar-brand" href="../../Views/homepage/index.php">
@@ -59,19 +152,19 @@
     </div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar hide-on-mobile">
         <button id="closeSidebar" class="btn-close" aria-label="Close"></button>
         <hr>
         <div class="sidebar-category">
             <h5 class="px-3 pt-3">DANH MỤC MÓN ĂN</h5>
             <ul class="list-unstyled px-3">
-                <li><a href="#">Món Mới <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Combo 1 Người <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Combo Nhóm <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Gà Rán - Gà Quay <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Burger - Cơm - Mì Ý <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Thức Ăn Nhẹ <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="#">Thức Uống & Tráng Miệng <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#monmoi">Món Mới <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#combo1nguoi">Combo 1 Người <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#combonhom">Combo Nhóm <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#garan">Gà Rán - Gà Quay <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#burgercom">Burger - Cơm - Mì Ý <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#thucan">Thức Ăn Nhẹ <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="../../Views/product/index.php#thucuong">Thức Uống & Tráng Miệng <i class="fa-solid fa-angle-right"></i></a></li>
             </ul>
         </div>
         <hr>

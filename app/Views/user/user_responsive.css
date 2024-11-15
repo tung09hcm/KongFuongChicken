@@ -1,0 +1,219 @@
+/* Điện thoại nhỏ (<= 480px) */
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+    /* Edit profile */
+    .user-edit-sidebar {
+        width: 100%;
+        height: fit-content;
+        background-color: #212121;
+        color: #ffffff;
+        padding: 30px 12px 10px 12px;
+        border-radius: 0 !important;
+    }
+
+    .user-edit-sidebar-info {
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .user-select {
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        gap: 15px;
+        scrollbar-width: none !important;
+    }
+    
+    .user-select::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .user-edit-item {
+        flex: 0 0 auto;
+        padding: 0px 12px;
+        text-decoration: none;
+        color: #000;
+    }
+    
+    .user-edit-item.active {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .user-edit {
+        margin-top: 10px !important;
+    }
+
+    /*  */
+    .no-products-ordered .no-products-ordered-container {
+        display: block !important;
+    }
+
+    .no-products-ordered-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-left: auto !important;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    
+    .no-products-ordered-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: #FBF7F7;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .no-products-ordered-info {
+        display: block;
+        margin-left: 25px;
+    }
+    
+    .no-products-ordered-cart-title p {
+        font-size: 38px;
+        font-weight: 800;
+    }
+    
+    .no-products-ordered-btn {
+        background-color: #ED3833;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        border-radius: 30px;
+    }
+    
+    .no-products-ordered-btn:hover {
+        background-color: #e60000;
+    }
+}
+
+/* Điện thoại lớn (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    body {
+        overflow-x: hidden !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+    /* Edit profile */
+    .user-edit-sidebar {
+        width: 100%;
+        height: fit-content;
+        background-color: #212121;
+        color: #ffffff;
+        padding: 30px 12px 10px 12px;
+        border-radius: 0 !important;
+    }
+
+    .user-edit-sidebar-info {
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .user-select {
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        gap: 15px;
+        scrollbar-width: none !important;
+    }
+    
+    .user-select::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .user-edit-item {
+        flex: 0 0 auto;
+        padding: 0px 12px;
+        text-decoration: none;
+        color: #000;
+    }
+    
+    .user-edit-item.active {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .user-edit {
+        margin-top: 10px !important;
+    }
+
+    /*  */
+    .no-products-ordered .no-products-ordered-container {
+        display: block !important;
+    }
+
+    .no-products-ordered-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-left: auto !important;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    
+    .no-products-ordered-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: #FBF7F7;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .no-products-ordered-info {
+        display: block;
+        margin-left: 25px;
+    }
+    
+    .no-products-ordered-cart-title p {
+        font-size: 38px;
+        font-weight: 800;
+    }
+    
+    .no-products-ordered-btn {
+        background-color: #ED3833;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        border-radius: 30px;
+    }
+    
+    .no-products-ordered-btn:hover {
+        background-color: #e60000;
+    }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hide-on-tablet-desktop {
+        display: none !important;
+    }
+}
+
+/* Màn hình máy tính (>= 1025px) */
+@media (min-width: 1025px) {
+    .hide-on-tablet-desktop {
+        display: none !important;
+    }
+}

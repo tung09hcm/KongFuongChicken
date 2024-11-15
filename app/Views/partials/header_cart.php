@@ -15,7 +15,7 @@
             <a href="../../Views/product/index.php" class="header-cart-page-btn">
                 <button class="btn btn-back-menu">Quay lại menu</button>
             </a>
-            <a href="../../Views/homepage/index.php" class="logo">
+            <a href="../../Views/homepage/index.php" class="logo hide-on-mobile">
                 <img class="header-cart-page-logo" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo-mobile.svg?v=5.0" alt="">
             </a>
             <a href="../../Views/user/edit-profile.php" class="header-cart-page-user">

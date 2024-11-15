@@ -9,20 +9,64 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Link css header -->
-    <link rel="stylesheet" href="../../Views/partials/partials.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/partials/partials.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/partials/partials_responsive.css">
     <!-- Link css homepage -->
-    <link rel="stylesheet" href="../../Views/auth/auth.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/auth/auth.css">
+    <link rel="stylesheet" href="/KongFuongChicken/app/Views/auth/auth_responsive.css">
     <!-- Link Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <!-- Header -->
-    <?php 
-        include '../../Views/partials/header.php';
+    <?php
+        include dirname(__FILE__) . '/../partials/header.php';
     ?>
 
+    <!-- Login on mobile -->
+    <div class="container-fluid container-login container-login-on-mobile hide-on-tablet-desktop">
+        <div class="row">
+            <div class="col right-section">
+                <h2>ĐĂNG NHẬP</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Địa chỉ email của bạn *</label>
+                        <input class="form-control" id="email" required="" type="email"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Mật khẩu *</label>
+                        <input class="form-control" id="password" required="" type="password"/>
+                        <div class="form-text">
+                            <a id="forgotpassword" href="#">Bạn quên mật khẩu?</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-login" type="submit" style="font-size: 18px !important;">Đăng nhập</button>
+                </form>
+                <p class="text-center" style="font-size: 18px !important;">Hoặc tiếp tục với</p>
+                <button class="btn btn-apple" style="font-size: 18px !important;">
+                    <i class="icon-apple appico"></i>
+                    Đăng nhập bằng apple
+                </button>
+                <button class="btn btn-google" style="font-size: 18px !important;">
+                    <i class="fab fa-google btn-google-item"></i>
+                    Đăng nhập bằng google
+                </button>
+                <p class="register-text">
+                    Bạn chưa có tài khoản?
+                    <a href="/KongFuongChicken/app/Views/auth/register.php">Đăng ký</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col left-section">
+                <img class="login-image" src="https://static.kfcvietnam.com.vn/images/web/signin/lg/signin.jpg?v=gqGP8L" alt="signin">
+            </div>
+        </div>
+    </div>
+
     <!-- Main -->
-    <div class="container-fluid container-login">
+    <div class="container-fluid container-login hide-on-mobile">
         <div class="row">
             <div class="col-md-6 left-section">
                 <img class="login-image" src="https://static.kfcvietnam.com.vn/images/web/signin/lg/signin.jpg?v=gqGP8L" alt="signin">
@@ -54,7 +98,7 @@
                 </button>
                 <p class="register-text">
                     Bạn chưa có tài khoản?
-                    <a href="../../Views/auth/register.php">Đăng ký</a>
+                    <a href="index.php?controller=auth&action=registerView">Đăng ký</a>
                 </p>
             </div>
         </div>
@@ -80,14 +124,14 @@
     </div>
 
     <!-- Footer -->
-    <?php 
-        include '../../Views/partials/footer.php';
+    <?php
+        include dirname(__FILE__) . '/../partials/footer.php';
     ?>
 
     <!-- Link Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="../../Views/auth/auth.js"></script>
+    <script src="/KongFuongChicken/app/Views/auth/auth.js"></script>
 </body>
 </html>
