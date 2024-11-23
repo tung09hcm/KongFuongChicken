@@ -1,19 +1,19 @@
 <?php
-namespace Models;
 
+namespace Models;
+require_once  __DIR__ ."/../Models/BaseModel.php";
 use PDO;
 
 class AccountModel extends BaseModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone, $birth_date) {
-        $sql = "INSERT INTO ACCOUNT (first_name, last_name, password, email, phone, birth_date) 
-                VALUES (:first_name, :last_name, :password, :email, :phone, :birth_date)";
+    public function createAccount($first_name, $last_name, $password, $email, $phone) {
+        $sql = "INSERT INTO ACCOUNT (first_name, last_name, password, email, phone) 
+                VALUES (:first_name, :last_name, :password, :email, :phone)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':birth_date', $birth_date);
         return $stmt->execute();
     }
 

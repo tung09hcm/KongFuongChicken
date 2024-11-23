@@ -1,7 +1,10 @@
 <?php
 
-use App\Models\AccountModel;
-use App\Models\UserModel;
+use Models\AccountModel;
+use Models\UserModel;
+
+require_once  __DIR__ ."/../Models/AccountModel.php";
+require_once  __DIR__ ."/../Models/UserModel.php";
 
 class AuthController {
     public function index() {
@@ -18,7 +21,7 @@ class AuthController {
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
             $accountModel = new AccountModel();
-            $account = $accountModel->findByEmail($email);
+            $account = $accountModel->getAccountByEmail($email);
             if ($account && password_verify($password, $account['password'])) {
                 $_SESSION['user_id'] = $account['id'];
                 $_SESSION['role'] = $account['role'];
@@ -39,32 +42,92 @@ class AuthController {
 
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (empty($_POST)) {
-                $_POST = json_decode(file_get_contents("php://input"), true);
-            }
-            $username = trim($_POST['username']);
-            $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
-            $role = 'user';
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
-            $address = trim($_POST['address']);
-            $birth_date = trim($_POST['birth_date']);
-            $phone = trim($_POST['phone']);
-            $accountModel = new AccountModel();
-            $userModel = new UserModel();
-            if ($accountModel->findByEmail($email)) {
-                echo json_encode(['status' => 'error', 'message' => 'Email đã được sử dụng.']);
+            echo "Phương thức: POST<br>";
+            echo "Dữ liệu gửi lên (POST):<br>";
+            $lastName = trim($_POST['lastName'] ?? '');
+            echo "lastName: $lastName";
+        } else {
+            echo "Phương thức không phải là POST, mà là: " . $_SERVER['REQUEST_METHOD'] . "<br>";
+        }
+        die();
+
+        // Kiểm tra nếu yêu cầu là POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy dữ liệu từ $_POST
+            $lastName = trim($_POST['lastName'] ?? '');
+            $firstName = trim($_POST['firstName'] ?? '');
+            $phone = trim($_POST['phone'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+            $terms = isset($_POST['terms']); // Checkbox chỉ cần kiểm tra tồn tại
+
+            // Kiểm tra các trường bắt buộc
+            if (empty($lastName) || empty($firstName) || empty($phone) || empty($email) || empty($password) || !$terms) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Vui lòng điền đầy đủ thông tin và chấp nhận điều khoản.'
+                ]);
                 exit();
             }
-            $account_id = $accountModel->createAccount($username, $password, $role, $name, $email, $address, $birth_date, $phone);
-            $userModel->createUser($account_id);
-            echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'login']);
-            exit();
+
+            // Kiểm tra định dạng email
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Địa chỉ email không hợp lệ.'
+                ]);
+                exit();
+            }
+
+            // Kiểm tra độ dài mật khẩu
+            if (strlen($password) < 6) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Mật khẩu phải có ít nhất 6 ký tự.'
+                ]);
+                exit();
+            }
+
+            // Mã hóa mật khẩu
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Kết nối cơ sở dữ liệu và lưu người dùng
+            require_once '../models/UserModel.php';
+            $userModel = new UserModel();
+
+            // Kiểm tra email đã tồn tại chưa
+            if ($userModel->getAccountByEmail($email)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Email đã được sử dụng.'
+                ]);
+                exit();
+            }
+
+            // Lưu thông tin người dùng
+            $success = $userModel->createUser($lastName, $firstName, $phone, $email, $hashedPassword);
+
+            if ($success) {
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Đăng ký thành công. Vui lòng đăng nhập.',
+                    'redirect' => 'index.php?controller=auth&action=login'
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Có lỗi xảy ra. Vui lòng thử lại sau.'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Phương thức không hợp lệ.'
+            ]);
         }
-        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
     }
-
+    
     public function logout() {
         session_unset();
         session_destroy();

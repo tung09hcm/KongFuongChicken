@@ -29,39 +29,40 @@
             <div class="col right-section">
                 <div class="form-container">
                     <h2>TẠO TÀI KHOẢN</h2>
-                    <form>
+
+                    <form action="check_form.php" method="POST">
                         <div class="mb-3">
-                            <label class="form-label" for="lastName">Họ của bạn *</label>
-                            <input class="form-control" id="lastName" required="" type="text"/>
+                            <label class="form-label">HọCX của bạn *</label>
+                            <input class="form-control" id="lastName" name="lastName" required type="text"/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="firstName">Tên của bạn *</label>
-                            <input class="form-control" id="firstName" required="" type="text"/>
+                            <label class="form-label">Tên của bạn *</label>
+                            <input class="form-control" id="firstName" name="firstName" required type="text"/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="phone">Số điện thoại *</label>
-                            <input class="form-control" id="phone" required="" type="tel"/>
+                            <label class="form-label">Số điện thoại *</label>
+                            <input class="form-control" id="phone" name="phone" required type="tel"/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="email">Địa chỉ email của bạn *</label>
-                            <input class="form-control" id="email" required="" type="email"/>
+                            <label class="form-label">Địa chỉ email của bạn *</label>
+                            <input class="form-control" id="email" name="email" required type="email"/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="password">Mật khẩu *</label>
-                            <input class="form-control" id="password" required="" type="password"/>
+                            <label class="form-label">Mật khẩu *</label>
+                            <input class="form-control" id="password" name="password" required type="password"/>
                         </div>
                         <div class="mb-3 form-check">
-                            <input class="form-check-input" id="terms" required="" type="checkbox"/>
+                            <input class="form-check-input" id="terms" name="terms" required type="checkbox"/>
                             <label class="form-check-label" for="terms">
                                 Tôi đã đọc và đồng ý với các
                                 <a href="#">Chính Sách Hoạt Động</a>
                                 và
-                                <a href="#">Chính Sách Bảo Mật Thông Tin của KFC Việt Nam</a>
-                                .
+                                <a href="#">Chính Sách Bảo Mật Thông Tin của KFC Việt Nam</a>.
                             </label>
                         </div>
                         <button class="btn btn-primary" type="submit">Tạo Tài Khoản</button>
                     </form>
+
 
                     <p class="form-text-register mt-3">
                         Bạn đã có tài khoản?

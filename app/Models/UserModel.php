@@ -4,8 +4,8 @@ namespace Models;
 use PDO;
 
 class UserModel extends AccountModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone, $birth_date) {
-        parent::createAccount($first_name, $last_name, $password, $email, $phone, $birth_date);
+    public function createAccount($first_name, $last_name, $password, $email, $phone) {
+        parent::createAccount($first_name, $last_name, $password, $email, $phone);
         $account = parent::getAccountByEmail($email);
         if ($account) {
             $this->createUser($account['id']);
