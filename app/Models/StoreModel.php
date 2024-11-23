@@ -16,6 +16,13 @@ class StoreModel extends BaseModel {
         return $stmt->fetch();
     }
 
+    public function searchStores($location) {
+        $stmt = $this->db->prepare("SELECT * FROM Store WHERE address = :location");
+        $stmt->bindParam(':location', $location, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function createStore($name, $address, $phone, $opening_hours) {
         $stmt = $this->db->prepare("INSERT INTO Store (name, address, phone, opening_hours) VALUES (:name, :address, :phone, :opening_hours)");
         $stmt->bindParam(':name', $name);
@@ -43,4 +50,6 @@ class StoreModel extends BaseModel {
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+
 }

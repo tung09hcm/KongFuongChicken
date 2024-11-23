@@ -5,11 +5,13 @@ namespace App\Controllers;
 
 use App\Models\CartModel;
 use App\Models\ProductModel;
+use Models\CartModel as ModelsCartModel;
 
+require_once  __DIR__ ."/../Models/CartModel.php";
 class CartController {
     public function view() {
         $this->checkAuth('user');
-        $cartModel = new CartModel();
+        $cartModel = new ModelsCartModel();
         $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
         $products = $cart ? $cartModel->getProductsInCart($cart['id']) : [];
         echo json_encode(['status' => 'success', 'products' => $products]);
@@ -20,13 +22,14 @@ class CartController {
         $this->checkAuth('user');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product_id = intval($_POST['product_id']);
-            $cartModel = new CartModel();
+            $quantity = intval($_POST['quantity']);
+            $cartModel = new ModelsCartModel();
             $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             if (!$cart) {
                 $cartModel->createCart($_SESSION['user_id']);
                 $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             }
-            $cartModel->addProductToCart($cart['id'], $product_id);
+            $cartModel->addProductToCart($cart['id'], $product_id, $quantity);
             echo json_encode(['status' => 'success', 'message' => 'Đã thêm sản phẩm vào giỏ hàng.']);
             exit();
         }
@@ -36,7 +39,7 @@ class CartController {
 
     public function remove($product_id) {
         $this->checkAuth('user');
-        $cartModel = new CartModel();
+        $cartModel = new ModelsCartModel();
         $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
         if ($cart) {
             $cartModel->removeProductFromCart($cart['id'], $product_id);

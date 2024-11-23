@@ -8,15 +8,29 @@ use App\Models\OrderModel;
 use App\Models\CartModel;
 use App\Models\ProductModel;
 use App\Models\ReviewModel;
+use Models\AccountModel;
+use Models\CartModel as ModelsCartModel;
+use Models\DiscountModel;
+use Models\OrderModel as ModelsOrderModel;
+use Models\ProductModel as ModelsProductModel;
+use Models\ReviewModel as ModelsReviewModel;
+use Models\StoreModel;
+use Models\UserModel as ModelsUserModel;
 
+require_once  __DIR__ ."/../Models/OrderModel.php";
+require_once  __DIR__ ."/../Models/CartModel.php";
+require_once  __DIR__ ."/../Models/UserModel.php";
+require_once  __DIR__ ."/../Models/AccountModel.php";
+require_once  __DIR__ ."/../Models/ReviewModel.php";
+require_once  __DIR__ ."/../Models/ProductModel.php";
+require_once  __DIR__ ."/../Models/DiscountModel.php";
+require_once  __DIR__ ."/../Models/StoreModel.php";
 class UserController {
     public function dashboard() {
         $this->checkAuth('user');
-        $userModel = new UserModel();
-        $user = $userModel->findByAccountId($_SESSION['user_id']);
-        $orderModel = new OrderModel();
+        $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
-        echo json_encode(['status' => 'success', 'user' => $user, 'orders' => $orders]);
+        echo json_encode(['status' => 'success', 'orders' => $orders]);
         exit();
     }
 
@@ -25,9 +39,9 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
-            $userModel = new UserModel();
+            $userModel = new ModelsUserModel();
             // $userModel->updateUserInfo($_SESSION['user_id'], $phone, $address);
-            $user = $userModel->findByAccountId($_SESSION['user_id']);
+            $user = $userModel->getAccountById($_SESSION['user_id']);
             echo json_encode(['status' => 'success', 'user' => $user]);
             exit();
         }
@@ -40,8 +54,8 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $current_password = trim($_POST['current_password']);
             $new_password = password_hash(trim($_POST['new_password']), PASSWORD_BCRYPT);
-            $accountModel = new \App\Models\AccountModel();
-            $account = $accountModel->findById($_SESSION['user_id']);
+            $accountModel = new AccountModel();
+            $account = $accountModel->getAccountById($_SESSION['user_id']);
             if ($account && password_verify($current_password, $account['password'])) {
                 $accountModel->updatePassword($_SESSION['user_id'], $new_password);
                 echo json_encode(['status' => 'success', 'message' => 'Mật khẩu đã được đổi thành công.']);
@@ -56,7 +70,7 @@ class UserController {
 
     public function orderHistory() {
         $this->checkAuth('user');
-        $orderModel = new OrderModel();
+        $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
         echo json_encode(['status' => 'success', 'orders' => $orders]);
         exit();
@@ -64,8 +78,8 @@ class UserController {
 
     public function reviews() {
         $this->checkAuth('user');
-        $productModel = new ProductModel();
-        $reviewModel = new ReviewModel();
+        $productModel = new ModelsProductModel();
+        $reviewModel = new ModelsReviewModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product_id = intval($_POST['product_id']);
             $content = trim($_POST['content']);
@@ -91,13 +105,14 @@ class UserController {
         $this->checkAuth('user');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product_id = intval($_POST['product_id']);
-            $cartModel = new CartModel();
+            $quantity = intval($_POST['quantity']);
+            $cartModel = new ModelsCartModel();
             $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             if (!$cart) {
                 $cartModel->createCart($_SESSION['user_id']);
                 $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             }
-            $cartModel->addProductToCart($cart['id'], $product_id);
+            $cartModel->addProductToCart($cart['id'], $product_id, $quantity);
             echo json_encode(['status' => 'success', 'message' => 'Đã thêm sản phẩm vào giỏ hàng.']);
             exit();
         }
@@ -107,7 +122,7 @@ class UserController {
 
     public function viewCart() {
         $this->checkAuth('user');
-        $cartModel = new CartModel();
+        $cartModel = new ModelsCartModel();
         $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
         $products = $cart ? $cartModel->getProductsInCart($cart['id']) : [];
         echo json_encode(['status' => 'success', 'products' => $products]);
@@ -116,10 +131,10 @@ class UserController {
 
     public function checkout() {
         $this->checkAuth('user');
-        $cartModel = new CartModel();
-        $orderModel = new OrderModel();
-        $discountModel = new \App\Models\DiscountModel();
-        $storeModel = new \App\Models\StoreModel();
+        $cartModel = new ModelsCartModel();
+        $orderModel = new ModelsOrderModel();
+        $discountModel = new DiscountModel();
+        $storeModel = new StoreModel();
         $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
         if (!$cart) {
             echo json_encode(['status' => 'error', 'message' => 'Giỏ hàng trống.']);

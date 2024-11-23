@@ -7,11 +7,19 @@ use App\Models\OrderModel;
 use App\Models\CartModel;
 use App\Models\DiscountModel;
 use App\Models\StoreModel;
+use Models\CartModel as ModelsCartModel;
+use Models\DiscountModel as ModelsDiscountModel;
+use Models\OrderModel as ModelsOrderModel;
+use Models\StoreModel as ModelsStoreModel;
 
+require_once  __DIR__ ."/../Models/OrderModel.php";
+require_once  __DIR__ ."/../Models/CartModel.php";
+require_once  __DIR__ ."/../Models/DiscountModel.php";
+require_once  __DIR__ ."/../Models/StoreModel.php";
 class OrderController {
     public function history() {
         $this->checkAuth('user');
-        $orderModel = new OrderModel();
+        $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
         echo json_encode(['status' => 'success', 'orders' => $orders]);
         exit();
@@ -19,10 +27,10 @@ class OrderController {
 
     public function checkout() {
         $this->checkAuth('user');
-        $cartModel = new CartModel();
-        $orderModel = new OrderModel();
-        $discountModel = new DiscountModel();
-        $storeModel = new StoreModel();
+        $cartModel = new ModelsCartModel();
+        $orderModel = new ModelsOrderModel();
+        $discountModel = new ModelsDiscountModel();
+        $storeModel = new ModelsStoreModel();
         $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
         if (!$cart) {
             echo json_encode(['status' => 'error', 'message' => 'Giỏ hàng trống.']);

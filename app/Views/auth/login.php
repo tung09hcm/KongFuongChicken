@@ -28,14 +28,14 @@
         <div class="row">
             <div class="col right-section">
                 <h2>ĐĂNG NHẬP</h2>
-                <form>
+                <form action="index.php?controller=auth&action=login" method="POST">
                     <div class="mb-3">
                         <label class="form-label" for="email">Địa chỉ email của bạn *</label>
-                        <input class="form-control" id="email" required="" type="email"/>
+                        <input class="form-control" id="email" required="" type="email" name = "email"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Mật khẩu *</label>
-                        <input class="form-control" id="password" required="" type="password"/>
+                        <input class="form-control" id="password" required="" type="password" name = "password"/>
                         <div class="form-text">
                             <a id="forgotpassword" href="#">Bạn quên mật khẩu?</a>
                         </div>
@@ -73,14 +73,14 @@
             </div>
             <div class="col-md-6 right-section">
                 <h2>ĐĂNG NHẬP</h2>
-                <form>
+                <form action="index.php?controller=auth&action=login" method="POST">
                     <div class="mb-3">
                         <label class="form-label" for="email">Địa chỉ email của bạn *</label>
-                        <input class="form-control" id="email" required="" type="email"/>
+                        <input class="form-control" id="email" required="" type="email" name = "email"/>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Mật khẩu *</label>
-                        <input class="form-control" id="password" required="" type="password"/>
+                        <input class="form-control" id="password" required="" type="password" name = "password"/>
                         <div class="form-text">
                             <a id="forgotpassword" href="#">Bạn quên mật khẩu?</a>
                         </div>

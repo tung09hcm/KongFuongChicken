@@ -1,10 +1,12 @@
 <?php
 
 use Models\AccountModel;
+use Models\AdminModel;
 use Models\UserModel;
 
 require_once  __DIR__ ."/../Models/AccountModel.php";
 require_once  __DIR__ ."/../Models/UserModel.php";
+require_once  __DIR__ ."/../Models/AdminModel.php";
 
 class AuthController {
     public function index() {
@@ -22,117 +24,89 @@ class AuthController {
             $password = trim($_POST['password']);
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountByEmail($email);
-            if ($account && password_verify($password, $account['password'])) {
-                $_SESSION['user_id'] = $account['id'];
-                $_SESSION['role'] = $account['role'];
-                if ($account['role'] === 'admin') {
-                    echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'admin/dashboard']);
+            if ($account) {
+                if (password_verify($password, $account['password'])) {
+                    session_start();
+                    $_SESSION['user_id'] = $account['id'];
+                    $_SESSION['email'] = $account['email'];
+                    // phân ra xem là admin hay user thông thường
+                    // TODO
+                    $adminModel = new AdminModel();
+                    $isAdmin = $adminModel->isAdmin($_SESSION['user_id']);
+                
+                    if ($isAdmin) {
+                        $_SESSION['role'] = 'admin';
+                    } else {
+                        $_SESSION['role'] = 'user'; 
+                    }
+
+                    $cookieLifetime = time() + (10 * 365 * 24 * 60 * 60);
+                    setcookie("id", $account['id'], $cookieLifetime, "/");
+
+                    echo json_encode(['status' => 'success', 'message' => 'Login successful.']);
+                    exit();
+                    // TODO: có thể đặt header đến nơi muốn 
+                    // ví dụ header("Location: index.php?controller=home&action=index");
                 } else {
-                    echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'user/dashboard']);
+                    echo json_encode(['status' => 'error', 'message' => 'Invalid password.']);
+                    exit();
+                    // TODO: có thể đặt header đến nơi muốn 
+                    // ví dụ header("Location: index.php?controller=home&action=index");
                 }
-                exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Thông tin đăng nhập không chính xác.']);
+                echo json_encode(['status' => 'error', 'message' => 'Account not found.']);
                 exit();
+                // TODO: có thể đặt header đến nơi muốn 
+                // ví dụ header("Location: index.php?controller=home&action=index");
             }
         }
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method :vvv.']);
         exit();
+        // TODO: có thể đặt header đến nơi muốn 
+        // ví dụ header("Location: index.php?controller=home&action=index");
     }
 
     public function register() {
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            echo "Phương thức: POST<br>";
-            echo "Dữ liệu gửi lên (POST):<br>";
-            $lastName = trim($_POST['lastName'] ?? '');
-            echo "lastName: $lastName";
-        } else {
-            echo "Phương thức không phải là POST, mà là: " . $_SERVER['REQUEST_METHOD'] . "<br>";
-        }
-        die();
-
-        // Kiểm tra nếu yêu cầu là POST
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lấy dữ liệu từ $_POST
-            $lastName = trim($_POST['lastName'] ?? '');
-            $firstName = trim($_POST['firstName'] ?? '');
-            $phone = trim($_POST['phone'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $password = trim($_POST['password'] ?? '');
-            $terms = isset($_POST['terms']); // Checkbox chỉ cần kiểm tra tồn tại
-
-            // Kiểm tra các trường bắt buộc
-            if (empty($lastName) || empty($firstName) || empty($phone) || empty($email) || empty($password) || !$terms) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Vui lòng điền đầy đủ thông tin và chấp nhận điều khoản.'
-                ]);
-                exit();
+            if (empty($_POST)) {
+                $_POST = json_decode(file_get_contents("php://input"), true);
             }
-
-            // Kiểm tra định dạng email
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Địa chỉ email không hợp lệ.'
-                ]);
-                exit();
-            }
-
-            // Kiểm tra độ dài mật khẩu
-            if (strlen($password) < 6) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Mật khẩu phải có ít nhất 6 ký tự.'
-                ]);
-                exit();
-            }
-
-            // Mã hóa mật khẩu
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-            // Kết nối cơ sở dữ liệu và lưu người dùng
-            require_once '../models/UserModel.php';
+            $firstname = trim($_POST['firstName']);
+            $lastname = trim($_POST['lastName']);
+            $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+            $role = 'user';
+            $email = trim($_POST['email']);
+            $phone = trim($_POST['phone']);
+            $accountModel = new AccountModel();
             $userModel = new UserModel();
-
-            // Kiểm tra email đã tồn tại chưa
-            if ($userModel->getAccountByEmail($email)) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Email đã được sử dụng.'
-                ]);
+            if ($accountModel->getAccountByEmail($email)) {
+                echo json_encode(['status' => 'error', 'message' => 'Email đã được sử dụng.']);
                 exit();
             }
-
-            // Lưu thông tin người dùng
-            $success = $userModel->createUser($lastName, $firstName, $phone, $email, $hashedPassword);
-
-            if ($success) {
-                echo json_encode([
-                    'status' => 'success',
-                    'message' => 'Đăng ký thành công. Vui lòng đăng nhập.',
-                    'redirect' => 'index.php?controller=auth&action=login'
-                ]);
-            } else {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Có lỗi xảy ra. Vui lòng thử lại sau.'
-                ]);
-            }
-        } else {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Phương thức không hợp lệ.'
-            ]);
+            $account_id = $accountModel->createAccount($firstname, $lastname, $password, $email, $phone);
+            $userModel->createUser($account_id);
+            // Route đến trang chủ của user
+            header("Location: index.php?controller=Auth&action=index");
         }
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
+            
     }
     
     public function logout() {
+        session_start();
         session_unset();
         session_destroy();
-        echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'login']);
+        
+        // Trỏ đến header tùy thích sau khi đăng xuất
+        // VD: header("Location: ../index.php");
         exit();
+    }
+
+    public function check(){
+        $firstName = $_POST["firstName"];
+        echo $firstName;
     }
 }
 ?>

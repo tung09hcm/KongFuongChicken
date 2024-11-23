@@ -39,4 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "<h3>Không có dữ liệu gửi lên.</h3>";
 }
+exit()
 ?>

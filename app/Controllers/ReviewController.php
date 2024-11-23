@@ -5,11 +5,15 @@ namespace App\Controllers;
 
 use App\Models\ReviewModel;
 use App\Models\ProductModel;
+use Models\ProductModel as ModelsProductModel;
+use Models\ReviewModel as ModelsReviewModel;
 
+require_once  __DIR__ ."/../Models/ReviewModel.php";
+require_once  __DIR__ ."/../Models/ProductModel.php";
 class ReviewController {
     public function view($product_id) {
-        $productModel = new ProductModel();
-        $reviewModel = new ReviewModel();
+        $productModel = new ModelsProductModel();
+        $reviewModel = new ModelsReviewModel();
         $product = $productModel->getProductById($product_id);
         if (!$product) {
             echo json_encode(['status' => 'error', 'message' => 'Product not found!']);
@@ -27,7 +31,7 @@ class ReviewController {
             $content = trim($_POST['content']);
             $rating = intval($_POST['rating']);
             if ($rating >= 1 && $rating <= 5) {
-                $reviewModel = new ReviewModel();
+                $reviewModel = new ModelsReviewModel();
                 $reviewModel->createReview($product_id, $_SESSION['user_id'], $content, $rating);
                 echo json_encode(['status' => 'success', 'message' => 'Đánh giá đã được gửi thành công.']);
             } else {

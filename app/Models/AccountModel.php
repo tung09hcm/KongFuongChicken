@@ -14,7 +14,8 @@ class AccountModel extends BaseModel {
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':phone', $phone);
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->db->lastInsertId();
     }
 
     public function getAccountByEmail($email) {

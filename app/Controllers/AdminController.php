@@ -1,26 +1,47 @@
 <?php
 namespace App\Controllers;
 
+use Models\AccountModel;
+use Models\AdminModel;
+use Models\AdminPermissionModel;
+use Models\DiscountModel;
+use Models\ProductModel;
+use Models\PromotionModel;
+use Models\ReviewModel;
+use Models\StoreModel;
+use Models\UserModel;
 
-
-use App\Models\AdminModel;
-use App\Models\AdminPermissionModel;
-use App\Models\UserModel;
-use App\Models\ReviewModel;
-use App\Models\ProductModel;
-use App\Models\StoreModel;
-use App\Models\OrderModel;
-use App\Models\DiscountModel;
-use App\Models\PromotionModel;
+require_once  __DIR__ ."/../Models/PromotionModel.php";
+require_once  __DIR__ ."/../Models/DiscountModel.php";
+require_once  __DIR__ ."/../Models/StoreModel.php";
+require_once  __DIR__ ."/../Models/ReviewModel.php";
+require_once  __DIR__ ."/../Models/ProductModel.php";
+require_once  __DIR__ ."/../Models/UserModel.php";
+require_once  __DIR__ ."/../Models/AdminModel.php";
+require_once  __DIR__ ."/../Models/AdminPermissionModel.php";
 
 class AdminController {
+    private function checkAuth($role, $permission = null) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
+            // TODO: có thể đặt header đến nơi muốn 
+            // ví dụ header("Location: index.php?controller=home&action=index");
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập để tiếp tục.', 'redirect' => BASE_URL . 'login']);
+            exit();
+        }
+        if ($permission) {
+            $permissionModel = new AdminPermissionModel();
+            $permissions = $permissionModel->getPermissions($_SESSION['user_id']);
+            if (!$permissions[$permission]) {
+                echo json_encode(['status' => 'error', 'message' => 'Bạn không có quyền truy cập chức năng này.']);
+                exit();
+            }
+        }
+    }
     public function dashboard() {
         $this->checkAuth('admin');
-        $adminModel = new AdminModel();
-        $admin = $adminModel->findByAccountId($_SESSION['user_id']);
         $permissionModel = new AdminPermissionModel();
         $permissions = $permissionModel->getPermissions($_SESSION['user_id']);
-        echo json_encode(['status' => 'success', 'admin' => $admin, 'permissions' => $permissions]);
+        echo json_encode(['status' => 'success', 'permissions' => $permissions]);
         exit();
     }
 
@@ -28,33 +49,29 @@ class AdminController {
         $this->checkAuth('admin', 'can_manage_user');
         $userModel = new UserModel();
         $users = $userModel->getAllUsers();
-        echo json_encode(['status' => 'success', 'users' => $users]);
-        exit();
+        return $users;
     }
 
     public function editUser($id) {
         $this->checkAuth('admin', 'can_manage_user');
-        $accountModel = new \App\Models\AccountModel();
+        $accountModel = new AccountModel();
         $userModel = new UserModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
             $address = trim($_POST['address']);
             $phone = trim($_POST['phone']);
-            $accountModel->updateAccount($id, $name, $email, $address, $phone);
+            $accountModel->updateInfo($id, $phone, $address);
             // $userModel->updateUserInfo($id, $phone, $address);
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật người dùng thành công.']);
             exit();
         }
-        $account = $accountModel->findById($id);
-        $user = $userModel->findByAccountId($id);
-        echo json_encode(['status' => 'success', 'account' => $account, 'user' => $user]);
+        $account = $accountModel->getAccountById($id);
+        echo json_encode(['status' => 'success', 'account' => $account]);
         exit();
     }
 
     public function deleteUser($id) {
         $this->checkAuth('admin', 'can_manage_user');
-        $accountModel = new \App\Models\AccountModel();
+        $accountModel = new AccountModel();
         $userModel = new UserModel();
         $userModel->deleteUser($id);
         $accountModel->deleteAccount($id);
@@ -104,8 +121,9 @@ class AdminController {
             $name = trim($_POST['name']);
             $price = floatval($_POST['price']);
             $description = trim($_POST['description']);
+            $image_link = trim($_POST['image_link']);
             $productModel = new ProductModel();
-            $productModel->createProduct($name, $price, $description);
+            $productModel->createProduct($name, $price, $description, $image_link);
             echo json_encode(['status' => 'success', 'message' => 'Thêm sản phẩm thành công.']);
             exit();
         }
@@ -120,7 +138,8 @@ class AdminController {
             $name = trim($_POST['name']);
             $price = floatval($_POST['price']);
             $description = trim($_POST['description']);
-            $productModel->updateProduct($id, $name, $price, $description);
+            $imageLink = trim($_POST['image_link']);
+            $productModel->updateProduct($id, $name, $price, $description, $imageLink);
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật sản phẩm thành công.']);
             exit();
         }
@@ -190,7 +209,7 @@ class AdminController {
 
     public function manageDiscounts() {
         $this->checkAuth('admin', 'can_manage_discount');
-        $discountModel = new DiscountModel();
+        $discountModel = new DiscountModel ();
         $discounts = $discountModel->getAllDiscounts();
         echo json_encode(['status' => 'success', 'discounts' => $discounts]);
         exit();
@@ -284,18 +303,5 @@ class AdminController {
         exit();
     }
 
-    private function checkAuth($role, $permission = null) {
-        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
-            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập để tiếp tục.', 'redirect' => BASE_URL . 'login']);
-            exit();
-        }
-        if ($permission) {
-            $permissionModel = new AdminPermissionModel();
-            $permissions = $permissionModel->getPermissions($_SESSION['user_id']);
-            if (!$permissions[$permission]) {
-                echo json_encode(['status' => 'error', 'message' => 'Bạn không có quyền truy cập chức năng này.']);
-                exit();
-            }
-        }
-    }
+    
 }

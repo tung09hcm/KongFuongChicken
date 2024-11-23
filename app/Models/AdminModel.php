@@ -4,8 +4,8 @@ namespace Models;
 use PDO;
 
 class AdminModel extends AccountModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone, $birth_date) {
-        parent::createAccount($first_name, $last_name, $password, $email, $phone, $birth_date);
+    public function createAccount($first_name, $last_name, $password, $email, $phone) {
+        parent::createAccount($first_name, $last_name, $password, $email, $phone);
         $account = parent::getAccountByEmail($email);
         if ($account) {
             $this->createAdmin($account['id']);
@@ -23,5 +23,13 @@ class AdminModel extends AccountModel {
         $stmt = $this->db->prepare("SELECT ACCOUNT.* FROM ACCOUNT JOIN ADMIN ON ACCOUNT.id = ADMIN.account_id");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function isAdmin($userId) {
+        $sql = "SELECT id FROM ADMIN WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false; 
     }
 }
