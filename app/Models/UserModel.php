@@ -2,7 +2,7 @@
 namespace Models;
 
 use PDO;
-
+require_once  __DIR__ ."/../Models/AccountModel.php";
 class UserModel extends AccountModel {
     public function createAccount($first_name, $last_name, $password, $email, $phone) {
         parent::createAccount($first_name, $last_name, $password, $email, $phone);

@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 use PDO;
-
+require_once  __DIR__ ."/../Models/BaseModel.php";
 class PromotionModel extends BaseModel {
     public function getAllPromotions() {
         $stmt = $this->db->prepare("SELECT * FROM Promotion WHERE start_date <= CURDATE() AND end_date >= CURDATE()");

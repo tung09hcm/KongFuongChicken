@@ -9,6 +9,13 @@ require_once  __DIR__ ."/../Models/UserModel.php";
 require_once  __DIR__ ."/../Models/AdminModel.php";
 
 class AuthController {
+
+    // TESTING
+    public function logOutView()
+    {
+        require __DIR__ . '/../Testing/logout.php';
+    }
+
     public function index() {
         require __DIR__ . '/../Views/auth/login.php';
     }
@@ -25,25 +32,36 @@ class AuthController {
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountByEmail($email);
             if ($account) {
-                if (password_verify($password, $account['password'])) {
-                    session_start();
-                    $_SESSION['user_id'] = $account['id'];
-                    $_SESSION['email'] = $account['email'];
+                // if (password_verify($password, $account['password'])) 
+                if (($password == $account['password'])) 
+                {
+                    
                     // phân ra xem là admin hay user thông thường
                     // TODO
-                    $adminModel = new AdminModel();
-                    $isAdmin = $adminModel->isAdmin($_SESSION['user_id']);
-                
+                    
+                    $isAdmin = $account['is_admin'];
+                    echo  "account_id: ".$account['id'];
+                    echo "<br>";
+                    echo   $account['email'];
                     if ($isAdmin) {
                         $_SESSION['role'] = 'admin';
                     } else {
-                        $_SESSION['role'] = 'user'; 
+                        $_SESSION['role'] = 'user';     
                     }
-
+                    $_SESSION['user_id'] = $account['id'];
                     $cookieLifetime = time() + (10 * 365 * 24 * 60 * 60);
                     setcookie("id", $account['id'], $cookieLifetime, "/");
 
-                    echo json_encode(['status' => 'success', 'message' => 'Login successful.']);
+                    echo json_encode(['status' => 'success', 'message' => 'Login successful.', 'role' => $_SESSION['role']]);
+                    if($_SESSION['role'] == "admin")
+                    {
+                        echo "giao diện admin". "<br>";
+                        
+                        header("Location: index.php?controller=admin&action=addProductTestView");
+                    }
+                    else{
+                        // TODO nối đến giao diện người dùng
+                    }
                     exit();
                     // TODO: có thể đặt header đến nơi muốn 
                     // ví dụ header("Location: index.php?controller=home&action=index");
@@ -95,18 +113,15 @@ class AuthController {
     }
     
     public function logout() {
-        session_start();
+        echo "xóa session và cookie" ."<br>";
         session_unset();
         session_destroy();
-        
+        setcookie('id', '', time() - 3600, '/');
         // Trỏ đến header tùy thích sau khi đăng xuất
-        // VD: header("Location: ../index.php");
+        echo "cookie_id: ". $_COOKIE['id'];
+        header("Location: index.php?controller=auth&action=index");
         exit();
     }
 
-    public function check(){
-        $firstName = $_POST["firstName"];
-        echo $firstName;
-    }
 }
 ?>

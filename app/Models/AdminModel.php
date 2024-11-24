@@ -26,7 +26,7 @@ class AdminModel extends AccountModel {
     }
 
     public function isAdmin($userId) {
-        $sql = "SELECT id FROM ADMIN WHERE id = :id";
+        $sql = "SELECT id FROM ADMIN WHERE account_id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
         $stmt->execute();

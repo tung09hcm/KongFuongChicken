@@ -56,7 +56,7 @@ class AccountModel extends BaseModel {
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+        $stmt->execute();
     }
 
     public function deleteAccount($id) {

@@ -1,5 +1,4 @@
 <?php
-namespace App\Controllers;
 
 use Models\AccountModel;
 use Models\AdminModel;
@@ -21,6 +20,7 @@ require_once  __DIR__ ."/../Models/AdminModel.php";
 require_once  __DIR__ ."/../Models/AdminPermissionModel.php";
 
 class AdminController {
+    // ok
     private function checkAuth($role, $permission = null) {
         if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
             // TODO: có thể đặt header đến nơi muốn 
@@ -37,21 +37,23 @@ class AdminController {
             }
         }
     }
+    // ok
     public function dashboard() {
+        // xuất ra các quyền admin hiện tại
         $this->checkAuth('admin');
         $permissionModel = new AdminPermissionModel();
         $permissions = $permissionModel->getPermissions($_SESSION['user_id']);
         echo json_encode(['status' => 'success', 'permissions' => $permissions]);
         exit();
     }
-
+    // ok
     public function manageUsers() {
         $this->checkAuth('admin', 'can_manage_user');
         $userModel = new UserModel();
         $users = $userModel->getAllUsers();
         return $users;
     }
-
+    // ok
     public function editUser($id) {
         $this->checkAuth('admin', 'can_manage_user');
         $accountModel = new AccountModel();
@@ -64,21 +66,18 @@ class AdminController {
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật người dùng thành công.']);
             exit();
         }
-        $account = $accountModel->getAccountById($id);
-        echo json_encode(['status' => 'success', 'account' => $account]);
+        
         exit();
     }
-
+    // ok
     public function deleteUser($id) {
         $this->checkAuth('admin', 'can_manage_user');
         $accountModel = new AccountModel();
-        $userModel = new UserModel();
-        $userModel->deleteUser($id);
         $accountModel->deleteAccount($id);
         echo json_encode(['status' => 'success', 'message' => 'Xóa người dùng thành công.']);
         exit();
     }
-
+    // ok
     public function manageReviews() {
         $this->checkAuth('admin', 'can_manage_review');
         $reviewModel = new ReviewModel();
@@ -86,7 +85,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'reviews' => $reviews]);
         exit();
     }
-
+    // ok
     public function handleReview($id) {
         $this->checkAuth('admin', 'can_manage_review');
         $reviewModel = new ReviewModel();
@@ -107,6 +106,10 @@ class AdminController {
         exit();
     }
 
+    public function addProductTestView(){
+        require __DIR__ . '/../Testing/manageProduct.php';
+    }
+    // ok
     public function manageProducts() {
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
@@ -114,7 +117,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'products' => $products]);
         exit();
     }
-
+    // ok
     public function addProduct() {
         $this->checkAuth('admin', 'can_manage_product');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -130,7 +133,7 @@ class AdminController {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
     }
-
+    // ok
     public function editProduct($id) {
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
@@ -147,15 +150,24 @@ class AdminController {
         echo json_encode(['status' => 'success', 'product' => $product]);
         exit();
     }
-
-    public function deleteProduct($id) {
+    // ok
+    public function deleteProductByID($id) {
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
         $productModel->deleteProduct($id);
         echo json_encode(['status' => 'success', 'message' => 'Xóa sản phẩm thành công.']);
         exit();
     }
-
+    // ok
+    public function deleteProduct() {
+        $this->checkAuth('admin', 'can_manage_product');
+        $id = intval($_POST['id']);
+        $productModel = new ProductModel();
+        $productModel->deleteProduct($id);
+        echo json_encode(['status' => 'success', 'message' => 'Xóa sản phẩm thành công.']);
+        exit();
+    }
+    // ok
     public function manageStores() {
         $this->checkAuth('admin', 'can_manage_store');
         $storeModel = new StoreModel();
@@ -163,7 +175,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'stores' => $stores]);
         exit();
     }
-
+    // ok
     public function addStore() {
         $this->checkAuth('admin', 'can_manage_store');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -180,7 +192,7 @@ class AdminController {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
     }
-
+    // ok
     public function editStore($id) {
         $this->checkAuth('admin', 'can_manage_store');
         $storeModel = new StoreModel();
@@ -198,7 +210,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'store' => $store]);
         exit();
     }
-
+    // ok
     public function deleteStore($id) {
         $this->checkAuth('admin', 'can_manage_store');
         $storeModel = new StoreModel();
