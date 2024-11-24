@@ -16,7 +16,7 @@ class BaseModel {
         $user = DB_USER;
         $password = DB_PASSWORD;
         $charset = DB_CHARSET;
-        $timeout = 10;
+        $timeout = 15;
 
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=$charset";
 

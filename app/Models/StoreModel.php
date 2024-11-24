@@ -17,10 +17,10 @@ class StoreModel extends BaseModel {
     }
 
     public function searchStores($location) {
-        $stmt = $this->db->prepare("SELECT * FROM Store WHERE address = :location");
-        $stmt->bindParam(':location', $location, PDO::PARAM_INT);
+        $stmt = $this->db->prepare("SELECT * FROM Store WHERE address LIKE :location");
+        $stmt->bindValue(':location', "%$location%");
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function createStore($name, $address, $phone, $opening_hours) {

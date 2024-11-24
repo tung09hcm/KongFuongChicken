@@ -4,7 +4,7 @@ namespace Models;
 use PDO;
 
 class UserModel extends AccountModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone) {
+    public function createAccount($first_name, $last_name, $password, $email, $phone, $is_admin = 0) {
         parent::createAccount($first_name, $last_name, $password, $email, $phone);
         $account = parent::getAccountByEmail($email);
         if ($account) {
@@ -33,9 +33,30 @@ class UserModel extends AccountModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteUser($id) {
-        $sql = "DELETE FROM USER WHERE id = :id";
-        $stmt = $this->db->prepare($sql);
+    public function addAddress($user_id, $address) {
+        $stmt = $this->db->prepare("INSERT INTO USER_ADDRESS (user_id, address) VALUES (:user_id, :address)");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':address', $address);
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function updateAddress($user_id, $address) {
+        $stmt = $this->db->prepare("UPDATE USER_ADDRESS SET address = :address, last_used = NOW() WHERE user_id = :user_id ORDER BY last_used DESC LIMIT 1");
+        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function getAddresses($user_id) {
+        $stmt = $this->db->prepare("SELECT * FROM USER_ADDRESS WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteAddress($id) {
+        $stmt = $this->db->prepare("DELETE FROM USER_ADDRESS WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
