@@ -9,8 +9,10 @@ use Models\PromotionModel;
 use Models\ReviewModel;
 use Models\StoreModel;
 use Models\UserModel;
+use Models\PostModel;
 
 require_once  __DIR__ ."/../Models/PromotionModel.php";
+require_once  __DIR__ ."/../Models/PostModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
 require_once  __DIR__ ."/../Models/StoreModel.php";
 require_once  __DIR__ ."/../Models/ReviewModel.php";
@@ -218,7 +220,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'message' => 'Xóa cửa hàng thành công.']);
         exit();
     }
-
+    // ok
     public function manageDiscounts() {
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel ();
@@ -226,7 +228,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'discounts' => $discounts]);
         exit();
     }
-
+    // ok
     public function addDiscount() {
         $this->checkAuth('admin', 'can_manage_discount');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -241,7 +243,7 @@ class AdminController {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
     }
-
+    // ok
     public function editDiscount($id) {
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel();
@@ -257,7 +259,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'discount' => $discount]);
         exit();
     }
-
+    // ok
     public function deleteDiscount($id) {
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel();
@@ -265,7 +267,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'message' => 'Xóa mã giảm giá thành công.']);
         exit();
     }
-
+    // ok
     public function managePromotions() {
         $this->checkAuth('admin', 'can_manage_promotion');
         $promotionModel = new PromotionModel();
@@ -273,7 +275,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'promotions' => $promotions]);
         exit();
     }
-
+    // ok
     public function addPromotion() {
         $this->checkAuth('admin', 'can_manage_promotion');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -289,7 +291,7 @@ class AdminController {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
     }
-
+    // ok
     public function editPromotion($id) {
         $this->checkAuth('admin', 'can_manage_promotion');
         $promotionModel = new PromotionModel();
@@ -306,7 +308,7 @@ class AdminController {
         echo json_encode(['status' => 'success', 'promotion' => $promotion]);
         exit();
     }
-
+    // ok
     public function deletePromotion($id) {
         $this->checkAuth('admin', 'can_manage_promotion');
         $promotionModel = new PromotionModel();
@@ -314,6 +316,70 @@ class AdminController {
         echo json_encode(['status' => 'success', 'message' => 'Xóa chương trình khuyến mãi thành công.']);
         exit();
     }
-
-    
+    public function managePost() {
+        $this->checkAuth('admin', 'can_manage_post');
+        $postModel = new PostModel();
+        $posts = $postModel->getAllPosts();
+        echo json_encode(['status' => 'success', 'posts' => $posts]);
+        exit();
+    }
+    // ok
+    public function addPost() {
+        $this->checkAuth('admin', 'can_manage_post');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = trim($_POST['title']);
+            $content = trim($_POST['content']);
+            $postModel = new PostModel();
+            $postModel->createPost($_SESSION['user_id'], $title, $content);
+            echo json_encode(['status' => 'success', 'message' => 'Thêm chương trình khuyến mãi thành công.']);
+            exit();
+        }
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        exit();
+    }
+    // ok
+    public function editPost($id) {
+        $this->checkAuth('admin', 'can_manage_post');
+        $postModel = new PostModel();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = trim($_POST['title']);
+            $content = trim($_POST['content']);
+            $postModel->updatePost($id, $title, $content);
+            echo json_encode(['status' => 'success', 'message' => 'Cập nhật chương trình khuyến mãi thành công.']);
+            exit();
+        }
+        $promotion = $postModel->getPostById($id);
+        echo json_encode(['status' => 'success', 'promotion' => $promotion]);
+        exit();
+    }
+    // ok
+    public function deletePost($id) {
+        $this->checkAuth('admin', 'can_manage_post');
+        $postModel = new PostModel();
+        $postModel->deletePost($id);
+        echo json_encode(['status' => 'success', 'message' => 'Xóa chương trình khuyến mãi thành công.']);
+        exit();
+    }
+    public function addAdmin()
+    {   
+        $this->checkAuth('admin', 'can_add_admin');
+        $firstname = trim($_POST['firstName']);
+        $lastname = trim($_POST['lastName']);
+        $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+        $email = trim($_POST['email']);
+        $phone = trim($_POST['phone']);
+        $accountModel = new AccountModel();
+        $adminModel = new AdminModel();
+        if ($accountModel->getAccountByEmail($email)) {
+            echo json_encode(['status' => 'error', 'message' => 'Email đã được sử dụng.']);
+            exit();
+        }
+        $account_id = $accountModel->createAccount($firstname, $lastname, $password, $email, $phone);
+        $adminModel->createAdmin($account_id);
+    }
+    public function deleteAdmin($id){
+        $this->checkAuth('admin', 'can_delete_admin');
+        $adminModel = new AdminModel();
+        $adminModel->deleteAdmin($id);
+    }
 }

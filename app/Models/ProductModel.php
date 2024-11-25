@@ -46,7 +46,7 @@ class ProductModel extends BaseModel {
     }
 
     public function getProductsByPromotionId($promotion_id) {
-        $stmt = $this->db->prepare("SELECT PRODUCT.* FROM Product JOIN Promotion_Product ON Product.id = Promotion_Product.product_id WHERE Promotion_Product.promotion_id = :promotion_id");
+        $stmt = $this->db->prepare("SELECT PRODUCT.* FROM PRODUCT JOIN PROMOTION_PRODUCT ON PRODUCT.id = PROMOTION_PRODUCT.product_id WHERE PROMOTION_PRODUCT.promotion_id = :promotion_id");
         $stmt->bindParam(':promotion_id', $promotion_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();

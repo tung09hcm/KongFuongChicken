@@ -61,6 +61,7 @@ class AuthController {
                     }
                     else{
                         // TODO nối đến giao diện người dùng
+                        header("Location: index.php?controller=cart&action=Menu");
                     }
                     exit();
                     // TODO: có thể đặt header đến nơi muốn 
@@ -92,7 +93,8 @@ class AuthController {
             }
             $firstname = trim($_POST['firstName']);
             $lastname = trim($_POST['lastName']);
-            $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+            // $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+            $password = trim($_POST['password']);
             $role = 'user';
             $email = trim($_POST['email']);
             $phone = trim($_POST['phone']);

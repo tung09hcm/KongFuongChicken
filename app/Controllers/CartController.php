@@ -1,5 +1,4 @@
 <?php
-namespace App\Controllers;
 
 
 
@@ -9,6 +8,13 @@ use Models\CartModel as ModelsCartModel;
 
 require_once  __DIR__ ."/../Models/CartModel.php";
 class CartController {
+    // TESTING
+    public function Menu()
+    {
+        require __DIR__ . '/../Testing/user_test.php';
+    }
+
+
     public function view() {
         $this->checkAuth('user');
         $cartModel = new ModelsCartModel();

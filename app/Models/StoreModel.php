@@ -19,8 +19,9 @@ class StoreModel extends BaseModel {
     public function searchStores($location) {
         $stmt = $this->db->prepare("SELECT * FROM STORE WHERE address = :location");
         $stmt->bindParam(':location', $location, PDO::PARAM_INT);
+
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function createStore($name, $address, $phone, $opening_hours) {
@@ -34,7 +35,7 @@ class StoreModel extends BaseModel {
     }
 
     public function updateStore($id, $name, $address, $phone, $opening_hours) {
-        $stmt = $this->db->prepare("UPDATE STORE SET name = :name, address = :address, phone = :phone, opening_hours = :opening_hours, WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE STORE SET name = :name, address = :address, phone = :phone, opening_hours = :opening_hours WHERE id = :id");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':phone', $phone);

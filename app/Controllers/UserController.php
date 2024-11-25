@@ -40,7 +40,7 @@ class UserController {
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
             $userModel = new ModelsUserModel();
-            // $userModel->updateUserInfo($_SESSION['user_id'], $phone, $address);
+            $userModel->updateInfo($_SESSION['user_id'], $phone, $address);
             $user = $userModel->getAccountById($_SESSION['user_id']);
             echo json_encode(['status' => 'success', 'user' => $user]);
             exit();

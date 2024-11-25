@@ -4,8 +4,8 @@ namespace Models;
 use PDO;
 
 class AdminModel extends AccountModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone) {
-        parent::createAccount($first_name, $last_name, $password, $email, $phone);
+    public function createAccount($first_name, $last_name, $password, $email, $phone, $is_admin = 1) {
+        parent::createAccount($first_name, $last_name, $password, $email, $phone, $is_admin);
         $account = parent::getAccountByEmail($email);
         if ($account) {
             $this->createAdmin($account['id']);
@@ -26,10 +26,17 @@ class AdminModel extends AccountModel {
     }
 
     public function isAdmin($userId) {
-        $sql = "SELECT id FROM ADMIN WHERE account_id = :id";
+        $sql = "SELECT id FROM ADMIN WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC) !== false; 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteAdmin($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM ACCOUNT WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

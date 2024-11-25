@@ -6,14 +6,15 @@ use PDO;
 
 class AccountModel extends BaseModel {
     public function createAccount($first_name, $last_name, $password, $email, $phone) {
-        $sql = "INSERT INTO ACCOUNT (first_name, last_name, password, email, phone) 
-                VALUES (:first_name, :last_name, :password, :email, :phone)";
+        $is_admin = 0;
+        $sql = "INSERT INTO ACCOUNT (first_name, last_name, password, email, phone, is_admin) VALUES (:first_name, :last_name, :password, :email, :phone, :is_admin)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':is_admin', $is_admin);
         $stmt->execute();
         return $this->db->lastInsertId();
     }
@@ -65,4 +66,6 @@ class AccountModel extends BaseModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+
 }
