@@ -2,7 +2,6 @@
 namespace Models;
 
 use PDO;
-require_once  __DIR__ ."/../Models/AccountModel.php";
 class UserModel extends AccountModel {
     public function createAccount($first_name, $last_name, $password, $email, $phone, $is_admin = 0) {
         parent::createAccount($first_name, $last_name, $password, $email, $phone);
@@ -33,12 +32,19 @@ class UserModel extends AccountModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    // CREATE TABLE USER_ADDRESS (
+    //     user_id INT NOT NULL,
+    //     address VARCHAR(200) NOT NULL,
+    //     last_used DATE,
+    //     PRIMARY KEY (user_id, address),
+    //     FOREIGN KEY (user_id) REFERENCES USER(account_id) ON DELETE CASCADE
+    // );
+
     public function addAddress($user_id, $address) {
-        $stmt = $this->db->prepare("INSERT INTO USER_ADDRESS (user_id, address, last_used) VALUES (:user_id, :address, :last_used)");
+        $stmt = $this->db->prepare("INSERT INTO USER_ADDRESS (user_id, address) VALUES (:user_id, :address)");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':address', $address);
-        $date = date('Y-m-d H:i:s');
-        $stmt->bindParam(':last_used', $date);
         $stmt->execute();
         return $this->db->lastInsertId();
     }
@@ -57,9 +63,10 @@ class UserModel extends AccountModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteAddress($id) {
-        $stmt = $this->db->prepare("DELETE FROM USER_ADDRESS WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    public function deleteAddress($user_id, $address) {
+        $stmt = $this->db->prepare("DELETE FROM USER_ADDRESS WHERE user_id = :user_id AND address = :address");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':address', $address);
         return $stmt->execute();
     }
 }

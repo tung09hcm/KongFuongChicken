@@ -5,8 +5,7 @@ require_once  __DIR__ ."/../Models/BaseModel.php";
 use PDO;
 
 class AccountModel extends BaseModel {
-    public function createAccount($first_name, $last_name, $password, $email, $phone) {
-        $is_admin = 0;
+    public function createAccount($first_name, $last_name, $password, $email, $phone, $is_admin = 0) {
         $sql = "INSERT INTO ACCOUNT (first_name, last_name, password, email, phone, is_admin) VALUES (:first_name, :last_name, :password, :email, :phone, :is_admin)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':first_name', $first_name);
@@ -57,7 +56,7 @@ class AccountModel extends BaseModel {
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteAccount($id) {
@@ -66,6 +65,4 @@ class AccountModel extends BaseModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-
-
 }

@@ -17,38 +17,28 @@ class ProductModel extends BaseModel {
         return $stmt->fetch();
     }
 
-    public function createProduct($name, $price, $description, $imageLink) {
-        $stmt = $this->db->prepare("INSERT INTO PRODUCT (name, price, description, image_link) VALUES (:name, :price, :description, :imageLink)");
+    public function createProduct($name, $price, $description, $image_link) {
+        $stmt = $this->db->prepare("INSERT INTO PRODUCT (name, price, description, image_link) VALUES (:name, :price, :description, :image_link)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':imageLink', $imageLink);
-        $stmt->execute();
-        return $this->db->lastInsertId();
+        $stmt->bindParam(':image_link', $image_link);
+        return $stmt->execute();
     }
 
-    public function updateProduct($id, $name, $price, $description, $imageLink) {
-        $stmt = $this->db->prepare("UPDATE PRODUCT SET name = :name, price = :price, description = :description,  image_link = :imageLink WHERE id = :id");
+    public function updateProduct($id, $name, $price, $description, $image_link) {
+        $stmt = $this->db->prepare("UPDATE PRODUCT SET name = :name, price = :price, description = :description,  image_link = :image_link WHERE id = :id");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':imageLink', $imageLink);
+        $stmt->bindParam(':image_link', $image_link);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount();
+        return $stmt->execute();
     }
 
     public function deleteProduct($id) {
         $stmt = $this->db->prepare("DELETE FROM PRODUCT WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
-
-    public function getProductsByPromotionId($promotion_id) {
-        $stmt = $this->db->prepare("SELECT PRODUCT.* FROM PRODUCT JOIN PROMOTION_PRODUCT ON PRODUCT.id = PROMOTION_PRODUCT.product_id WHERE PROMOTION_PRODUCT.promotion_id = :promotion_id");
-        $stmt->bindParam(':promotion_id', $promotion_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->execute();
     }
 }

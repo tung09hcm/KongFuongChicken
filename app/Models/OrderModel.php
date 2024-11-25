@@ -1,16 +1,14 @@
 <?php
 namespace Models;
-require_once  __DIR__ ."/../Models/BaseModel.php";
 use PDO;
 
 class OrderModel extends BaseModel {
-    public function createOrder($user_id, $store_id, $discount_id, $delivery_address, $order_date, $total, $status = 'Pending') {
-        $stmt = $this->db->prepare("INSERT INTO `ORDER` (user_id, store_id, discount_id, user_address_id, order_date, total, status) VALUES (:user_id, :store_id, :discount_id, :delivery_address, :order_date, :total, :status)");
+    public function createOrder($user_id, $store_id, $discount_id, $address, $total, $status = 'Pending') {
+        $stmt = $this->db->prepare("INSERT INTO `ORDER` (user_id, store_id, discount_id, user_address_id, total, status) VALUES (:user_id, :store_id, :discount_id, :address, :total, :status)");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_INT);
         $stmt->bindParam(':discount_id', $discount_id, PDO::PARAM_INT);
-        $stmt->bindParam(':delivery_address', $delivery_address);
-        $stmt->bindParam(':order_date', $order_date);
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':total', $total);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
@@ -53,5 +51,12 @@ class OrderModel extends BaseModel {
         $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function deleteOrder($order_id) {
+        $stmt = $this->db->prepare("DELETE FROM `ORDER` WHERE id = :order_id");
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }

@@ -143,8 +143,8 @@ class AdminController {
             $name = trim($_POST['name']);
             $price = floatval($_POST['price']);
             $description = trim($_POST['description']);
-            $imageLink = trim($_POST['image_link']);
-            $productModel->updateProduct($id, $name, $price, $description, $imageLink);
+            $image_link = trim($_POST['image_link']);
+            $productModel->updateProduct($id, $name, $price, $description, $image_link);
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật sản phẩm thành công.']);
             exit();
         }

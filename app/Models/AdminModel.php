@@ -24,19 +24,4 @@ class AdminModel extends AccountModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function isAdmin($userId) {
-        $sql = "SELECT id FROM ADMIN WHERE id = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function deleteAdmin($id)
-    {
-        $stmt = $this->db->prepare("DELETE FROM ACCOUNT WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-    }
 }
