@@ -14,7 +14,7 @@ class ProductModel extends BaseModel {
         $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function createProduct($name, $price, $description, $image_link) {

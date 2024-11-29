@@ -6,7 +6,7 @@ fetch('index.php?controller=admin&action=managePost')
     console.log(posts);
     posts.posts.forEach(post => {
         postList.innerHTML += `
-            <tr onclick="window.location.href='article.php?id=${post.id}'">
+            <tr onclick="window.location.href='index.php?controller=admin&action=viewPostDetail&idPost=${post.id}'">
                 <td>${post.id}</td>
                 <td>${post.title}</td>
                 <td class="news-content">

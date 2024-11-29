@@ -76,7 +76,7 @@
         <div class="contain2">
             <div class="link">
                 <h2>Menu</h2>
-                <a id="menus" href="menus.php">Xem thêm</a>
+                <a id="menus" href="index.php?controller=admin&action=viewMenu">Xem thêm</a>
             </div>
             <div id="card-items"></div>
         </div>
@@ -85,7 +85,7 @@
         <div class="contain2">
             <div class="link">
                 <h2>Đơn hàng gần đây</h2>
-                <a id="orders" href="orders.php">Xem thêm</a>
+                <a id="orders" href="index.php?controller=admin&action=viewOrder">Xem thêm</a>
             </div>
             <div class="table">
                 <table>
@@ -122,7 +122,7 @@
         <div class="contain2">
             <div class="link">
                 <h2>Các bài viết gần đây</h2>
-                <a id="news" href="news.php">Xem thêm</a>
+                <a id="news" href="index.php?controller=admin&action=viewPost">Xem thêm</a>
             </div>
             <div class="table">
                 <table>
@@ -140,71 +140,6 @@
                 </table>
             </div>
         </div>
-
-        <?php
-            ob_start();
-
-            // Kết nối cơ sở dữ liệu
-            include __DIR__ . '/../../../config/config.php';
-            $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-
-            if ($conn->connect_error) {
-                die("Kết nối thất bại: " . $conn->connect_error);
-            }
-
-            $discount_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-
-            $discount = [
-                'code' => '',
-                'percentage' => '',
-                'expiry_date' => ''
-            ];
-
-            // Xử lý khi form được submit
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $code = $_POST['code'] ?? '';
-                $percentage = $_POST['percentage'] ?? 0;
-                $expiry_date = $_POST['expiry_date'] ?? '';
-
-                // Kiểm tra dữ liệu
-                if (empty($code) || empty($percentage) || empty($expiry_date)) {
-                    alert("Vui lòng điền đầy đủ thông tin.");
-                    exit;
-                }
-
-                if ($discount_id > 0) {
-                    // Cập nhật mã giảm giá
-                    $stmt = $conn->prepare("UPDATE DISCOUNT SET code = ?, percentage = ?, expiry_date = ? WHERE id = ?");
-                    $stmt->bind_param("sdsi", $code, $percentage, $expiry_date, $discount_id);
-
-                    if ($stmt->execute()) {
-                        ob_clean();
-                        header("Location: index.php");
-                        exit();
-                    } else {
-                        error_log("Database error: " . $stmt->error);
-                        echo "Có lỗi xảy ra khi cập nhật mã giảm giá.";
-                    }
-                    $stmt->close();
-                } else {
-                    // Thêm mã giảm giá mới
-                    $stmt = $conn->prepare("INSERT INTO DISCOUNT (code, percentage, expiry_date) VALUES (?, ?, ?)");
-                    $stmt->bind_param("sds", $code, $percentage, $expiry_date);
-
-                    if ($stmt->execute()) {
-                        ob_clean();
-                        header("Location: index.php");
-                        exit();
-                    } else {
-                        error_log("Database error: " . $stmt->error);
-                        echo "Có lỗi xảy ra khi thêm mã giảm giá.";
-                    }
-                    $stmt->close();
-                }
-            }
-
-            $conn->close();
-        ?>
 
         <div class="contain2">
             <div class="link">
@@ -225,7 +160,7 @@
 
                     <div class="btn">
                         <button type="submit">Lưu</button>
-                        <button type="button" onclick="deleteProduct();" style="display: <?php echo $discount_id > 0 ? 'inline' : 'none'; ?>">Xóa</button>
+                        <button type="button" onclick="deleteDiscount();" style="display: none" id="deleteDiscount">Xóa</button>
                         <button type="reset">Hủy</button>
                     </div>
                 </form>
@@ -244,7 +179,71 @@
                     </table>
                 </div>
             </div>
+        </div>
 
+        <div class="contain2">
+            <div class="link">
+                <h2>Danh sách cửa hàng</h2>
+            </div>
+            <div class="store-box">
+                <form action="" method="POST" name="store-form" id="store-form">
+                    <div class="store-detail-form">
+                        <div id="store-info">
+                            <h3>Thông tin cửa hàng</h3>
+                            <input type="hidden" name="idStore" id="idStore" value="">
+
+                            <label for="name">Tên cửa hàng</label><br>
+                            <input type="text" id="name" name="name" value="" autocomplete="off"><br>
+
+                            <label for="address">Địa chỉ</label><br>
+                            <input type="number" id="address" name="address" value="" autocomplete="off"><br>
+
+                            <label for="phone">SĐT</label><br>
+                            <input type="text" id="phone" name="phone" value="" autocomplete="off" required><br>
+
+                            <label for="opening_hours">Giờ mở cửa</label><br>
+                            <input type="time" id="opening_hours" name="opening_hours" value="" autocomplete="off" required><br>
+                        </div>
+                        <div id="admin-info">
+                            <h3>Thông tin admin</h3>
+                            <input type="hidden" name="idAdmin" id="idAdmin" value="">
+
+                            <label for="first-name">Tên</label><br>
+                            <input type="text" id="first-name" name="first-name" value="" autocomplete="off"><br>
+
+                            <label for="last-name">Họ</label><br>
+                            <input type="text" id="last-name" name="last-name" value="" autocomplete="off"><br>
+
+                            <label for="phone">SĐT</label><br>
+                            <input type="text" id="admin-phone" name="phone" value="" autocomplete="off" required><br>
+
+                            <label for="email">Email</label><br>
+                            <input type="text" id="email" name="email" value="" autocomplete="off" required><br>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Lưu</button>
+                        <button type="button" onclick="deleteStore();" style="display: none" id="deleteStore">Xóa</button>
+                        <button type="reset">Hủy</button>
+                    </div>
+                </form>
+                <div class="table" id="store-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã cửa hàng</th>
+                                <th>Tên cửa hàng</th>
+                                <th>Địa chỉ</th>
+                                <th>Tên admin</th>
+                                <th>SĐT cửa hàng</th>
+                                <th>Email admin</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody id="code-list"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

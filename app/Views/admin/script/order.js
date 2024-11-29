@@ -22,25 +22,15 @@ function changeColor(selectElement, orderId) {
 }
 //DONE
 function updateStatusInDB(status, orderId) {
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "app/Views/admin/api/updateStatus.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    // Encode status and orderId as URL-encoded parameters
-    const params = `status=${encodeURIComponent(status)}&orderId=${encodeURIComponent(orderId)}`;
-    
-    // Send the data to the PHP script
-    xhr.send(params);
-
-    // Handle the response
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            console.log("Status updated successfully");
-        } else {
-            console.error("Error updating status: ", xhr.responseText);
-        }
-    };
+    fetch("index.php?controller=admin&action=updateStatus&idOrder=" + encodeURIComponent(orderId) + "&status=" + encodeURIComponent(status))
+    .then((response) => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        alert('Lỗi khi tải dữ liệu!');
+    });
 }
 
 
@@ -75,37 +65,36 @@ fetch('index?controller=admin&action=getAllOrders')
 
 // Hàm hiển thị popup
 function showPopup(orderId) {
-    fetch(`app/Views/admin/api/getOrderDetail.php?id=${orderId}`)
-    .then(response => {
-        if (!response.ok) {
-            console.error(`Server error: ${response.status}`);
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-            throw new Error("Phản hồi không phải JSON");
-        }
-        return response.json();
-    })
+    fetch("index.php?controller=admin&action=getOrderDetail&idOrder=" + encodeURIComponent(orderId))
+    .then((response) => response.json())
     .then(data => {
-
         let orderDetail = document.getElementById('popup');
+
+        const discountPercentage = data.order.discount_percentage || 0; // Nếu không có, mặc định là 0
+        const total = data.order.total || 0; // Tổng giá trị đơn hàng
+        const discount = total * discountPercentage; // Số tiền giảm giá
+        const finalTotal = total - discount + 10000; // Thành tiền sau giảm giá + phí 10,000
+
+        // Định dạng số theo kiểu tiền tệ
+        const formattedDiscount = discountPercentage > 0 ? (discountPercentage * 100).toLocaleString() + '%' : 'Không';
+        const formattedTotal = finalTotal.toLocaleString() + 'đ';
+
         orderDetail.innerHTML = `
             <div class="id-order">
-                <h3>${data.order_id}</h3>
+                <h3>${data.order.order_id}</h3>
                 <svg onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg> 
             </div>
-            <h3>Tên khách hàng: <span>${data.customer_name}</span></h3>
-            <h5>Địa chỉ: <span>${data.customer_address}</span></h5>
-            <h5>Tình trạng: <span>${data.status}</span></h5>
-            <h5>Thời gian đặt: <span>${data.order_date}</span></h5>
+            <h3>Tên khách hàng: <span>${data.order.customer_name}</span></h3>
+            <h5>Địa chỉ: <span>${data.order.customer_address}</span></h5>
+            <h5>Tình trạng: <span>${data.order.status}</span></h5>
+            <h5>Thời gian đặt: <span>${data.order.order_date}</span></h5>
             <div class="sumary">
                 <h3>Tóm tắt đơn hàng</h3>
                 <div class="detail">
-                    ${data.items && data.items.length > 0 
-                    ? data.items.map(detail => `
+                    ${data.order.items && data.order.items.length > 0 
+                    ? data.order.items.map(detail => `
                         <div class="dish-name">
                             <h5>${detail.quantity}x ${detail.product_name}</h5>
                             <h5>${Number(detail.item_total).toLocaleString()}đ</h5>
@@ -115,7 +104,7 @@ function showPopup(orderId) {
                 </div>
                 <div class="dish-name">
                     <h5>Tổng đơn hàng</h5>
-                    <span>${Number(data.total).toLocaleString()}đ</span>
+                    <span>${Number(data.order.total).toLocaleString()}đ</span>
                 </div>
                 <div class="dish-name">
                     <h5>Phí giao hàng</h5>
@@ -123,11 +112,11 @@ function showPopup(orderId) {
                 </div>
                 <div class="dish-name">
                     <h5>Khuyến mãi</h5>
-                    <span>${data.discount_code ? data.discount_percentage + '%' : 'Không'}</span>
+                    <span>${formattedDiscount}</span>
                 </div>
                 <div class="dish-name">
                     <h5>Thành tiền</h5>
-                    <span>${Number(data.total*data.discount_percentage).toLocaleString()}đ</span>
+                    <span>${formattedTotal}</span>
                 </div>
             </div>
         `;

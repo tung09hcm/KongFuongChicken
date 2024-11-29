@@ -29,7 +29,7 @@ class UserModel extends AccountModel {
     public function getAllUsers() {
         $stmt = $this->db->prepare("SELECT ACCOUNT.* FROM ACCOUNT JOIN USER ON ACCOUNT.id = USER.account_id");
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll();
     }
 
 

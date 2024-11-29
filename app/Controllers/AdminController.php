@@ -65,7 +65,8 @@ class AdminController {
         $this->checkAuth('admin', 'can_manage_user');
         $userModel = new UserModel();
         $users = $userModel->getAllUsers();
-        return $users;
+        echo json_encode(['status' => 'success', 'users' => $users]);
+        exit();
     }
     // ok
     public function editUser($id) {
@@ -123,12 +124,54 @@ class AdminController {
     public function addProductTestView(){
         require __DIR__ . '/../Testing/manageProduct.php';
     }
+
+    public function viewProduct() {
+        require __DIR__ . '/../Views/admin/dish.php';
+    }
+    public function viewMenu() {
+        require __DIR__ . '/../Views/admin/menus.php';
+    }
+    public function viewOrder() {
+        require __DIR__ . '/../Views/admin/orders.php';
+    }
+    public function viewCustomer() {
+        require __DIR__ . '/../Views/admin/customers.php';
+    }
+    public function viewComment() {
+        require __DIR__ . '/../Views/admin/comments.php';
+    }
+    public function viewPost() {
+        require __DIR__ . '/../Views/admin/news.php';
+    }
+    public  function viewPostDetail() {
+        require __DIR__ . '/../Views/admin/artical.php';
+    }
     // ok
     public function manageProducts() {
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
         $products = $productModel->getAllProducts();
         echo json_encode(['status' => 'success', 'products' => $products]);
+        exit();
+    }
+    public function getProduct() {
+        $id = $_GET['idProduct'];
+        $this->checkAuth('admin', 'can_manage_product');
+        $productModel = new ProductModel();
+        $product = $productModel->getProductById($id);
+        if (!$product) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không tìm thấy sản phẩm.',
+            ]);
+            exit();
+        }
+    
+        // Nếu tìm thấy, trả về dữ liệu
+        echo json_encode([
+            'success' => true,
+            'product' => $product,
+        ]);
         exit();
     }
     // ok
@@ -148,7 +191,9 @@ class AdminController {
         exit();
     }
     // ok
-    public function editProduct($id) {
+    public function editProduct() {
+        $id = $_GET['idProduct'];
+
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -156,8 +201,10 @@ class AdminController {
             $price = floatval($_POST['price']);
             $description = trim($_POST['description']);
             $image_link = trim($_POST['image_link']);
+
             $productModel->updateProduct($id, $name, $price, $description, $image_link);
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật sản phẩm thành công.']);
+
             exit();
         }
         $product = $productModel->getProductById($id);
@@ -165,7 +212,9 @@ class AdminController {
         exit();
     }
     // ok
-    public function deleteProductByID($id) {
+    public function deleteProductByID() {
+        $id = $_GET['idProduct'];
+        
         $this->checkAuth('admin', 'can_manage_product');
         $productModel = new ProductModel();
         $productModel->deleteProduct($id);
@@ -276,7 +325,9 @@ class AdminController {
         exit();
     }
     // ok
-    public function editDiscount($id) {
+    public function editDiscount() {
+        $id = $_GET['idDiscount'];
+
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -292,7 +343,9 @@ class AdminController {
         exit();
     }
     // ok
-    public function deleteDiscount($id) {
+    public function deleteDiscount() {
+        $id = $_GET['idDiscount'];
+        
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel();
         $discountModel->deleteDiscount($id);
@@ -355,6 +408,26 @@ class AdminController {
         echo json_encode(['status' => 'success', 'posts' => $posts]);
         exit();
     }
+    public function getPost() {
+        $id = $_GET['idPost'];
+        $this->checkAuth('admin', 'can_manage_post');
+        $postModel = new PostModel();
+        $post = $postModel->getPostById($id);
+        if (!$post) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không tìm thấy post.',
+            ]);
+            exit();
+        }
+    
+        // Nếu tìm thấy, trả về dữ liệu
+        echo json_encode([
+            'success' => true,
+            'product' => $product,
+        ]);
+        exit();
+    }
     // ok
     public function addPost() {
         $this->checkAuth('admin', 'can_manage_post');
@@ -370,7 +443,8 @@ class AdminController {
         exit();
     }
     // ok
-    public function editPost($id) {
+    public function editPost() {
+        $id = $_GET['idPost'];
         $this->checkAuth('admin', 'can_manage_post');
         $postModel = new PostModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -385,7 +459,8 @@ class AdminController {
         exit();
     }
     // ok
-    public function deletePost($id) {
+    public function deletePost() {
+        $id = $_GET['idPost'];
         $this->checkAuth('admin', 'can_manage_post');
         $postModel = new PostModel();
         $postModel->deletePost($id);
@@ -420,6 +495,35 @@ class AdminController {
         $orderModel = new OrderModel();
         $orders = $orderModel->getAllOrders();
         echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
+    }
+    public function getOrderDetail() {
+        $id = $_GET['idOrder'];
+        $this->checkAuth('admin');
+        $orderModel = new OrderModel();
+        $order = $orderModel->detail($id);
+        if (!$order) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng.',
+            ]);
+            exit();
+        }
+    
+        // Nếu tìm thấy, trả về dữ liệu
+        echo json_encode([
+            'success' => true,
+            'order' => $order,
+        ]);
+        exit();
+    }
+    public function updateStatus() {
+        $id = $_GET['idOrder'];
+        $status = $_GET['status'];
+        $this->checkAuth('admin');
+        $orderModel = new OrderModel();
+        $orderModel->updateOrderStatus($id, $status);
+        echo json_encode(['status' => 'success', 'message' => 'Cập nhật trạng thái đơn hàng thành công.']);
         exit();
     }
 }

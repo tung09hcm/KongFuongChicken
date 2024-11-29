@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="../partials/partials.css">
-    <link rel="stylesheet" href="../partials/partials_responsive.css">
+    <link rel="stylesheet" href="app/Views/admin/css/index.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials_responsive.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php 
-        include 'navBar.php';
+        include 'app/Views/admin/navBar.php';
     ?>
 
     <div class="big-container">
@@ -41,9 +41,9 @@
         <div class="popup" id="popup"></div>
 
         <?php 
-            include '../partials/footer.php';
+            include 'app/Views/partials/footer.php';
         ?>
     </div>
-    <script src="script/order.js"></script>
+    <script src="app/Views/admin/script/order.js"></script>
 </body>
 </html>

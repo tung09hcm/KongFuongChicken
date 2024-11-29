@@ -21,7 +21,7 @@
             </button>
         </div>
 
-        <a href="index.php" class="header-mobile-logo">
+        <a href="index.php?controller=admin&action=Menu" class="header-mobile-logo">
             <img class="header-mobile-logo-item" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo-mobile.svg?v=5.0" alt="">
         </a>
     </div>
@@ -34,27 +34,27 @@
         
         <hr style="margin: 5px 15px !important;">
 
-        <a href="index.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=Menu" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">TRANG CHỦ</h5>
         </a>
         <hr>
-        <a href="menus.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=viewMenu" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">MENU</h5>
         </a>
         <hr>
-        <a href="orders.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=viewOrder" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">ĐƠN HÀNG</h5>
         </a>
         <hr>
-        <a href="customers.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=viewCustomer" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">THÀNH VIÊN</h5>
         </a>
         <hr>
-        <a href="comments.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=viewComment" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">BÌNH LUẬN</h5>
         </a>
         <hr>
-        <a href="news.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=admin&action=viewPost" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">TIN TỨC</h5>
         </a>
         <hr>
@@ -67,26 +67,26 @@
     <div class="header hide-on-mobile">
         <nav class="navbar navbar-expand-lg navbar-light navbar-header">
             <div class="container container-header">
-                <a class="navbar-brand" href="index.php">
+                <a class="navbar-brand" href="index.php?controller=admin&action=Menu">
                     <img alt="KFC logo" class="navbar-brand-logo" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo.svg?v=5.0"/>
                 </a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-list me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" id="home" href="index.php">TRANG CHỦ</a>
+                            <a class="nav-link" id="home" href="index.php?controller=admin&action=Menu">TRANG CHỦ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="menus" href="menus.php">MENU</a>                        </li>
+                            <a class="nav-link" id="menus" href="index.php?controller=admin&action=viewMenu">MENU</a>                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="orders" href="orders.php">ĐƠN HÀNG</a>                        </li>
+                            <a class="nav-link" id="orders" href="index.php?controller=admin&action=viewOrder">ĐƠN HÀNG</a>                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="customers" href="customers.php">THÀNH VIÊN</a>
+                            <a class="nav-link" id="customers" href="index.php?controller=admin&action=viewCustomer">THÀNH VIÊN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="comments" href="comments.php">BÌNH LUẬN</a>
+                            <a class="nav-link" id="comments" href="index.php?controller=admin&action=viewComment">BÌNH LUẬN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="news" href="news.php">TIN TỨC</a>
+                            <a class="nav-link" id="news" href="index.php?controller=admin&action=viewPost">TIN TỨC</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="log-out" href="log-out.php">ĐĂNG XUẤT</a>

@@ -73,4 +73,31 @@ class OrderModel extends BaseModel {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function detail($order_id) {
+        $stmt = $this->db->prepare("
+            SELECT o.id AS order_id, 
+                CONCAT(a.first_name, ' ', a.last_name) AS customer_name,
+                ua.address AS customer_address,
+                o.total,
+                o.order_date,
+                p.id AS order_detail_id,
+                od.quantity, 
+                p.name AS product_name, 
+                (p.price * od.quantity) AS item_total,
+                d.percentage,
+                d.code,
+                o.status
+            FROM `ORDER` o
+            LEFT JOIN `ACCOUNT` a ON o.user_id = a.id
+            LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id
+            LEFT JOIN `ORDER_PRODUCT` od ON o.id = od.order_id
+            LEFT JOIN `PRODUCT` p ON od.product_id = p.id
+            LEFT JOIN `DISCOUNT` d ON o.discount_id = d.id
+            WHERE o.id = :order_id
+        ");
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

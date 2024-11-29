@@ -8,6 +8,7 @@ require_once  __DIR__ ."/../Models/AccountModel.php";
 require_once  __DIR__ ."/../Models/UserModel.php";
 require_once  __DIR__ ."/../Models/AdminModel.php";
 
+
 class AuthController {
 
     // TESTING

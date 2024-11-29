@@ -6,7 +6,7 @@ fetch('index.php?controller=admin&action=manageProducts')
     if (products.suscess = "suscess") {
         products.products.forEach(product => {
             productList.innerHTML += `
-                <div class="item" onclick="window.location.href='dish.php?id=${product.id}'">
+                <div class="item" onclick="window.location.href='index.php?controller=admin&action=viewProduct&idProduct=${product.id}'">
                     <img src="${product.image_link}" alt="">
                     <h4>${product.name}</h4>
                     <div class="info">

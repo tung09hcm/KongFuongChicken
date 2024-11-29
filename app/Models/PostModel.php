@@ -14,7 +14,7 @@ class PostModel extends BaseModel {
     }
 
     public function updatePost($post_id, $title, $content) {
-        $stmt = $this->db->prepare("UPDATE POST SET title = :title, content = :content, updated_at = CURRENT_TIMESTAMP WHERE id = :post_id");
+        $stmt = $this->db->prepare("UPDATE POST SET title = :title, content = :content, created_at = CURRENT_TIMESTAMP WHERE id = :post_id");
         $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);

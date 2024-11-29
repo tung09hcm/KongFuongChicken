@@ -1,93 +1,3 @@
-<!-- DONE -->
-<?php
-    ob_start();
-    include 'navBar.php'; 
-    include  __DIR__ . '/../../../config/config.php';
-
-    // Kết nối cơ sở dữ liệu
-    $host = DB_HOST;
-    $port = DB_PORT;
-    $dbname = DB_NAME;
-    $username = DB_USER;
-    $password = DB_PASSWORD;
-
-    $conn = new mysqli($host, $username, $password, $dbname, $port);
-
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-
-    // Lấy ID sản phẩm từ URL
-    $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-    $product = [
-        'image_link' => '',
-        'name' => '',
-        'description' => '',
-        'price' => ''
-    ];
-
-    if ($product_id > 0) {
-        // Truy vấn sản phẩm từ cơ sở dữ liệu
-        $sql = "SELECT * FROM PRODUCT WHERE id = $product_id";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $product = $result->fetch_assoc();
-        } else {
-            echo "Không tìm thấy sản phẩm.";
-        }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Lấy dữ liệu từ form
-        $image_link = $_POST['img'];
-        $name = $_POST['name'];
-        $description = $_POST['description'];
-        $price = $_POST['price'];
-
-        // Loại bỏ dấu phẩy và dấu chấm
-        $price = str_replace('.', '', $price); // Loại bỏ dấu chấm
-        $price = str_replace(',', '', $price); // Loại bỏ dấu phẩy
-
-        // Chuyển thành số (int hoặc float nếu cần)
-        $price = (float)$price; // Hoặc (int)$price nếu bạn muốn là số nguyên
-
-        // Cập nhật thông tin sản phẩm trong cơ sở dữ liệu
-        if ($product_id > 0) {
-            // Cập nhật sản phẩm
-            $update_sql = "UPDATE PRODUCT SET 
-                            image_link = '$image_link', 
-                            name = '$name', 
-                            description = '$description', 
-                            price = '$price' 
-                            WHERE id = $product_id";
-            if ($conn->query($update_sql) === TRUE) {
-                ob_clean();  // Dọn sạch bất kỳ output nào đã được buffer
-                header("Location: menus.php");
-                exit();
-            } else {
-                echo "Lỗi: " . $conn->error;
-            }
-        } else {
-            // Nếu không có ID (tạo sản phẩm mới)
-            $insert_sql = "INSERT INTO PRODUCT (image_link, name, description, price) 
-                        VALUES ('$image_link', '$name', '$description', '$price')";
-            if ($conn->query($insert_sql) === TRUE) {
-                ob_clean();
-                header("Location: menus.php");
-                exit();
-            } else {
-                echo "Lỗi khi thêm sản phẩm mới: " . $conn->error;
-            }
-        }
-    }
-
-    $conn->close();
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -96,34 +6,42 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-    <link rel="stylesheet" href="css/dish.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../partials/partials.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../partials/partials_responsive.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/admin/css/dish.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials_responsive.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <?php
+        include 'app/Views/admin/navBar.php';
+
+        $idProduct = isset($_GET['idProduct']) ? intval($_GET['idProduct']) : null;
+    ?>
+
     <div class="big-container">
-        <h1><?php echo $product_id > 0 ? 'Cập nhật món ăn' : 'Thêm món ăn mới'; ?></h1>
-        <div class="info">
-            <form action="" method="POST" name="dish-form">
-                <img id="product-image" src="<?php  echo $product_id > 0 ? $product['image_link'] : "" ?>" alt=""><br>
+        <h1><?php echo $idProduct > 0 ? 'Cập nhật món ăn' : 'Thêm món ăn mới'; ?></h1>
+        <div id="info">
+            <form action="" method="POST" name="dish-form" id="dish-form">
+                <img id="product-image" src="" alt=""><br>
                 <div class="info-item">
+                    <input type="hidden" name="id" id="id" value="<?php echo $idProduct; ?>">
+
                     <label for="img">Link ảnh</label><br>
-                    <input type="text" id="img" name="img" value="<?php echo $product_id > 0 ? $product['image_link'] : ""; ?>" autocomplete="off" oninput="updateImage()"><br>
+                    <input type="text" id="image_link" name="image_link" value="" autocomplete="off" oninput="updateImage()"><br>
 
                     <label for="name">Tên</label><br>
-                    <input type="text" id="name" name="name" value="<?php echo $product_id > 0 ? $product['name'] : ""; ?>" autocomplete="name"><br>
+                    <input type="text" id="name" name="name" value="" autocomplete="name"><br>
 
                     <label for="description">Mô tả</label><br>
-                    <input type="text" id="description" name="description" value="<?php echo $product_id > 0 ? $product['description'] : ""; ?>" autocomplete="off"><br>
+                    <input type="text" id="description" name="description" value="" autocomplete="off"><br>
 
                     <label for="price">Giá</label><br>
-                    <input type="number" id="price" name="price" value="<?php echo $product_id > 0 ? number_format($product['price'], 0, ',', '.') : ""; ?>" autocomplete="off"><br>
+                    <input type="number" id="price" name="price" value="" autocomplete="off"><br>
 
                     <div class="btn">
-                        <button type="submit">Lưu</button>
-                        <button type="button" onclick="deleteProduct();" style="display: <?php echo $product_id > 0 ? 'inline' : 'none'; ?>">Xóa</button>
-                        <button type="reset" onclick="window.location.href = 'menus.php'">Hủy</button>
+                        <button type="submit" id="saveButton">Lưu</button>
+                        <button type="button" onclick="deleteProduct();" style="display: <?php echo $idProduct > 0 ? 'inline' : 'none'; ?>">Xóa</button>
+                        <button type="reset" onclick="window.location.href='index.php?controller=admin&action=viewMenu'">Hủy</button>
                     </div>
                 </div>
             </form>
@@ -131,6 +49,24 @@
     </div>
 
     <script>
+        fetch("index.php?controller=admin&action=getProduct&idProduct=" + encodeURIComponent(<?php echo $idProduct; ?>))
+        .then((response) => response.json())
+        .then((data) => {
+            // Điền thông tin vào form
+            if (data.success) {
+                let form = document.getElementById('info');
+                document.getElementById('product-image').src = data.product.image_link;
+                document.getElementById('image_link').value = data.product.image_link;
+                document.getElementById('name').value = data.product.name;
+                document.getElementById('description').value = data.product.description;
+                document.getElementById('price').value = data.product.price;
+            }
+        })
+        .catch((error) => {
+            console.error('Lỗi:', error);
+            alert('Đã xảy ra lỗi khi lấy dữ liệu.');
+        });
+
         // Hàm để cập nhật ảnh khi thay đổi giá trị của ô nhập liệu
         function updateImage() {
             const imageUrl = document.getElementById('img').value;  // Lấy giá trị của ô nhập liệu
@@ -140,38 +76,72 @@
             imgElement.src = imageUrl;
         }
 
+        document.getElementById('dish-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Ngăn không cho form tải lại trang
+            
+            const id = document.getElementById('id').value;
+            const actionUrl = id > 0
+                ? `index.php?controller=admin&action=editProduct&idProduct=${encodeURIComponent(id)}`
+                : `index.php?controller=admin&action=addProduct`;
+
+            // Tạo FormData để gửi dữ liệu
+            const formData = new FormData(this);
+
+            // Gửi form bằng Fetch API
+            fetch(actionUrl, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json()) // Giả sử server trả về JSON
+            .then(data => {
+                if (data.status) {
+                    // Điều hướng khi thành công
+                    window.location.href = 'index.php?controller=admin&action=viewMenu';
+                } else {
+                    alert(data.message); // Hiển thị thông báo lỗi
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi gửi dữ liệu.');
+            });
+        });
+
+
         function deleteProduct() {
-            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
-                const productId = <?php echo $product_id; ?>;  // Lấy ID của sản phẩm hiện tại
+            event.preventDefault(); // Ngăn không cho form tải lại trang
+            
+            const form = document.getElementById('dish-form');
+            const id = document.getElementById('id').value;
 
-                // Gửi yêu cầu xóa sản phẩm tới PHP
-                fetch('api/deleteProduct.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `id=${productId}`  // Gửi ID sản phẩm qua POST
-                })
-                .then(response => response.json())  // Chuyển đổi phản hồi từ JSON
-                .then(data => {
-                    if (data.success) {
-                        // Nếu xóa thành công, chuyển hướng về trang menus.php
-                        window.location.href = 'menus.php';
-                    } else {
-                        // Nếu có lỗi khi xóa
-                        alert('Có lỗi khi xóa sản phẩm: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Lỗi:', error);  // Hiển thị lỗi nếu có
-                });
-            }
+            const actionUrl = `index.php?controller=admin&action=deleteProductByID&idProduct=${encodeURIComponent(id)}`;                ;
+
+            // Tạo FormData để gửi dữ liệu
+            const formData = new FormData(form);
+
+            // Gửi form bằng Fetch API
+            fetch(actionUrl, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json()) // Giả sử server trả về JSON
+            .then(data => {
+                if (data.status) {
+                    // Điều hướng khi thành công
+                    window.location.href = 'index.php?controller=admin&action=viewMenu';
+                } else {
+                    alert(data.message); // Hiển thị thông báo lỗi
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi gửi dữ liệu.');
+            });
         }
-
     </script>
 
     <?php 
-        include '../partials/footer.php';
+        include 'app/Views/partials/footer.php';
     ?>
 </body>
 </html>

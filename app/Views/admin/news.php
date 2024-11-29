@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../partials/partials.css">
+    <link rel="stylesheet" href="app/Views/admin/css/index.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials_responsive.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="../partials/partials_responsive.css">
 </head>
 <body>
     <?php 
-        include 'navBar.php';
+        include 'app/Views/admin/navBar.php';
     ?>
 
     <div class="big-container">
@@ -21,7 +21,7 @@
         <!-- /*news - mấy trang thông tin đồ đó*/ -->
         <div class="contain2">
             <div class="link">
-                <a id="add-article" href="article.php?id=0">Thêm bài viết</a>
+                <a id="add-article" href="index.php?controller=admin&action=viewPostDetail&idPost=0">Thêm bài viết</a>
             </div>
             <div class="table">
                 <table>
@@ -40,10 +40,10 @@
         </div>
 
         <?php 
-            include '../partials/footer.php';
+            include 'app/Views/partials/footer.php';
         ?>
     </div>
 
-    <script src="script/post.js"></script>
+    <script src="app/Views/admin/script/post.js"></script>
 </body>
 </html>

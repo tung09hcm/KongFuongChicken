@@ -177,7 +177,7 @@ body {
 }
 
 .item img {
-    width: 350px;
+    width: 300px;
     height: 250px;
     object-fit: cover;
     border-top-left-radius: 5px;
@@ -465,6 +465,27 @@ button:hover {
     width: 50%;
     overflow-y: auto;
 }
+
+.store-detail-form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.store-detail-form #store-info h3, .store-detail-form #admin-info h3 {
+    border-bottom: 2px solid #e4002b;
+    width: fit-content;
+}
+
+#store-info, #admin-info {
+    width: 50%;
+}
+
+#store-info label, #admin-info label {
+    font-size: 15px;
+    font-weight: bold;
+}
   
 
 @media screen and (max-width: 720px) {
@@ -516,6 +537,12 @@ button:hover {
     }
     #discount-table {
         width: 100%;
+    }
+    .store-detail-form {
+        flex-direction: column;
+    }
+    #store-info, #admin-info {
+        width: 90%;
     }
     
 }
