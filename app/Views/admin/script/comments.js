@@ -1,7 +1,7 @@
-// Function to load product details and comments
+// DONE Function to load product details and comments
 function loadProducts() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api/fetchComment.php', true);
+    xhr.open('GET', 'index.php?controller=admin&action=manageReviews', true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
@@ -11,12 +11,12 @@ function loadProducts() {
     xhr.send();
 }
 
-// Function to display products and their comments
+// DONE Function to display products and their comments
 function displayProducts(products) {
     var productsContainer = document.querySelector('.comments');
     productsContainer.innerHTML = ''; // Clear the previous products
 
-    products.forEach(function(product) {
+    products.reviews.forEach(function(product) {
         // Check if product has comments
         if (product.comments && Object.keys(product.comments).length > 0) {
             // Create product card

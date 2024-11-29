@@ -5,18 +5,19 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <title>KFC ADMIN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-    <link rel="stylesheet" href="css/index.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../partials/partials.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../partials/partials_responsive.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/admin/css/index.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="app/Views/partials/partials_responsive.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php 
-        include 'navBar.php';
+        include 'app/Views/admin/navBar.php';
     ?>
 
     <div class="big-container">
@@ -139,15 +140,123 @@
                 </table>
             </div>
         </div>
+
+        <?php
+            ob_start();
+
+            // Kết nối cơ sở dữ liệu
+            include __DIR__ . '/../../../config/config.php';
+            $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+
+            if ($conn->connect_error) {
+                die("Kết nối thất bại: " . $conn->connect_error);
+            }
+
+            $discount_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+            $discount = [
+                'code' => '',
+                'percentage' => '',
+                'expiry_date' => ''
+            ];
+
+            // Xử lý khi form được submit
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $code = $_POST['code'] ?? '';
+                $percentage = $_POST['percentage'] ?? 0;
+                $expiry_date = $_POST['expiry_date'] ?? '';
+
+                // Kiểm tra dữ liệu
+                if (empty($code) || empty($percentage) || empty($expiry_date)) {
+                    alert("Vui lòng điền đầy đủ thông tin.");
+                    exit;
+                }
+
+                if ($discount_id > 0) {
+                    // Cập nhật mã giảm giá
+                    $stmt = $conn->prepare("UPDATE DISCOUNT SET code = ?, percentage = ?, expiry_date = ? WHERE id = ?");
+                    $stmt->bind_param("sdsi", $code, $percentage, $expiry_date, $discount_id);
+
+                    if ($stmt->execute()) {
+                        ob_clean();
+                        header("Location: index.php");
+                        exit();
+                    } else {
+                        error_log("Database error: " . $stmt->error);
+                        echo "Có lỗi xảy ra khi cập nhật mã giảm giá.";
+                    }
+                    $stmt->close();
+                } else {
+                    // Thêm mã giảm giá mới
+                    $stmt = $conn->prepare("INSERT INTO DISCOUNT (code, percentage, expiry_date) VALUES (?, ?, ?)");
+                    $stmt->bind_param("sds", $code, $percentage, $expiry_date);
+
+                    if ($stmt->execute()) {
+                        ob_clean();
+                        header("Location: index.php");
+                        exit();
+                    } else {
+                        error_log("Database error: " . $stmt->error);
+                        echo "Có lỗi xảy ra khi thêm mã giảm giá.";
+                    }
+                    $stmt->close();
+                }
+            }
+
+            $conn->close();
+        ?>
+
+        <div class="contain2">
+            <div class="link">
+                <h2>Khuyến mãi</h2>
+            </div>
+            <div class="discount-box">
+                <form action="" method="POST" name="discount-form" id="discount-form">
+                    <input type="hidden" name="id" id="id" value="">
+
+                    <label for="code">Code</label><br>
+                    <input type="text" id="code" name="code" value="" autocomplete="off" required placeholder="Nhập mã giảm giá"><br>
+
+                    <label for="percentage">Phần trăm giảm giá</label><br>
+                    <input type="number" id="percentage" name="percentage" value="" autocomplete="off" step="0.01" min="0" max="1" required placeholder="Nhập giá trị từ 0 đến 1"><br>
+
+                    <label for="expiry_date">Ngày hết hạn</label><br>
+                    <input type="date" id="expiry_date" name="expiry_date" value="" autocomplete="off" required><br>
+
+                    <div class="btn">
+                        <button type="submit">Lưu</button>
+                        <button type="button" onclick="deleteProduct();" style="display: <?php echo $discount_id > 0 ? 'inline' : 'none'; ?>">Xóa</button>
+                        <button type="reset">Hủy</button>
+                    </div>
+                </form>
+                <div class="table" id="discount-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã Code</th>
+                                <th>Code</th>
+                                <th>Phần trăm</th>
+                                <th>Ngày hết hạn</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody id="code-list"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
     </div>
 
+
     <?php 
-        include '../partials/footer.php';
+        include 'app/Views/partials/footer.php';
     ?>
 
-    <script src="script/menu.js"></script>
-    <script src="script/comments.js"></script>
-    <script src="script/order.js"></script>
-    <script src="script/post.js"></script>
+    <script src="app/Views/admin/script/menu.js"></script>
+    <script src="app/Views/admin/script/comments.js"></script>
+    <script src="app/Views/admin/script/order.js"></script>
+    <script src="app/Views/admin/script/post.js"></script>
+    <script src="app/Views/admin/script/code.js"></script>
 </body>
 </html>

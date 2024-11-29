@@ -1,5 +1,5 @@
 // Tải dữ liệu từ API
-fetch('api/fetchPost.php')
+fetch('app/Views/admin/api/fetchPost.php')
 .then(response => response.json())
 .then(posts => {
     let postList = document.getElementById('post-list');

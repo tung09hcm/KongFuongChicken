@@ -22,7 +22,35 @@ class ReviewModel extends BaseModel {
     }
 
     public function getAllReviews() {
-        $stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, PRODUCT.name as product_name FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id JOIN PRODUCT ON REVIEW.product_id = PRODUCT.id");
+        $stmt = $this->db->prepare("
+            SELECT 
+                p.id AS product_id, 
+                p.name AS product_name, 
+                p.image_link AS product_image, 
+                p.price AS product_price, 
+                p.description AS product_description, 
+                
+                c.id AS comment_id, 
+                c.content AS comment_content, 
+                c.rating AS comment_rating, 
+                
+                u.first_name AS user_first_name, 
+                u.last_name AS user_last_name, 
+                
+                r.id AS reply_id, 
+                r.reply_content AS reply_content, 
+                r.reply_date AS reply_date, 
+                
+                a.first_name AS admin_first_name, 
+                a.last_name AS admin_last_name 
+                
+            FROM PRODUCT p 
+                LEFT JOIN REVIEW c ON p.id = c.product_id 
+                LEFT JOIN ACCOUNT u ON c.user_id = u.id 
+                LEFT JOIN REVIEW_REPLY r ON c.id = r.review_id 
+                LEFT JOIN ACCOUNT a ON r.admin_id = a.id 
+            ORDER BY p.id, c.id;");
+        //$stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, PRODUCT.name as product_name FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id JOIN PRODUCT ON REVIEW.product_id = PRODUCT.id");
         $stmt->execute();
         return $stmt->fetchAll();
     }

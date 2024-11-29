@@ -1,3 +1,4 @@
+// DONE
 function changeColor(selectElement, orderId) {
     const value = selectElement.value;
     
@@ -19,11 +20,11 @@ function changeColor(selectElement, orderId) {
     // Update the database with the new status
     updateStatusInDB(value, orderId);
 }
-
+//DONE
 function updateStatusInDB(status, orderId) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "api/updateStatus.php", true);
+    xhr.open("POST", "app/Views/admin/api/updateStatus.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     // Encode status and orderId as URL-encoded parameters
@@ -44,7 +45,7 @@ function updateStatusInDB(status, orderId) {
 
 
 // Tải dữ liệu từ API
-fetch('api/getOrder.php')
+fetch('app/Views/admin/api/getOrder.php')
 .then(response => response.json())
 .then(orders => {
     let orderList = document.getElementById('order-list');
@@ -74,7 +75,7 @@ fetch('api/getOrder.php')
 
 // Hàm hiển thị popup
 function showPopup(orderId) {
-    fetch(`api/getOrderDetail.php?id=${orderId}`)
+    fetch(`app/Views/admin/api/getOrderDetail.php?id=${orderId}`)
     .then(response => {
         if (!response.ok) {
             console.error(`Server error: ${response.status}`);

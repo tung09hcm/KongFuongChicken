@@ -112,6 +112,7 @@ body {
     background-color: #fff;
     max-width: 90%; 
     margin: 0px auto;
+    padding: 20px;
 }
 
 .link {
@@ -153,8 +154,8 @@ body {
 }
 
 .item {
-    width: fit-content;
-    height: fit-content;
+    width: 300px;
+    height: 430px;
     border-radius: 10px;
     background-color: #fff;
     transition: all 0.3s ease;
@@ -417,6 +418,53 @@ tbody tr:hover td {
 .footer .footer-item h3, .footer .footer-item p, .footer .footer-item a{
     color: #fff;
 }
+
+.discount-box {
+    display: flex;
+    height: 350px;
+    gap: 20px;
+}
+
+.discount-box form {
+    width: 50%;
+}
+
+.discount-box form label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.discount-box form input {
+    margin-bottom: 0px;
+}
+
+.discount-box .btn {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e4002b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #e4002b;
+    border: 1px solid #e4002b;
+}
+
+#discount-table {
+    width: 50%;
+    overflow-y: auto;
+}
   
 
 @media screen and (max-width: 720px) {
@@ -458,6 +506,16 @@ tbody tr:hover td {
     }
     .table {
         overflow-x: auto;
+    }
+    .discount-box {
+        display: block;
+        height: fit-content;
+    }
+    .discount-box form {
+        width: 100%;
+    }
+    #discount-table {
+        width: 100%;
     }
     
 }

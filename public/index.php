@@ -1,6 +1,7 @@
 <?php
-
+    echo "Hello World";
     session_start();
+
     // file routing với controller và action name mẫu ( có thể đặt lại )
     if (isset($_COOKIE['id']) && !isset($_REQUEST['controller'])) {
         $controller_name = 'AuthController';
@@ -16,6 +17,11 @@
     require "./app/Controllers/${controller_name}.php";
 
     $controller_object = new $controller_name;
-    $controller_object->$action_name();
+
+    $idDiscount = isset(_GET['idDiscount']) ? $_GET['idDiscount'] : 20;
+
+    $controller_object->$action_name($idDiscount);
+
+    exit();
 
 ?>

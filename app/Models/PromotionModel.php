@@ -1,5 +1,6 @@
 <?php
 namespace Models;
+
 use PDO;
 class PromotionModel extends BaseModel {
     public function getAllPromotions() {

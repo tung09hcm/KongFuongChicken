@@ -11,6 +11,9 @@ use Models\StoreModel;
 use Models\UserModel;
 use Models\PostModel;
 
+require_once  __DIR__ ."/../Models/BaseModel.php";
+require_once  __DIR__ ."/../Models/AccountModel.php";
+
 require_once  __DIR__ ."/../Models/PromotionModel.php";
 require_once  __DIR__ ."/../Models/PostModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
@@ -22,6 +25,12 @@ require_once  __DIR__ ."/../Models/AdminModel.php";
 require_once  __DIR__ ."/../Models/AdminPermissionModel.php";
 
 class AdminController {
+    public function Menu()
+    {
+        require __DIR__ . '/../Views/admin/index.php';
+    }
+
+
     // ok
     private function checkAuth($role, $permission = null) {
         if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
@@ -225,6 +234,13 @@ class AdminController {
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel ();
         $discounts = $discountModel->getAllDiscounts();
+        echo json_encode(['status' => 'success', 'discounts' => $discounts]);
+        exit();
+    }
+    public function getDiscount($id) {
+        $this->checkAuth('admin', 'can_manage_discount');
+        $discountModel = new DiscountModel ();
+        $discounts = $discountModel->getDiscount($id);
         echo json_encode(['status' => 'success', 'discounts' => $discounts]);
         exit();
     }

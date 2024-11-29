@@ -57,7 +57,7 @@ class AuthController {
                     {
                         echo "giao diện admin". "<br>";
                         
-                        header("Location: index.php?controller=admin&action=addProductTestView");
+                        header("Location: index.php?controller=admin&action=Menu");
                     }
                     else{
                         // TODO nối đến giao diện người dùng
