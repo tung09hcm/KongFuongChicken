@@ -44,13 +44,13 @@ function updateStatusInDB(status, orderId) {
 }
 
 
-// Tải dữ liệu từ API
-fetch('app/Views/admin/api/getOrder.php')
+// DONE Tải dữ liệu từ API
+fetch('index?controller=admin&action=getAllOrders')
 .then(response => response.json())
 .then(orders => {
     let orderList = document.getElementById('order-list');
     
-    orders.forEach(order => {
+    orders.orders.forEach(order => {
         orderList.innerHTML += `
             <tr>
                 <td onclick="showPopup('${order.order_id}')">${order.order_id}</td>

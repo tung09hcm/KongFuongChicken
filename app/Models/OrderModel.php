@@ -59,4 +59,18 @@ class OrderModel extends BaseModel {
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function getAllOrders() {
+        $stmt = $this->db->prepare("
+            SELECT o.id AS order_id, 
+                CONCAT(a.first_name, ' ', a.last_name) AS customer_name,
+                ua.address AS customer_address, 
+                o.total AS order_total,
+                o.status
+            FROM `ORDER` o
+            LEFT JOIN `ACCOUNT` a ON o.user_id = a.id
+            LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

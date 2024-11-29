@@ -1,10 +1,10 @@
 // Tải dữ liệu từ API
-fetch('app/Views/admin/api/fetchPost.php')
+fetch('index.php?controller=admin&action=managePost')
 .then(response => response.json())
 .then(posts => {
     let postList = document.getElementById('post-list');
     console.log(posts);
-    posts.forEach(post => {
+    posts.posts.forEach(post => {
         postList.innerHTML += `
             <tr onclick="window.location.href='article.php?id=${post.id}'">
                 <td>${post.id}</td>

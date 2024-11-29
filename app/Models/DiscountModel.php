@@ -42,11 +42,10 @@ class DiscountModel extends BaseModel {
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
     public function getDiscount($id) {
         $stmt = $this->db->prepare("SELECT * FROM DISCOUNT WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

@@ -10,6 +10,7 @@ use Models\ReviewModel;
 use Models\StoreModel;
 use Models\UserModel;
 use Models\PostModel;
+use Models\OrderModel;
 
 require_once  __DIR__ ."/../Models/BaseModel.php";
 require_once  __DIR__ ."/../Models/AccountModel.php";
@@ -23,6 +24,8 @@ require_once  __DIR__ ."/../Models/ProductModel.php";
 require_once  __DIR__ ."/../Models/UserModel.php";
 require_once  __DIR__ ."/../Models/AdminModel.php";
 require_once  __DIR__ ."/../Models/AdminPermissionModel.php";
+require_once  __DIR__ ."/../Models/OrderModel.php";
+
 
 class AdminController {
     public function Menu()
@@ -237,11 +240,24 @@ class AdminController {
         echo json_encode(['status' => 'success', 'discounts' => $discounts]);
         exit();
     }
-    public function getDiscount($id) {
+    public function getDiscount() {
+        $id = $_GET['idDiscount'];
         $this->checkAuth('admin', 'can_manage_discount');
         $discountModel = new DiscountModel ();
-        $discounts = $discountModel->getDiscount($id);
-        echo json_encode(['status' => 'success', 'discounts' => $discounts]);
+        $discount = $discountModel->getDiscount($id);
+        if (!$discount) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không tìm thấy mã giảm giá.',
+            ]);
+            exit();
+        }
+    
+        // Nếu tìm thấy, trả về dữ liệu
+        echo json_encode([
+            'success' => true,
+            'discount' => $discount, // Trả về đối tượng giảm giá
+        ]);
         exit();
     }
     // ok
@@ -397,5 +413,13 @@ class AdminController {
         $this->checkAuth('admin', 'can_delete_admin');
         $adminModel = new AdminModel();
         $adminModel->deleteAdmin($id);
+    }
+
+    public function getAllOrders() {
+        $this->checkAuth('admin');
+        $orderModel = new OrderModel();
+        $orders = $orderModel->getAllOrders();
+        echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
     }
 }
