@@ -24,7 +24,7 @@ function selectDiscount(id) {
     .then((data) => {
         // Điền thông tin vào form
         if (data.success) {
-            document.getElementById('deleteDiscount').style = 'inline';
+            document.getElementById('deleteDiscount').style.display = 'inline';
             document.getElementById('id').value = data.discount.id;
             document.getElementById('code').value = data.discount.code;
             document.getElementById('percentage').value = data.discount.percentage;
@@ -72,8 +72,6 @@ document.getElementById('discount-form').addEventListener('submit', function (ev
 
 
 function deleteDiscount() {
-    event.preventDefault(); // Ngăn không cho form tải lại trang
-    
     const form = document.getElementById('discount-form');
     const id = document.getElementById('id').value;
 
@@ -101,3 +99,11 @@ function deleteDiscount() {
         alert('Có lỗi xảy ra khi gửi dữ liệu.');
     });
 }
+
+function reset() {
+    // Ẩn nút delete khi form được reset
+    document.getElementById('deleteDiscount').style.display = 'none';
+}
+
+// Lắng nghe sự kiện reset của form để gọi hàm reset
+document.getElementById('discount-form').addEventListener('reset', reset);

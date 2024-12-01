@@ -18,6 +18,19 @@ class AccountModel extends BaseModel {
         return $this->db->lastInsertId();
     }
 
+    public function editAccount($id, $first_name, $last_name, $email, $phone, $is_admin = 0) {
+        $sql = "UPDATE ACCOUNT SET first_name = :first_name, last_name = :last_name, email = :email, phone = :phone, is_admin = :is_admin WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':is_admin', $is_admin);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
     public function getAccountByEmail($email) {
         $sql = "SELECT * FROM ACCOUNT WHERE email = :email";
         $stmt = $this->db->prepare($sql);

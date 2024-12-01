@@ -5,7 +5,24 @@ use PDO;
 
 class AdminPermissionModel extends BaseModel {
     public function setPermissions($admin_id, $permissions) {
-        $stmt = $this->db->prepare("INSERT INTO ADMIN_PERMISSION (admin_id, can_manage_user, can_manage_review, can_manage_order, can_manage_product, can_manage_discount, can_manage_promotion, can_add_admin, can_delete_admin, can_manage_store, can_manage_post) VALUES (:admin_id, :can_manage_user, :can_manage_review, :can_manage_order, :can_manage_product, :can_manage_discount, :can_manage_promotion, :can_add_admin, :can_delete_admin) ON DUPLICATE KEY UPDATE can_manage_user = :can_manage_user, can_manage_review = :can_manage_review, can_manage_order = :can_manage_order, can_manage_product = :can_manage_product, can_manage_discount = :can_manage_discount, can_manage_promotion = :can_manage_promotion, can_add_admin = :can_add_admin, can_delete_admin = :can_delete_admin,can_manage_store = :can_manage_store, can_manage_post = :can_manage_post ");
+        $stmt = $this->db->prepare("
+            INSERT INTO ADMIN_PERMISSION 
+            (admin_id, can_manage_user, can_manage_review, can_manage_order, can_manage_product, can_manage_discount, can_manage_promotion, can_add_admin, can_delete_admin, can_manage_store, can_manage_post) 
+            VALUES 
+            (:admin_id, :can_manage_user, :can_manage_review, :can_manage_order, :can_manage_product, :can_manage_discount, :can_manage_promotion, :can_add_admin, :can_delete_admin, :can_manage_store, :can_manage_post)
+            ON DUPLICATE KEY UPDATE 
+            can_manage_user = :can_manage_user, 
+            can_manage_review = :can_manage_review, 
+            can_manage_order = :can_manage_order, 
+            can_manage_product = :can_manage_product, 
+            can_manage_discount = :can_manage_discount, 
+            can_manage_promotion = :can_manage_promotion, 
+            can_add_admin = :can_add_admin, 
+            can_delete_admin = :can_delete_admin, 
+            can_manage_store = :can_manage_store, 
+            can_manage_post = :can_manage_post
+        ");
+        //$stmt = $this->db->prepare("INSERT INTO ADMIN_PERMISSION (admin_id, can_manage_user, can_manage_review, can_manage_order, can_manage_product, can_manage_discount, can_manage_promotion, can_add_admin, can_delete_admin, can_manage_store, can_manage_post) VALUES (:admin_id, :can_manage_user, :can_manage_review, :can_manage_order, :can_manage_product, :can_manage_discount, :can_manage_promotion, :can_add_admin, :can_delete_admin) ON DUPLICATE KEY UPDATE can_manage_user = :can_manage_user, can_manage_review = :can_manage_review, can_manage_order = :can_manage_order, can_manage_product = :can_manage_product, can_manage_discount = :can_manage_discount, can_manage_promotion = :can_manage_promotion, can_add_admin = :can_add_admin, can_delete_admin = :can_delete_admin,can_manage_store = :can_manage_store, can_manage_post = :can_manage_post ");
         $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         $stmt->bindParam(':can_manage_user', $permissions['can_manage_user'], PDO::PARAM_BOOL);
         $stmt->bindParam(':can_manage_review', $permissions['can_manage_review'], PDO::PARAM_BOOL);
@@ -17,6 +34,14 @@ class AdminPermissionModel extends BaseModel {
         $stmt->bindParam(':can_delete_admin', $permissions['can_delete_admin'], PDO::PARAM_BOOL);
         $stmt->bindParam(':can_manage_store', $permissions['can_manage_store'], PDO::PARAM_BOOL);
         $stmt->bindParam(':can_manage_post', $permissions['can_manage_post'], PDO::PARAM_BOOL);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+
+    public function setStoreToAdmin($admin_id, $store_id) {
+        $stmt = $this->db->prepare("INSERT INTO ADMIN_STORE (admin_id, store_id) VALUES (:admin_id, :store_id)");
+        $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount();
     }
@@ -75,5 +100,13 @@ class AdminPermissionModel extends BaseModel {
         $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchColumn();
+    }
+
+    public function deletePermissions($admin_id, $store_id) {
+        $stmt = $this->db->prepare("DELETE FROM ADMIN_STORE WHERE admin_id = :admin_id AND store_id = :store_id");
+        $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

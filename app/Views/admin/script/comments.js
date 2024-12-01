@@ -13,10 +13,21 @@ function loadProducts() {
 
 // DONE Function to display products and their comments
 function displayProducts(products) {
+    const currentUrl = window.location.search;
+
     var productsContainer = document.querySelector('.comments');
     productsContainer.innerHTML = ''; // Clear the previous products
 
-    products.reviews.forEach(function(product) {
+    let filteredComment = products.reviews;
+
+    // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
+    if (currentUrl.includes('action=Menu')) {
+        filteredComment = filteredComment.slice(0, 5);
+    }
+
+    console.log(filteredComment);
+
+    filteredComment.forEach(function(product) {
         // Check if product has comments
         if (product.comments && Object.keys(product.comments).length > 0) {
             // Create product card

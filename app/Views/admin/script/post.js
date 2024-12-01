@@ -3,8 +3,15 @@ fetch('index.php?controller=admin&action=managePost')
 .then(response => response.json())
 .then(posts => {
     let postList = document.getElementById('post-list');
-    console.log(posts);
-    posts.posts.forEach(post => {
+    
+    const currentUrl = window.location.search;
+    let filteredPosts = posts.posts;
+
+    if (currentUrl.includes('action=Menu')) {
+        filteredPosts = filteredPosts.slice(0, 5);
+    }
+
+    filteredPosts.forEach(post => {
         postList.innerHTML += `
             <tr onclick="window.location.href='index.php?controller=admin&action=viewPostDetail&idPost=${post.id}'">
                 <td>${post.id}</td>

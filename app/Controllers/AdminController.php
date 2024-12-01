@@ -526,4 +526,140 @@ class AdminController {
         echo json_encode(['status' => 'success', 'message' => 'Cập nhật trạng thái đơn hàng thành công.']);
         exit();
     }
+
+    public function manageStoreAndAdmin() {
+        $this->checkAuth('admin', 'can_manage_store');
+        $storeModel = new StoreModel();
+        $stores = $storeModel->getAllStoreAndAdmin();
+        echo json_encode(['status' => 'success', 'stores' => $stores]);
+        exit();
+    }
+
+    public function getStoreAndAdmin() {
+        $id = $_GET['idStore'];
+        $this->checkAuth('admin', 'can_manage_store');
+
+        $storeModel = new StoreModel();
+        $store = $storeModel->getStoreAndAdmin($id);
+        if (!$store) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không tìm thấy cửa hàng giảm giá.',
+            ]);
+            exit();
+        }
+    
+        // Nếu tìm thấy, trả về dữ liệu
+        echo json_encode([
+            'success' => true,
+            'store' => $store, // Trả về đối tượng giảm giá
+        ]);
+        exit();
+    }
+
+    public function updateStoreAndAdmin() {
+        $idStore = $_GET['idStore'];
+        $idAdmin = $_GET['idAdmin'];
+
+        $this->checkAuth('admin', 'can_manage_store');
+        $this->checkAuth('admin', 'can_manage_user');
+
+        $storeModel = new StoreModel();
+        $accountModel = new AccountModel();
+        $userModel = new UserModel();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = trim($_POST['name']);
+            $address = trim($_POST['address']);
+            $phone1 = trim($_POST['phone1']);
+            $opening_hours = trim($_POST['opening_hours']);
+            $storeModel->updateStore($idStore, $name, $address, $phone1, $opening_hours);
+
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $phone2 = trim($_POST['phone2']);
+            $is_admin = 1;
+            $accountModel->editAccount($idAdmin, $first_name, $last_name, $email, $phone2, $is_admin);
+            echo json_encode(['status' => true, 'message' => 'Cập nhật thành công.']);
+
+            exit();
+        }
+        $store = $storeModel->getStoreAndAdmin($id);
+        echo json_encode(['status' => true, 'store' => $store]);
+        exit();
+    }
+
+    public function addStoreAndAdmin() {
+        $this->checkAuth('admin', 'can_manage_store');
+        $this->checkAuth('admin', 'can_manage_user');
+        $this->checkAuth('admin', 'can_add_admin');
+
+        $storeModel = new StoreModel();
+        $accountModel = new AccountModel();
+        $adminModel = new AdminModel();
+        $userModel = new UserModel();
+        $permissionModel = new AdminPermissionModel(); 
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = trim($_POST['name']);
+            $address = trim($_POST['address']);
+            $phone1 = trim($_POST['phone1']);
+            $opening_hours = trim($_POST['opening_hours']);
+            $store_id = $storeModel->createStore($name, $address, $phone1, $opening_hours);
+
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $phone2 = trim($_POST['phone2']);
+            $password = trim($_POST['password']);
+
+            $account_id = $accountModel->createAccount($first_name, $last_name, $password, $email, $phone2, 1);
+            $adminModel->createAdmin($account_id);
+
+            $permissions = [
+                'can_manage_user' => 1,
+                'can_manage_review' => 1,
+                'can_manage_order' => 1,
+                'can_manage_product' => 1,
+                'can_manage_discount' => 1,
+                'can_manage_promotion' => 1,
+                'can_add_admin' => 0,
+                'can_delete_admin' => 0,
+                'can_manage_store' => 0,
+                'can_manage_post' => 1
+            ];            
+            $permissionModel->setPermissions($account_id, $permissions);
+
+            $permissionModel->setStoreToAdmin($account_id, $store_id);
+
+            echo json_encode(['status' => true, 'message' => 'Cập nhật người dùng thành công.']);
+
+            exit();
+        }
+        $store = $storeModel->getStoreAndAdmin($id);
+        echo json_encode(['status' => true, 'store' => $store]);
+        exit();
+    }
+    public function deleteStoreAndAdmin() {
+        $idStore = $_GET['idStore'];
+        $idAdmin = $_GET['idAdmin'];
+        
+        $this->checkAuth('admin', 'can_manage_store');
+        $this->checkAuth('admin', 'can_manage_user');
+        $this->checkAuth('admin', 'can_delete_admin');
+
+        $permissionModel = new AdminPermissionModel();
+        $storeModel = new StoreModel();
+        $accountModel = new AccountModel();
+        $adminModel = new AdminModel();
+
+        $permissionModel->deletePermissions($idAdmin, $idStore);
+        $storeModel->deleteStore($idStore);
+        $adminModel->deleteAdmin($idAdmin);
+        $accountModel->deleteAccount($idAdmin);
+
+        echo json_encode(['status' => true, 'message' => 'Xóa cửa hàng và admin thành công.']);
+        exit();
+    }
 }

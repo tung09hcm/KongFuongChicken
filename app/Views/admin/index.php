@@ -186,47 +186,51 @@
                 <h2>Danh sách cửa hàng</h2>
             </div>
             <div class="store-box">
-                <form action="" method="POST" name="store-form" id="store-form">
-                    <div class="store-detail-form">
-                        <div id="store-info">
-                            <h3>Thông tin cửa hàng</h3>
-                            <input type="hidden" name="idStore" id="idStore" value="">
+                <form action="" id="store-detail-form">
+                    <div name="store-info" id="store-info">
+                        <h3>Thông tin cửa hàng</h3>
+                        <input type="hidden" name="id" id="idStore" value="">
 
-                            <label for="name">Tên cửa hàng</label><br>
-                            <input type="text" id="name" name="name" value="" autocomplete="off"><br>
+                        <label for="name">Tên cửa hàng</label><br>
+                        <input type="text" id="name" name="name" value="" autocomplete="off"><br>
 
-                            <label for="address">Địa chỉ</label><br>
-                            <input type="number" id="address" name="address" value="" autocomplete="off"><br>
+                        <label for="address">Địa chỉ</label><br>
+                        <input type="text" id="address" name="address" value="" autocomplete="off"><br>
 
-                            <label for="phone">SĐT</label><br>
-                            <input type="text" id="phone" name="phone" value="" autocomplete="off" required><br>
+                        <label for="phone">SĐT</label><br>
+                        <input type="text" id="store-phone" name="phone1" value="" autocomplete="off" required><br>
 
-                            <label for="opening_hours">Giờ mở cửa</label><br>
-                            <input type="time" id="opening_hours" name="opening_hours" value="" autocomplete="off" required><br>
-                        </div>
-                        <div id="admin-info">
-                            <h3>Thông tin admin</h3>
-                            <input type="hidden" name="idAdmin" id="idAdmin" value="">
-
-                            <label for="first-name">Tên</label><br>
-                            <input type="text" id="first-name" name="first-name" value="" autocomplete="off"><br>
-
-                            <label for="last-name">Họ</label><br>
-                            <input type="text" id="last-name" name="last-name" value="" autocomplete="off"><br>
-
-                            <label for="phone">SĐT</label><br>
-                            <input type="text" id="admin-phone" name="phone" value="" autocomplete="off" required><br>
-
-                            <label for="email">Email</label><br>
-                            <input type="text" id="email" name="email" value="" autocomplete="off" required><br>
-                        </div>
+                        <label for="opening_hours">Giờ mở cửa</label><br>
+                        <input type="time" id="opening_hours" name="opening_hours" value="" autocomplete="off" required>
                     </div>
-                    <div class="btn">
-                        <button type="submit">Lưu</button>
-                        <button type="button" onclick="deleteStore();" style="display: none" id="deleteStore">Xóa</button>
-                        <button type="reset">Hủy</button>
+                    <div name="admin-info" id="admin-info">
+                        <h3>Thông tin admin</h3>
+                        <input type="hidden" name="id" id="idAdmin" value="">
+
+                        <label for="first_name">Tên</label><br>
+                        <input type="text" id="first_name" name="first_name" value="" autocomplete="off"><br>
+
+                        <label for="last_name">Họ</label><br>
+                        <input type="text" id="last_name" name="last_name" value="" autocomplete="off"><br>
+
+                        <div id="pass-input">
+                            <label for="password">Mật khẩu</label><br>
+                            <input type="password" id="password" name="password" value="" autocomplete="off"><br>
+                        </div>
+                        
+                        <label for="phone">SĐT</label><br>
+                        <input type="text" id="admin-phone" name="phone2" value="" autocomplete="off" required><br>
+
+                        <label for="email">Email</label><br>
+                        <input type="text" id="email" name="email" value="" autocomplete="off" required>
                     </div>
                 </form>
+                <div class="btn">
+                    <button type="submit" onclick="saveStore();" id="save-store">Lưu</button>
+                    <button type="button" onclick="deleteStore();" style="display: none" id="deleteStore">Xóa</button>
+                    <button type="reset" onclick="reset()" id="reset-store">Hủy</button>
+                </div>
+
                 <div class="table" id="store-table">
                     <table>
                         <thead>
@@ -240,7 +244,7 @@
                             </tr>
                         </thead>
         
-                        <tbody id="code-list"></tbody>
+                        <tbody id="store-list"></tbody>
                     </table>
                 </div>
             </div>
@@ -257,5 +261,6 @@
     <script src="app/Views/admin/script/order.js"></script>
     <script src="app/Views/admin/script/post.js"></script>
     <script src="app/Views/admin/script/code.js"></script>
+    <script src="app/Views/admin/script/store.js"></script>
 </body>
 </html>

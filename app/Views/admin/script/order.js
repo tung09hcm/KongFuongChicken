@@ -39,6 +39,13 @@ fetch('index?controller=admin&action=getAllOrders')
 .then(response => response.json())
 .then(orders => {
     let orderList = document.getElementById('order-list');
+
+    const currentUrl = window.location.search;
+
+    // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
+    if (currentUrl.includes('action=Menu')) {
+        orders.orders = orders.orders.slice(0, 5);
+    }
     
     orders.orders.forEach(order => {
         orderList.innerHTML += `
