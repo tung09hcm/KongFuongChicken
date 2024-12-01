@@ -1,6 +1,6 @@
 /* Có hàng trong giỏ */
 .products-ordered {
-    display: none;
+    display: block;
 }
 
 .products-ordered-title {

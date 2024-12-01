@@ -10,7 +10,10 @@
 
         $action_name = strtolower($_REQUEST['action'] ?? 'index');
     }
-    
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
 
     require "./app/Controllers/${controller_name}.php";
 
