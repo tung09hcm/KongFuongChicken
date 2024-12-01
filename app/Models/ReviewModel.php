@@ -5,7 +5,7 @@ use PDO;
 
 class ReviewModel extends BaseModel {
     public function createReview($product_id, $user_id, $content, $rating) {
-        $stmt = $this->db->prepare("INSERT INTO Review (product_id, user_id, content, rating) VALUES (:product_id, :user_id, :content, :rating)");
+        $stmt = $this->db->prepare("INSERT INTO REVIEW (product_id, user_id, content, rating) VALUES (:product_id, :user_id, :content, :rating)");
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':content', $content);
@@ -15,43 +15,71 @@ class ReviewModel extends BaseModel {
     }
 
     public function getReviewsByProductId($product_id) {
-        $stmt = $this->db->prepare("SELECT Review.*, Account.name FROM Review JOIN User ON Review.user_id = User.account_id JOIN Account ON User.account_id = Account.id WHERE Review.product_id = :product_id");
+        $stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id WHERE REVIEW.product_id = :product_id");
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     public function getAllReviews() {
-        $stmt = $this->db->prepare("SELECT Review.*, Account.name, Product.name as product_name FROM Review JOIN User ON Review.user_id = User.account_id JOIN Account ON User.account_id = Account.id JOIN Product ON Review.product_id = Product.id");
+        $stmt = $this->db->prepare("
+            SELECT 
+                p.id AS product_id, 
+                p.name AS product_name, 
+                p.image_link AS product_image, 
+                p.price AS product_price, 
+                p.description AS product_description, 
+                
+                c.id AS comment_id, 
+                c.content AS comment_content, 
+                c.rating AS comment_rating, 
+                
+                u.first_name AS user_first_name, 
+                u.last_name AS user_last_name, 
+                
+                r.id AS reply_id, 
+                r.reply_content AS reply_content, 
+                r.reply_date AS reply_date, 
+                
+                a.first_name AS admin_first_name, 
+                a.last_name AS admin_last_name 
+                
+            FROM PRODUCT p 
+                LEFT JOIN REVIEW c ON p.id = c.product_id 
+                LEFT JOIN ACCOUNT u ON c.user_id = u.id 
+                LEFT JOIN REVIEW_REPLY r ON c.id = r.review_id 
+                LEFT JOIN ACCOUNT a ON r.admin_id = a.id 
+            ORDER BY p.id, c.id;");
+        //$stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, PRODUCT.name as product_name FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id JOIN PRODUCT ON REVIEW.product_id = PRODUCT.id");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     public function getReviewById($id) {
-        $stmt = $this->db->prepare("SELECT Review.*, Account.name FROM Review JOIN User ON Review.user_id = User.account_id JOIN Account ON User.account_id = Account.id WHERE Review.id = :id");
+        $stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id WHERE REVIEW.id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch();
     }
 
     public function deleteReview($id) {
-        $stmt = $this->db->prepare("DELETE FROM Review WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM REVIEW WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount();
     }
 
     public function replyToReview($id, $reply) {
-        $stmt = $this->db->prepare("INSERT INTO Review_Reply (review_id, admin_id, reply_content) VALUES (:review_id, :admin_id, :reply_content)");
+        $stmt = $this->db->prepare("INSERT INTO REVIEW_REPLY (review_id, admin_id, reply_content) VALUES (:review_id, :admin_id, :reply_content)");
         $stmt->bindParam(':review_id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':admin_id', $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':admin_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt->bindParam(':reply_content', $reply);
         $stmt->execute();
         return $this->db->lastInsertId();
     }
 
     public function getReplyByReviewId($review_id) {
-        $stmt = $this->db->prepare("SELECT Review_Reply.*, Account.name FROM Review_Reply JOIN Admin ON Review_Reply.admin_id = Admin.account_id JOIN Account ON Admin.account_id = Account.id WHERE Review_Reply.review_id = :review_id");
+        $stmt = $this->db->prepare("SELECT REVIEW_REPLY.*, ACCOUNT.first_name,ACCOUNT.last_name FROM REVIEW_REPLY JOIN Admin ON REVIEW_REPLY.admin_id = ADMIN.account_id JOIN ACCOUNT ON ADMIN.account_id = ACCOUNT.id WHERE REVIEW_REPLY.review_id = :review_id");
         $stmt->bindParam(':review_id', $review_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();

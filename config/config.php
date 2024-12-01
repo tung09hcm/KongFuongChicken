@@ -21,7 +21,8 @@ define('BASE_URL', '/KongFuongChicken');
 
 define('BASE_PATH', dirname(dirname(__FILE__)));
 
-loadEnv(BASE_PATH . '/.env');
+loadEnv(__DIR__ . '/../.env');
+
 
 define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
 define('DB_PORT', $_ENV['DB_PORT'] ?? 3306);

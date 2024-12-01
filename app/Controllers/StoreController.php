@@ -4,12 +4,14 @@ namespace App\Controllers;
 
 
 use App\Models\StoreModel;
+use Models\StoreModel as ModelsStoreModel;
 
+require_once  __DIR__ ."/../Models/StoreModel.php";
 class StoreController {
     public function search() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $location = trim($_POST['location']);
-            $storeModel = new StoreModel();
+            $storeModel = new ModelsStoreModel();
             $stores = $storeModel->searchStores($location);
             echo json_encode(['status' => 'success', 'stores' => $stores]);
             exit();
@@ -19,7 +21,7 @@ class StoreController {
     }
 
     public function detail($id) {
-        $storeModel = new StoreModel();
+        $storeModel = new ModelsStoreModel();
         $store = $storeModel->getStoreById($id);
         if ($store) {
             echo json_encode(['status' => 'success', 'store' => $store]);

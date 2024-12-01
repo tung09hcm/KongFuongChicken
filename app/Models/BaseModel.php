@@ -8,7 +8,7 @@ class BaseModel {
     protected $db;
 
     public function __construct() {
-        require_once BASE_PATH . '/config/config.php';
+        require_once  __DIR__ ."/../../config/config.php";
 
         $host = DB_HOST;
         $port = DB_PORT;
@@ -16,7 +16,7 @@ class BaseModel {
         $user = DB_USER;
         $password = DB_PASSWORD;
         $charset = DB_CHARSET;
-        $timeout = 10;
+        $timeout = 15;
 
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=$charset";
 

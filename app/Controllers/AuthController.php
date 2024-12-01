@@ -1,10 +1,28 @@
 <?php
-namespace App\Controllers;
 
-use App\Models\AccountModel;
-use App\Models\UserModel;
+use Models\AccountModel;
+use Models\AdminModel;
+use Models\UserModel;
+
+require_once  __DIR__ ."/../Models/AccountModel.php";
+require_once  __DIR__ ."/../Models/UserModel.php";
+require_once  __DIR__ ."/../Models/AdminModel.php";
+
 
 class AuthController {
+
+    // TESTING
+    public function logOutView()
+    {
+        require __DIR__ . '/../Testing/logout.php';
+    }
+
+    public function index() {
+        require __DIR__ . '/../Views/auth/login.php';
+    }
+    public function registerView() {
+        require __DIR__ . '/../Views/auth/register.php';
+    }
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST)) {
@@ -13,58 +31,100 @@ class AuthController {
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
             $accountModel = new AccountModel();
-            $account = $accountModel->findByEmail($email);
-            if ($account && password_verify($password, $account['password'])) {
-                $_SESSION['user_id'] = $account['id'];
-                $_SESSION['role'] = $account['role'];
-                if ($account['role'] === 'admin') {
-                    echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'admin/dashboard']);
+            $account = $accountModel->getAccountByEmail($email);
+            if ($account) {
+                // if (password_verify($password, $account['password'])) 
+                if (($password == $account['password'])) 
+                {
+                    
+                    // phân ra xem là admin hay user thông thường
+                    // TODO
+                    
+                    $isAdmin = $account['is_admin'];
+                    echo  "account_id: ".$account['id'];
+                    echo "<br>";
+                    echo   $account['email'];
+                    if ($isAdmin) {
+                        $_SESSION['role'] = 'admin';
+                    } else {
+                        $_SESSION['role'] = 'user';     
+                    }
+                    $_SESSION['user_id'] = $account['id'];
+                    $cookieLifetime = time() + (10 * 365 * 24 * 60 * 60);
+                    setcookie("id", $account['id'], $cookieLifetime, "/");
+
+                    echo json_encode(['status' => 'success', 'message' => 'Login successful.', 'role' => $_SESSION['role']]);
+                    if($_SESSION['role'] == "admin")
+                    {
+                        echo "giao diện admin". "<br>";
+                        
+                        header("Location: index.php?controller=admin&action=Menu");
+                    }
+                    else{
+                        // TODO nối đến giao diện người dùng
+                        header("Location: index.php?controller=cart&action=Menu");
+                    }
+                    exit();
+                    // TODO: có thể đặt header đến nơi muốn 
+                    // ví dụ header("Location: index.php?controller=home&action=index");
                 } else {
-                    echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'user/dashboard']);
+                    echo json_encode(['status' => 'error', 'message' => 'Invalid password.']);
+                    exit();
+                    // TODO: có thể đặt header đến nơi muốn 
+                    // ví dụ header("Location: index.php?controller=home&action=index");
                 }
-                exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Thông tin đăng nhập không chính xác.']);
+                echo json_encode(['status' => 'error', 'message' => 'Account not found.']);
                 exit();
+                // TODO: có thể đặt header đến nơi muốn 
+                // ví dụ header("Location: index.php?controller=home&action=index");
             }
         }
-        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method :vvv.']);
         exit();
+        // TODO: có thể đặt header đến nơi muốn 
+        // ví dụ header("Location: index.php?controller=home&action=index");
     }
 
     public function register() {
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST)) {
                 $_POST = json_decode(file_get_contents("php://input"), true);
             }
-            $username = trim($_POST['username']);
-            $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+            $firstname = trim($_POST['firstName']);
+            $lastname = trim($_POST['lastName']);
+            // $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+            $password = trim($_POST['password']);
             $role = 'user';
-            $name = trim($_POST['name']);
             $email = trim($_POST['email']);
-            $address = trim($_POST['address']);
-            $birth_date = trim($_POST['birth_date']);
             $phone = trim($_POST['phone']);
             $accountModel = new AccountModel();
             $userModel = new UserModel();
-            if ($accountModel->findByEmail($email)) {
+            if ($accountModel->getAccountByEmail($email)) {
                 echo json_encode(['status' => 'error', 'message' => 'Email đã được sử dụng.']);
                 exit();
             }
-            $account_id = $accountModel->createAccount($username, $password, $role, $name, $email, $address, $birth_date, $phone);
+            $account_id = $accountModel->createAccount($firstname, $lastname, $password, $email, $phone);
             $userModel->createUser($account_id);
-            echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'login']);
-            exit();
+            // Route đến trang chủ của user
+            header("Location: index.php?controller=Auth&action=index");
         }
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
         exit();
+            
     }
-
+    
     public function logout() {
+        echo "xóa session và cookie" ."<br>";
         session_unset();
         session_destroy();
-        echo json_encode(['status' => 'success', 'redirect' => BASE_URL . 'login']);
+        setcookie('id', '', time() - 3600, '/');
+        // Trỏ đến header tùy thích sau khi đăng xuất
+        echo "cookie_id: ". $_COOKIE['id'];
+        header("Location: index.php?controller=auth&action=index");
         exit();
     }
+
 }
 ?>

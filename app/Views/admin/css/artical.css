@@ -13,13 +13,12 @@ body {
     z-index: 0;
 }
 
-.container {
+.big-container {
     background-color: #f6f6f6;
     position: relative;
-    top: 100px;
 }
 
-.container h1 {
+.big-container h1 {
     text-align: start;
     padding: 10px;
     margin-left: 30px;

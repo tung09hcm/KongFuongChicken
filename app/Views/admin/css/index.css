@@ -13,16 +13,16 @@ body {
     z-index: 0;
 }
 
-.container {
-    background-color: #f6f6f6;
-    position: relative;
-    top: 100px;
-}
-
-.container h1 {
+.big-container h1 {
     text-align: start;
     padding: 15px;
     margin-left: 30px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.big-container h2 {
+    font-weight: 600;
 }
 
 .contain1 {
@@ -38,6 +38,7 @@ body {
 
 .chart {
     width: 80%;
+    align-content: center;
 }
 
 .chart #month {
@@ -51,11 +52,11 @@ body {
 
 .chart select {
     width: 250px;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 0;
     border: 1px solid #e4002b;
     border-radius: 5px;
-    size: 16px;
+    size: 20px;
 }
 
 .chart select:focus {
@@ -86,27 +87,31 @@ body {
 }
 
 .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     margin: 10px;
 }
 
-.info h5 {
-    font-weight: 600;
-    color: green;
+.info h5, .price-product {
+    font-size: 19px !important;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .info span {
     color: #e4002b;
 }
 
+.description-product {
+    min-height: 2rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: block;
+}
+
 .contain2 {
-    padding: 40px 10%;
     background-color: #fff;
     max-width: 90%; 
-    margin: 10px auto;
-    margin-top: 30px; 
+    margin: 0px auto;
     padding: 20px;
 }
 
@@ -118,6 +123,7 @@ body {
     flex-direction: row;
     border-bottom: 2px solid #cccbcb;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .link h2 {
@@ -141,20 +147,28 @@ body {
 }
 
 
-.card-items {
+#card-items {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .item {
-    width: fit-content;
-    height: fit-content;
-    text-align: center;
-    border-radius: 25px;
-    background-color: #e1e1e193;
+    width: 300px;
+    height: 430px;
+    border-radius: 10px;
+    background-color: #fff;
     transition: all 0.3s ease;
     margin: 17px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.item h4 {
+    font-size: 20px !important;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .item:hover {
@@ -164,9 +178,12 @@ body {
 }
 
 .item img {
-    border-radius: 25px 25px 0 0;
-    max-width: 230px;
-    margin: 10px;
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px 10px 5px 10px;
 }
 
 table {
@@ -202,7 +219,7 @@ tbody tr:hover td {
 
 .table select {
     width: 150px;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 0;
     border-radius: 5px;
     size: 16px;
@@ -210,6 +227,26 @@ tbody tr:hover td {
 
 .table select:focus {
     outline: none;
+}
+
+.table select[value="Pending"] {
+    border: 3px solid #f1c40f;
+}
+
+.table select[value="Processing"] {
+    border: 3px solid #3498db; 
+}
+
+.table select[value="Shipped"] {
+    border: 3px solid #2e3bcc;
+}
+
+.table select[value="Delivered"] {
+    border: 3px solid #2ecc71;
+}
+
+.table select[value="Cancelled"] {
+    border: 3px solid #cc2e2e;
 }
 
 .popup {
@@ -243,6 +280,7 @@ tbody tr:hover td {
 }
 
 .popup .id-order {
+    margin-bottom: 10px;
     display: flex;
     height: 25px;
     justify-content: space-between;
@@ -285,11 +323,12 @@ tbody tr:hover td {
     z-index: 1000; /* Show behind the popup but over the rest of the page */
 }
 
-.comment {
-    width: 100%;
+.product-card {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+}
+
+.comment {
+    width: 70%;
     align-content: center;
     background-color: rgb(255, 240, 240);
     border-radius: 20px;
@@ -306,8 +345,6 @@ tbody tr:hover td {
     margin-bottom: 10px;
     color: #e4002b;
 }
-
-
 
 .comment .content .answer-item {
     margin-left: 20px;
@@ -327,19 +364,20 @@ tbody tr:hover td {
     margin: 10px 0;
 }
 
-.comment .content .answer-input input {
+.content .answer-input input {
     width: 90%; 
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
+    margin-bottom: 0px;
 }
 
-.comment .content .answer-input input:focus {
+.content .answer-input input:focus {
     outline: none;
 }
 
-.comment .content .answer-input button {
+.content .answer-input button,  .content button{
     text-decoration: none;
     padding: 6px 20px 6px 20px;
     border: 1px solid #e4002b;
@@ -349,12 +387,10 @@ tbody tr:hover td {
     cursor: pointer;
 }
 
-.comment .content .answer-input button:hover {
+.content .answer-input button:hover, .content button:hover{
     background-color: #fff;
     color: #e4002b;
 }
-
-
 
 .contain2 .table .news-content p{
     display: -webkit-box;
@@ -383,6 +419,74 @@ tbody tr:hover td {
 .footer .footer-item h3, .footer .footer-item p, .footer .footer-item a{
     color: #fff;
 }
+
+.discount-box {
+    display: flex;
+    height: 350px;
+    gap: 20px;
+}
+
+.discount-box form {
+    width: 50%;
+}
+
+.discount-box form label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.discount-box form input {
+    margin-bottom: 0px;
+}
+
+.discount-box .btn {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e4002b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #e4002b;
+    border: 1px solid #e4002b;
+}
+
+#discount-table {
+    width: 50%;
+    overflow-y: auto;
+}
+
+#store-detail-form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+#store-detail-form #store-info h3, #store-detail-form #admin-info h3 {
+    border-bottom: 2px solid #e4002b;
+    width: fit-content;
+}
+
+#store-info, #admin-info {
+    width: 50%;
+}
+
+#store-info label, #admin-info label {
+    font-size: 15px;
+    font-weight: bold;
+}
   
 
 @media screen and (max-width: 720px) {
@@ -399,7 +503,16 @@ tbody tr:hover td {
     }
 
     .item img {
-        max-width: 190px;
+        object-fit: cover;
+    }
+
+    #card-items {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .product-card {
+        flex-direction: column;
     }
 
     .comment .item {
@@ -408,9 +521,29 @@ tbody tr:hover td {
     }
     .comment {
         flex-direction: column;
+        width: 100%;
+    }
+    .comment .content {
+        max-width: 90%;
     }
     .table {
         overflow-x: auto;
+    }
+    .discount-box {
+        display: block;
+        height: fit-content;
+    }
+    .discount-box form {
+        width: 100%;
+    }
+    #discount-table {
+        width: 100%;
+    }
+    #store-detail-form {
+        flex-direction: column;
+    }
+    #store-info, #admin-info {
+        width: 90%;
     }
     
 }
