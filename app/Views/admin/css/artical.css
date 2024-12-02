@@ -91,3 +91,24 @@ button:hover {
 .footer .footer-item h3, .footer .footer-item p, .footer .footer-item a{
     color: #fff;
 }
+
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#pagination-controls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #e4002b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

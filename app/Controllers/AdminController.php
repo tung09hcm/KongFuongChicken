@@ -69,7 +69,8 @@ class AdminController {
         exit();
     }
     // ok
-    public function editUser($id) {
+    public function editUser() {
+        $id = $_GET['idUser'];
         $this->checkAuth('admin', 'can_manage_user');
         $accountModel = new AccountModel();
         $userModel = new UserModel();
@@ -84,8 +85,30 @@ class AdminController {
         
         exit();
     }
+    public function updateUser() {
+        $id = $_GET['idUser'];
+
+        $this->checkAuth('admin', 'can_manage_user');
+        $accountModel = new AccountModel();
+        $userModel = new UserModel();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $phone = trim($_POST['phone']);
+            $email = trim($_POST['email']);
+
+            $accountModel->editAccount($id, $first_name, $last_name, $email, $phone);
+            echo json_encode(['status' => 'success', 'message' => 'Cập nhật người dùng thành công.']);
+            exit();
+        }
+        $user = $userModel->getUserById($id);
+        echo json_encode(['status' => 'success', 'user' => $user]);
+        exit();
+    }
     // ok
-    public function deleteUser($id) {
+    public function deleteUser() {
+        $id = $_GET['idUser'];
+        
         $this->checkAuth('admin', 'can_manage_user');
         $accountModel = new AccountModel();
         $accountModel->deleteAccount($id);
@@ -434,7 +457,7 @@ class AdminController {
         // Nếu tìm thấy, trả về dữ liệu
         echo json_encode([
             'success' => true,
-            'product' => $product,
+            'post' => $post,
         ]);
         exit();
     }
