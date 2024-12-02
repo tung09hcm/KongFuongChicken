@@ -23,6 +23,10 @@
             <div class="comments"></div>
         </div>
 
+        <div id="pagination-controls">
+            <button id="prev-page">Trang trước</button>
+            <button id="next-page">Trang sau</button>
+        </div>
         
         <?php 
             include 'app/Views/partials/footer.php';

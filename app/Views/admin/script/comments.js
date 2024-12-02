@@ -20,11 +20,6 @@ function displayProducts(products) {
 
     let filteredComment = products.reviews;
 
-    // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
-    if (currentUrl.includes('action=Menu')) {
-        filteredComment = filteredComment.slice(0, 5);
-    }
-
     // Hàm nhóm dữ liệu theo product và comment
     const groupedReviews = filteredComment.reduce((acc, review) => {
         const { product_id, product_name, product_image, product_price, product_description, comment_id, comment_content, comment_rating, user_first_name, user_last_name, reply_id, reply_content, reply_date } = review;
@@ -70,7 +65,7 @@ function displayProducts(products) {
     }, {});
   
     // Chuyển đổi sang mảng
-    const result = Object.values(groupedReviews);
+    let result = Object.values(groupedReviews);
 
     // Sắp xếp products theo comment_id giảm dần
     result.sort((a, b) => {
@@ -93,71 +88,124 @@ function displayProducts(products) {
         }
     });  
 
-    result.forEach(function(product) {
-        // Check if product has comments
-        if (product.comments && Object.keys(product.comments).length > 0) {
-            // Create product card
-            var productDiv = document.createElement('div');
-            productDiv.classList.add('product-card');
+    // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
+    if (currentUrl.includes('action=Menu')) {
+        result = result.slice(0, 3);
+    }
 
-            productDiv.innerHTML = `
-                <div class="item" onclick="window.location.href='index.php?controller=admin&action=viewProduct&idProduct=${product.id}'">
-                    <img src="${product.product_image}" alt="${product.product_name}">
-                    <h4>${product.product_name}</h4>
-                    <div class="info">
-                        <p class="price-product">${Number(product.product_price).toLocaleString()}đ</p>
-                        <p class="description-product">${product.product_description}</p>
-                    </div>
-                </div>
-            `;
+    const itemsPerPage = 5; // Số sản phẩm mỗi trang
+    let currentPage = 1; // Trang hiện tại
+    const totalPages = Math.ceil(result.length / itemsPerPage);
 
-            // Create comments section
-            var commentsDiv = document.createElement('div');
-            commentsDiv.classList.add('comment');
+    // Hàm hiển thị sản phẩm theo trang
+    const renderProducts = () => {
 
-            Object.values(product.comments).forEach(function(comment) {
-                var commentDiv = document.createElement('div');
-                commentDiv.classList.add('content');
-                commentDiv.id = `comment_${comment.comment_id}`;
+        let commentToDisplay = result; 
 
-                // Create replies section
-                var repliesHTML = '';
-                if (comment.replies && comment.replies.length > 0) {
-                    comment.replies.forEach(function(reply) {
-                        repliesHTML += `
-                            <div class="answer-item">
-                                <h3>${reply.admin_first_name} ${reply.admin_last_name}</h3>
-                                <p style="color: #00000082; margin-bottom: 10px;">${reply.reply_date}</p>
-                                <p>${reply.reply_content}</p>
-                            </div>
-                        `;
-                    });
-                }
+        // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
+        if (!currentUrl.includes('action=Menu')) {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            commentToDisplay = result.slice(start, end);
+        }
 
-                commentDiv.innerHTML = `
-                    <h3>${comment.user_first_name} ${comment.user_last_name}</h3>
-                    <p style="color: #00000082; margin-bottom: 10px;">Rating: ${comment.comment_rating}</p>
-                    <p>${comment.comment_content}</p>
-                    <button onclick="deleteComments('${commentDiv.id}')">Xóa</button>
-                    <div class="answer" id="answer-item-${comment.comment_id}">${repliesHTML}</div>
-                    <div class="answer-input">
-                        <form id="answer-form-${comment.comment_id}">
-                            <input id="answer-form-${comment.comment_id}-input" name="reply" type="text" placeholder="Trả lời bình luận...">
-                        </form>
-                        <button onclick="answerComments('${commentDiv.id}')">Gửi</button>
+        console.log(commentToDisplay);
+
+        commentToDisplay.forEach(function(product) {
+            // Check if product has comments
+
+            if (product.comments && Object.keys(product.comments).length > 0) {
+                // Create product card
+                var productDiv = document.createElement('div');
+                productDiv.classList.add('product-card');
+    
+                productDiv.innerHTML = `
+                    <div class="item" onclick="window.location.href='index.php?controller=admin&action=viewProduct&idProduct=${product.id}'">
+                        <img src="${product.product_image}" alt="${product.product_name}">
+                        <h4>${product.product_name}</h4>
+                        <div class="info">
+                            <p class="price-product">${Number(product.product_price).toLocaleString()}đ</p>
+                            <p class="description-product">${product.product_description}</p>
+                        </div>
                     </div>
                 `;
+    
+                // Create comments section
+                var commentsDiv = document.createElement('div');
+                commentsDiv.classList.add('comment');
+    
+                Object.values(product.comments).forEach(function(comment) {
+                    var commentDiv = document.createElement('div');
+                    commentDiv.classList.add('content');
+                    commentDiv.id = `comment_${comment.comment_id}`;
+    
+                    // Create replies section
+                    var repliesHTML = '';
+                    if (comment.replies && comment.replies.length > 0) {
+                        comment.replies.forEach(function(reply) {
+                            repliesHTML += `
+                                <div class="answer-item">
+                                    <h3>${reply.admin_first_name} ${reply.admin_last_name}</h3>
+                                    <p style="color: #00000082; margin-bottom: 10px;">${reply.reply_date}</p>
+                                    <p>${reply.reply_content}</p>
+                                </div>
+                            `;
+                        });
+                    }
+    
+                    commentDiv.innerHTML = `
+                        <h3>${comment.user_first_name} ${comment.user_last_name}</h3>
+                        <p style="color: #00000082; margin-bottom: 10px;">Rating: ${comment.comment_rating}</p>
+                        <p>${comment.comment_content}</p>
+                        <button onclick="deleteComments('${commentDiv.id}')">Xóa</button>
+                        <div class="answer" id="answer-item-${comment.comment_id}">${repliesHTML}</div>
+                        <div class="answer-input">
+                            <form id="answer-form-${comment.comment_id}">
+                                <input id="answer-form-${comment.comment_id}-input" name="reply" type="text" placeholder="Trả lời bình luận...">
+                            </form>
+                            <button onclick="answerComments('${commentDiv.id}')">Gửi</button>
+                        </div>
+                    `;
+    
+                    commentsDiv.appendChild(commentDiv);
+    
+                    productDiv.appendChild(commentsDiv);
+                    productsContainer.appendChild(productDiv);
+                });
+            }
+        });
+    };
 
-                commentsDiv.appendChild(commentDiv);
+    if (!currentUrl.includes('action=Menu')) {
+        // Hàm cập nhật trạng thái nút
+        const updateButtons = () => {
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+        };
 
-                productDiv.appendChild(commentsDiv);
-                productsContainer.appendChild(productDiv);
-            });
-        }
-    });
+        // Xử lý khi nhấn nút phân trang
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProducts();
+                updateButtons();
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderProducts();
+                updateButtons();
+            }
+        });
+
+        updateButtons();
+    }
+
+    // Khởi tạo lần đầu
+    renderProducts();
 }
-
-
 
 // Load products when the page is ready
 document.addEventListener('DOMContentLoaded', loadProducts);

@@ -46,27 +46,79 @@ fetch('index?controller=admin&action=getAllOrders')
     if (currentUrl.includes('action=Menu')) {
         orders.orders = orders.orders.slice(0, 5);
     }
-    
-    orders.orders.forEach(order => {
-        orderList.innerHTML += `
-            <tr>
-                <td onclick="showPopup('${order.order_id}')">${order.order_id}</td>
-                <td onclick="showPopup('${order.order_id}')">${order.customer_name}</td>
-                <td onclick="showPopup('${order.order_id}')">${order.customer_address}</td>
-                <td>
-                    <select onchange="changeColor(this, ${order.order_id})" value="${order.status}">
-                        <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Đang chờ</option>
-                        <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Đang thực hiện</option>
-                        <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Đang giao</option>
-                        <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Đã giao</option>
-                        <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Hủy</option>
-                    </select>
 
-                </td>
-                <td onclick="showPopup('${order.order_id}')">${Number(order.order_total).toLocaleString()}đ</td>
-            </tr>
-        `;
-    });
+    let filteredProducts = orders.orders;
+
+    const itemsPerPage = 10; // Số sản phẩm mỗi trang
+    let currentPage = 1; // Trang hiện tại
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+    // Hàm hiển thị sản phẩm theo trang
+    const renderProducts = () => {
+        orderList.innerHTML = ''; // Xóa nội dung cũ
+
+        let productsToDisplay = filteredProducts; 
+
+        // Nếu URL chứa `action=Menu`, giới hạn 5 sản phẩm
+        if (!currentUrl.includes('action=Menu')) {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            productsToDisplay = filteredProducts.slice(start, end);
+        }
+
+        console.log(productsToDisplay);
+
+        productsToDisplay.forEach(order => {
+            orderList.innerHTML += `
+                <tr>
+                    <td onclick="showPopup('${order.order_id}')">${order.order_id}</td>
+                    <td onclick="showPopup('${order.order_id}')">${order.customer_name}</td>
+                    <td onclick="showPopup('${order.order_id}')">${order.customer_address}</td>
+                    <td>
+                        <select onchange="changeColor(this, ${order.order_id})" value="${order.status}">
+                            <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Đang chờ</option>
+                            <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Đang thực hiện</option>
+                            <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Đang giao</option>
+                            <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Đã giao</option>
+                            <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Hủy</option>
+                        </select>
+    
+                    </td>
+                    <td onclick="showPopup('${order.order_id}')">${Number(order.order_total).toLocaleString()}đ</td>
+                </tr>
+            `;
+        });
+    };
+
+    if (!currentUrl.includes('action=Menu')) {
+        // Hàm cập nhật trạng thái nút
+        const updateButtons = () => {
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+        };
+
+        // Xử lý khi nhấn nút phân trang
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProducts();
+                updateButtons();
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderProducts();
+                updateButtons();
+            }
+        });
+
+        updateButtons();
+    }
+
+    // Khởi tạo lần đầu
+    renderProducts();
 })
 .catch(error => console.error('Lỗi tải dữ liệu:', error));
 
