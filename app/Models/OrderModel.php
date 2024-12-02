@@ -69,7 +69,8 @@ class OrderModel extends BaseModel {
                 o.status
             FROM `ORDER` o
             LEFT JOIN `ACCOUNT` a ON o.user_id = a.id
-            LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id");
+            LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id
+            ORDER BY o.order_date DESC");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -98,6 +99,61 @@ class OrderModel extends BaseModel {
         ");
         $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // public function getSalesData($month) {
+    //     $stmt = $this->db->prepare("
+    //         SELECT 
+    //             DATE(order_date) AS order_day,
+    //             SUM(total) AS total_sales
+    //         FROM `ORDER`
+    //         WHERE MONTH(order_date) = :month AND YEAR(order_date) = YEAR(CURDATE()) AND status = 'Delivered'
+    //         GROUP BY DATE(order_date)
+    //         ORDER BY order_day ASC;
+    //     ");
+    //     $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    function getSalesData($month) {
+        $year = date('Y');
+        $start_date = "$year-$month-01";
+        $end_date = date('Y-m-t', strtotime($start_date)); // Lấy ngày cuối tháng
+
+        $query = "
+            WITH all_dates AS (
+                SELECT 
+                    DATE_FORMAT(DATE_ADD(:month_start_date, INTERVAL n DAY), '%Y-%m-%d') AS order_date
+                FROM (
+                    SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL 
+                    SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL 
+                    SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 UNION ALL SELECT 13 UNION ALL SELECT 14 UNION ALL 
+                    SELECT 15 UNION ALL SELECT 16 UNION ALL SELECT 17 UNION ALL SELECT 18 UNION ALL SELECT 19 UNION ALL 
+                    SELECT 20 UNION ALL SELECT 21 UNION ALL SELECT 22 UNION ALL SELECT 23 UNION ALL SELECT 24 UNION ALL 
+                    SELECT 25 UNION ALL SELECT 26 UNION ALL SELECT 27 UNION ALL SELECT 28 UNION ALL SELECT 29 UNION ALL 
+                    SELECT 30 UNION ALL SELECT 31
+                ) AS numbers
+                WHERE DATE_ADD(:month_start_date, INTERVAL n DAY) <= :month_end_date
+            )
+            SELECT 
+                ad.order_date,
+                COALESCE(SUM(o.total), 0) AS total_sales
+            FROM all_dates ad
+            LEFT JOIN `ORDER` o
+                ON DATE(o.order_date) = ad.order_date AND o.status = 'Delivered'
+            GROUP BY ad.order_date
+            ORDER BY ad.order_date ASC;
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':month_start_date' => $start_date,
+            ':month_end_date' => $end_date
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

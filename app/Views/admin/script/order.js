@@ -78,9 +78,8 @@ function showPopup(orderId) {
         let orderDetail = document.getElementById('popup');
 
         const discountPercentage = data.order.discount_percentage || 0; // Nếu không có, mặc định là 0
-        const total = data.order.total || 0; // Tổng giá trị đơn hàng
-        const discount = total * discountPercentage; // Số tiền giảm giá
-        const finalTotal = total - discount + 10000; // Thành tiền sau giảm giá + phí 10,000
+        const total = data.order.total/(1-discountPercentage) || 0; // Tổng giá trị đơn hàng
+        const finalTotal = Number(data.order.total) + 10000; // Thành tiền sau giảm giá + phí 10,000
 
         // Định dạng số theo kiểu tiền tệ
         const formattedDiscount = discountPercentage > 0 ? (discountPercentage * 100).toLocaleString() + '%' : 'Không';
@@ -111,7 +110,7 @@ function showPopup(orderId) {
                 </div>
                 <div class="dish-name">
                     <h5>Tổng đơn hàng</h5>
-                    <span>${Number(data.order.total).toLocaleString()}đ</span>
+                    <span>${Number(total).toLocaleString()}đ</span>
                 </div>
                 <div class="dish-name">
                     <h5>Phí giao hàng</h5>

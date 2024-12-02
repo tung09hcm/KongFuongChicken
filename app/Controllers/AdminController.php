@@ -101,14 +101,16 @@ class AdminController {
         exit();
     }
     // ok
-    public function handleReview($id) {
+    public function handleReview() {
         $this->checkAuth('admin', 'can_manage_review');
+        $id = $_GET['idReview'];
+
         $reviewModel = new ReviewModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['reply'])) {
                 $reply = trim($_POST['reply']);
-                $reviewModel->replyToReview($id, $reply);
-                echo json_encode(['status' => 'success', 'message' => 'Trả lời đánh giá thành công.']);
+                $re = $reviewModel->replyToReview($id, $reply);
+                echo json_encode(['status' => 'success', 'message' => 'Trả lời đánh giá thành công.', 'reply' => $re]);
                 exit();
             } elseif (isset($_POST['delete'])) {
                 $reviewModel->deleteReview($id);
@@ -118,6 +120,14 @@ class AdminController {
         }
         $review = $reviewModel->getReviewById($id);
         echo json_encode(['status' => 'success', 'review' => $review]);
+        exit();
+    }
+
+    public function getReplyById() {
+        $id = $_GET['idReply'];
+        $reviewModel = new ReviewModel();
+        $reply = $reviewModel->getReplyById($id);
+        echo json_encode(['status' => 'success', 'reply' => $reply]);
         exit();
     }
 
@@ -508,12 +518,41 @@ class AdminController {
                 'message' => 'Không tìm thấy đơn hàng.',
             ]);
             exit();
-        }
+        }   
     
-        // Nếu tìm thấy, trả về dữ liệu
+        // // Nếu tìm thấy, trả về dữ liệu
+        // echo json_encode([
+        //     'success' => true,
+        //     'order' => $order,
+        // ]);
+
+        // Nếu tìm thấy, tái cấu trúc dữ liệu
+        $groupedOrder = [
+            'order_id' => $order[0]['order_id'], // ID đơn hàng
+            'customer_name' => $order[0]['customer_name'], // Tên khách hàng
+            'customer_address' => $order[0]['customer_address'], // Địa chỉ khách hàng
+            'total' => $order[0]['total'], // Tổng tiền
+            'order_date' => $order[0]['order_date'], // Ngày đặt hàng
+            'percentage' => $order[0]['percentage'], // Giảm giá
+            'code' => $order[0]['code'], // Mã giảm giá
+            'status' => $order[0]['status'], // Trạng thái
+            'items' => [], // Chi tiết các mặt hàng
+        ];
+
+        // Thêm thông tin chi tiết từng mặt hàng vào mảng `items`
+        foreach ($order as $item) {
+            $groupedOrder['items'][] = [
+                'order_detail_id' => $item['order_detail_id'],
+                'quantity' => $item['quantity'],
+                'product_name' => $item['product_name'],
+                'item_total' => $item['item_total'],
+            ];
+        }
+
+        // Trả về dữ liệu đã tái cấu trúc
         echo json_encode([
             'success' => true,
-            'order' => $order,
+            'order' => $groupedOrder,
         ]);
         exit();
     }
@@ -660,6 +699,17 @@ class AdminController {
         $accountModel->deleteAccount($idAdmin);
 
         echo json_encode(['status' => true, 'message' => 'Xóa cửa hàng và admin thành công.']);
+        exit();
+    }
+
+    public function getSalesData() {
+        $month = $_GET['month'];
+        $this->checkAuth('admin');
+        
+        $orderModel = new OrderModel();
+        $salesData = $orderModel->getSalesData($month);
+
+        echo json_encode(['status' => 'success', 'salesData' => $salesData]);
         exit();
     }
 }

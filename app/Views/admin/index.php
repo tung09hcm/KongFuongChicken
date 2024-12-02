@@ -23,7 +23,7 @@
     <div class="big-container">
         <h1>Chào mừng quay trở lại!</h1>
 
-        <!-- /*chart*/ -->
+        <!-- /*chart*/ DONE-->
         <div class="contain1">
             <div class="chart">
                 <div id="month">
@@ -43,32 +43,7 @@
                         <option value="12">Tháng 12</option>
                     </select>
                 </div>
-    
-                <div class="bar">
-                    <div class="bar-label">Tuần 1</div>
-                    <div class="bar-value" style="width: 50%;">50%</div>
-                </div>
-                <div class="bar">
-                    <div class="bar-label">Tuần 2</div>
-                    <div class="bar-value" style="width: 10%;">10%</div>
-                </div>
-                <div class="bar">
-                    <div class="bar-label">Tuần 3</div>
-                    <div class="bar-value" style="width: 20%;">20%</div>
-                </div>
-                <div class="bar">
-                    <div class="bar-label">Tuần 4</div>
-                    <div class="bar-value" style="width: 20%;">20%</div>
-                </div>
-            </div>
-            <div class="item" onclick="window.location.href='dish.php'">
-                <img src="https://static.kfcvietnam.com.vn/images/items/lg/burger-copy.jpg?v=4lY0lg" alt="">
-                <h4>Combo 1 người</h4>
-                <div class="info">
-                    <p class="price-product">78.000đ</p>
-                    <p class="description-product">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                    <h5>Orders <span>15</span></h5>
-                </div>
+                <canvas id="salesChart"></canvas>
             </div>
         </div>
 
@@ -113,7 +88,7 @@
         <div class="contain2">
             <div class="link">
                 <h2>Bình luận gần đây</h2>
-                <a id="comments" href="comments.php">Xem thêm</a>
+                <a id="comments" href="index.php?controller=admin&action=viewComment">Xem thêm</a>
             </div>
             <div class="comments"></div>
         </div>        
@@ -141,6 +116,7 @@
             </div>
         </div>
 
+        <!-- /*discount*/ DONE -->
         <div class="contain2">
             <div class="link">
                 <h2>Khuyến mãi</h2>
@@ -181,6 +157,7 @@
             </div>
         </div>
 
+        <!-- /*store*/ DONE -->
         <div class="contain2">
             <div class="link">
                 <h2>Danh sách cửa hàng</h2>
@@ -262,5 +239,7 @@
     <script src="app/Views/admin/script/post.js"></script>
     <script src="app/Views/admin/script/code.js"></script>
     <script src="app/Views/admin/script/store.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app/Views/admin/script/chart.js"></script> 
 </body>
 </html>
