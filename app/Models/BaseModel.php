@@ -27,7 +27,7 @@ class BaseModel {
         ];
 
         try {
-            $this->db = new PDO($dsn, $user, $password, $options);            
+            $this->db = new PDO($dsn, $user, $password, $options);
         } catch (PDOException $e) {
             die("Connection failed: " . $e->getMessage());
         }

@@ -9,7 +9,7 @@ class UserModel extends AccountModel {
         if ($account) {
             $this->createUser($account['id']);
         }
-    }
+    }   
 
     public function getAccountById($id) {
         $sql = "SELECT * FROM USER WHERE id = :id";

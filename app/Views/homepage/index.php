@@ -1,3 +1,14 @@
+<?php
+    require_once __DIR__ . '/../../Controllers/ProductController.php';
+
+    use App\Controllers\ProductController;
+
+    // Tạo instance ProductController và lấy danh sách sản phẩm
+    $productController = new ProductController();
+    $products = json_decode($productController->listComboGroupProducts(), true)['products'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +93,15 @@
         </div>
         <div class="row food-list-row">
             <div class="col-md-3 mb-4 food-list-col">
+                <a href="../../Views/product/index.php#uudai" class="card card-food-list">
+                    <img alt="Món Mới" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/KHUYEN MAI.jpg?v=gOqwaL" width="300"/>
+                    <div class="card-body text-center">
+                        <h5 class="card-food-list-title">Ưu Đãi</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#monmoi" class="card card-food-list">
                     <img alt="Món Mới" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
                     <div class="card-body text-center">
@@ -92,7 +112,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#combo1nguoi" class="card card-food-list">
-                    <img alt="Combo 1 Người" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Combo 1 Người" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/COMBO 1 NGUOI.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Combo 1 Người</h5>
                     </div>
@@ -101,7 +121,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#combonhom" class="card card-food-list">
-                    <img alt="Combo Nhóm" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Combo Nhóm" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/COMBO NHOM.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Combo Nhóm</h5>
                     </div>
@@ -110,7 +130,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#garan" class="card card-food-list">
-                    <img alt="Gà Rán - Gà Quay" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Gà Rán - Gà Quay" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/GA.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Gà Rán - Gà Quay</h5>
                     </div>
@@ -119,7 +139,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#burgercom" class="card card-food-list">
-                    <img alt="Burger - Cơm - Mì Ý" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Burger - Cơm - Mì Ý" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/COM.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Burger - Cơm - Mì Ý</h5>
                     </div>
@@ -128,7 +148,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#thucan" class="card card-food-list">
-                    <img alt="Thức Ăn Nhẹ" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Thức Ăn Nhẹ" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON AN NHE.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Thức Ăn Nhẹ</h5>
                     </div>
@@ -137,7 +157,7 @@
 
             <div class="col-md-3 mb-4 food-list-col">
                 <a href="../../Views/product/index.php#thucuong" class="card card-food-list">
-                    <img alt="Thức Uống &amp; Tráng Miệng" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/MON MOI.jpg?v=gqGP8L" width="300"/>
+                    <img alt="Thức Uống &amp; Tráng Miệng" class="card-img-top" height="200" src="https://static.kfcvietnam.com.vn/images/category/lg/TRANG MIENG.jpg?v=gOqwaL" width="300"/>
                     <div class="card-body text-center">
                         <h5 class="card-food-list-title">Thức Uống &amp; Tráng Miệng</h5>
                     </div>
@@ -157,7 +177,7 @@
 
         <div class="container-recommend-row pt-2">
             <!-- Combo Item 1 -->
-            <div class="container-recommend-col">
+            <!-- <div class="container-recommend-col">
                 <a href="../../Views/product/detail.php" class="card card-recommend">
                     <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
                     <div class="card-recommend-body">
@@ -167,59 +187,25 @@
                         <button class="btn btn-recommend-add w-100">Thêm</button>
                     </div>
                 </a>
-            </div>
-
-            <!-- Combo Item 1 -->
-            <div class="container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Burger</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
+            </div> -->
+            
+            <?php if (!empty($products)) : ?>
+                <?php foreach ($products as $product) : ?>
+                    <div class="container-recommend-col">
+                        <a href="../../Views/product/detail.php?id=<?= $product['id'] ?>" class="card card-recommend">
+                            <img src="<?= htmlspecialchars($product['image_link']) ?>" class="card-recommend-img" alt="<?= htmlspecialchars($product['name']) ?>">
+                            <div class="card-recommend-body">
+                                <h5 class="product-recommend-title"><?= htmlspecialchars($product['name']) ?></h5>
+                                <p class="price-recommend"><?= number_format($product['price'], 0, ',', '.') ?>đ</p>
+                                <p class="description-recommend"><?= htmlspecialchars($product['description']) ?></p>
+                                <button class="btn btn-recommend-add w-100" data-id="<?= $product['id'] ?>">Thêm</button>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 1 -->
-            <div class="container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Burger</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 1 -->
-            <div class="container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Burger</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 1 -->
-            <div class="container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Burger</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>Không có sản phẩm nào để hiển thị!</p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -231,57 +217,23 @@
         </h3>
 
         <div class="container-recommend-row row row-cols-1 row-cols-md-4 g-4 pt-2">
-            <!-- Combo Item 1 -->
-            <div class="col container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Burger">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Burger</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Miếng gà rán + 1 Burger tôm + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
+            <?php if (!empty($products)) : ?>
+                <?php foreach ($products as $product) : ?>
+                    <div class="container-recommend-col">
+                        <a href="../../Views/product/detail.php?id=<?= $product['id'] ?>" class="card card-recommend">
+                            <img src="<?= htmlspecialchars($product['image_link']) ?>" class="card-recommend-img" alt="<?= htmlspecialchars($product['name']) ?>">
+                            <div class="card-recommend-body">
+                                <h5 class="product-recommend-title"><?= htmlspecialchars($product['name']) ?></h5>
+                                <p class="price-recommend"><?= number_format($product['price'], 0, ',', '.') ?>đ</p>
+                                <p class="description-recommend"><?= htmlspecialchars($product['description']) ?></p>
+                                <button class="btn btn-recommend-add w-100" data-id="<?= $product['id'] ?>">Thêm</button>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 2 -->
-            <div class="col container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Cơm Gà Rán">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Cơm Gà Rán</h5>
-                        <p class="price-recommend">78.000đ</p>
-                        <p class="description-recommend">1 Cơm gà rán + 3 Gà rán tenders vị nguyên bản + 1 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 3 -->
-            <div class="col container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Nhóm">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Nhóm</h5>
-                        <p class="price-recommend">148.000đ</p>
-                        <p class="description-recommend">3 Miếng gà rán + 1 Gà viên Popcorn (Vừa) + 1 Khoai tây múi cau (Vừa) + 2 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Combo Item 4 -->
-            <div class="col container-recommend-col">
-                <a href="../../Views/product/detail.php" class="card card-recommend">
-                    <img src="https://static.kfcvietnam.com.vn/images/items/lg/D-CBO-CHICKEN-2.jpg?v=gqGP8L" class="card-recommend-img" alt="Combo Tối Nhóm 178K">
-                    <div class="card-recommend-body">
-                        <h5 class="product-recommend-title">Combo Tối Nhóm 178K</h5>
-                        <p class="price-recommend">178.000đ</p>
-                        <p class="description-recommend">4 Miếng gà rán + 1 Mì Ý gà viên + 3 Pepsi (Lớn)</p>
-                        <button class="btn btn-recommend-add w-100">Thêm</button>
-                    </div>
-                </a>
-            </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>Không có sản phẩm nào để hiển thị!</p>
+            <?php endif; ?>
         </div>
     </div>
 

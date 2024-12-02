@@ -10,6 +10,62 @@ class ProductModel extends BaseModel {
         return $stmt->fetchAll();
     }
 
+    // Lấy sản phẩm ưu đãi
+    public function getPromotionProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsDiscounted = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm mới
+    public function getNewProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsNew = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm combo 1
+    public function getCombo1Products() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsCombo1 = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm combo nhóm
+    public function getComboGroupProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsComboGroup = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm gà rán - gà quay
+    public function getChickenProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsChicken = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm burger - cơm - mì ý
+    public function getMainDishProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsMainDish = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm thức ăn nhẹ
+    public function getSnackProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsSnack = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy sản phẩm thức uống tráng miệng
+    public function getDrinkDessertProducts() {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE IsDrinkDessert = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getProductById($id) {
         $stmt = $this->db->prepare("SELECT * FROM PRODUCT WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
