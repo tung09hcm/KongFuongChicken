@@ -29,7 +29,7 @@ body {
     background-color: #fff;
     max-width: 90%; 
     margin: 10px auto; 
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -37,7 +37,7 @@ body {
 }
 
 .chart {
-    width: 80%;
+    width: 100%;
     align-content: center;
 }
 
@@ -63,27 +63,8 @@ body {
     outline: none;
 }
 
-.chart .bar {
-    display: flex;
-    margin: 15px 0;
-    background-color: #f6f6f6;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: right;
-}
-
-.chart .bar-label {
-    padding: 10px;
-    flex-grow: 1;
-}
-
-.chart .bar-value {
-    display: inline-block;
-    padding: 10px;
-    color: #fff;
-    text-align: center;
-    background-color: #e4002b;
-    height: 100%;
+#salesChart {
+    max-height: 500px;
 }
 
 .info {
@@ -328,8 +309,8 @@ tbody tr:hover td {
 }
 
 .comment {
-    width: 70%;
-    align-content: center;
+    height: fit-content;
+    flex-grow: 1;
     background-color: rgb(255, 240, 240);
     border-radius: 20px;
     transition: all 0.3s ease;
@@ -377,7 +358,7 @@ tbody tr:hover td {
     outline: none;
 }
 
-.content .answer-input button,  .content button{
+.content .answer-input button, .content button {
     text-decoration: none;
     padding: 6px 20px 6px 20px;
     border: 1px solid #e4002b;
@@ -385,11 +366,16 @@ tbody tr:hover td {
     color: #fff;
     background-color: #e4002b;
     cursor: pointer;
+    width: 100px;
 }
 
 .content .answer-input button:hover, .content button:hover{
     background-color: #fff;
     color: #e4002b;
+}
+
+.answer-input form {
+    flex-grow: 1;
 }
 
 .contain2 .table .news-content p{

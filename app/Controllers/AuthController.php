@@ -69,6 +69,7 @@ class AuthController {
                     // ví dụ header("Location: index.php?controller=home&action=index");
                 } else {
                     echo json_encode(['status' => 'error', 'message' => 'Invalid password.']);
+                    header("Location: index.php");
                     exit();
                     // TODO: có thể đặt header đến nơi muốn 
                     // ví dụ header("Location: index.php?controller=home&action=index");

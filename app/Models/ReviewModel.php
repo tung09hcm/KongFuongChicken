@@ -49,7 +49,9 @@ class ReviewModel extends BaseModel {
                 LEFT JOIN ACCOUNT u ON c.user_id = u.id 
                 LEFT JOIN REVIEW_REPLY r ON c.id = r.review_id 
                 LEFT JOIN ACCOUNT a ON r.admin_id = a.id 
-            ORDER BY p.id, c.id;");
+            WHERE c.id IS NOT NULL
+            ORDER BY c.id DESC;"
+        );
         //$stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, PRODUCT.name as product_name FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id JOIN PRODUCT ON REVIEW.product_id = PRODUCT.id");
         $stmt->execute();
         return $stmt->fetchAll();
@@ -63,6 +65,12 @@ class ReviewModel extends BaseModel {
     }
 
     public function deleteReview($id) {
+        // Xoá reply
+        $stmt = $this->db->prepare("DELETE FROM REVIEW_REPLY WHERE review_id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Xóa comment
         $stmt = $this->db->prepare("DELETE FROM REVIEW WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -79,9 +87,15 @@ class ReviewModel extends BaseModel {
     }
 
     public function getReplyByReviewId($review_id) {
-        $stmt = $this->db->prepare("SELECT REVIEW_REPLY.*, ACCOUNT.first_name,ACCOUNT.last_name FROM REVIEW_REPLY JOIN Admin ON REVIEW_REPLY.admin_id = ADMIN.account_id JOIN ACCOUNT ON ADMIN.account_id = ACCOUNT.id WHERE REVIEW_REPLY.review_id = :review_id");
+        $stmt = $this->db->prepare("SELECT REVIEW_REPLY.*, ACCOUNT.first_name,ACCOUNT.last_name FROM REVIEW_REPLY JOIN ADMIN ON REVIEW_REPLY.admin_id = ADMIN.account_id JOIN ACCOUNT ON ADMIN.account_id = ACCOUNT.id WHERE REVIEW_REPLY.review_id = :review_id");
         $stmt->bindParam(':review_id', $review_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function getReplyById($id) {
+        $stmt = $this->db->prepare("SELECT REVIEW_REPLY.*, ACCOUNT.first_name, ACCOUNT.last_name FROM REVIEW_REPLY JOIN ADMIN ON REVIEW_REPLY.admin_id = ADMIN.account_id JOIN ACCOUNT ON ADMIN.account_id = ACCOUNT.id WHERE REVIEW_REPLY.id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

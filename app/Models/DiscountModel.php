@@ -38,7 +38,12 @@ class DiscountModel extends BaseModel {
     }
 
     public function getAllDiscounts() {
-        $stmt = $this->db->prepare("SELECT * FROM DISCOUNT");
+        $stmt = $this->db->prepare("
+        SELECT * 
+            FROM DISCOUNT
+            WHERE expiry_date > CURDATE()
+            ORDER BY expiry_date ASC;
+        ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
