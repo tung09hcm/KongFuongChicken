@@ -330,8 +330,12 @@ body {
     margin-right: 10px;
 }
 
-.comment-input .comment-header .name {
+.comment-input .comment-header .name, .comment-input .comment-reply .reply-header .name {
     font-weight: bold;
+}
+
+.comment-input .comment-reply {
+    margin-left: 50px;
 }
 
 .comment-input .comment-body {
@@ -411,4 +415,23 @@ body {
 .btn-more:hover {
     background-color: #c92f2a !important;
     color: white !important;
+}
+
+/* Định dạng phần đánh giá sao */
+.rating-container {
+    margin-top: 10px;
+}
+
+.rating-container label {
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.rating-container select {
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }

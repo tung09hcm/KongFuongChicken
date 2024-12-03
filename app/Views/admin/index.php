@@ -1,6 +1,3 @@
-<!-- admin_id: 9, // ID của admin đang đăng nhập, bạn có thể lấy từ session hoặc biến toàn cục
-    Này lúc làm đăng nhập coi lại nè -->
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>

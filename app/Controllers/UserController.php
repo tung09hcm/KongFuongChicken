@@ -1,7 +1,4 @@
 <?php
-namespace App\Controllers;
-
-
 
 use App\Models\UserModel;
 use App\Models\OrderModel;
@@ -25,12 +22,72 @@ require_once  __DIR__ ."/../Models/ReviewModel.php";
 require_once  __DIR__ ."/../Models/ProductModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
 require_once  __DIR__ ."/../Models/StoreModel.php";
+
 class UserController {
+
+    public function Menu()
+    {
+        require __DIR__ . '/../Views/homepage/index.php';
+    }
+
+    public function Product() {
+        $section = $_GET['section'] ?? 'all';
+        require __DIR__ . '/../Views/product/index.php';
+    }
+
+    public function hotDeal() {
+        $section = $_GET['section'] ?? 'all';
+        require __DIR__ . '/../Views/product/hotdeal.php';
+    }
+
+    public function bookParty() {
+        $section = $_GET['section'] ?? 'all';
+        require __DIR__ . '/../Views/bookparty/index.php';
+    }
+
+    public function ProductDetail() {
+        $id = $_GET['id'] ?? 0;
+        require __DIR__ . '/../Views/product/detail.php';
+    }
+
+    public function Cart() {
+        require __DIR__ . '/../Views/cart/cart.php';
+    }
+
+    public function Profile() {
+        require __DIR__ . '/../Views/user/edit-profile.php';
+    }
+
+    public function previousOrders() {
+        require __DIR__ . '/../Views/user/previous-orders.php';
+    }
+
+    public function Addresses() {
+        require __DIR__ . '/../Views/user/addresses.php';
+    }
+
+    public function resetPassword() {
+        require __DIR__ . '/../Views/user/reset-password.php';
+    }
+
+    public function delete() {
+        require __DIR__ . '/../Views/user/delete.php';
+    }
+
+
     public function dashboard() {
         $this->checkAuth('user');
         $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
         echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
+    }
+
+    public function getProfile() {
+        $this->checkAuth('user');
+        $userModel = new ModelsUserModel();
+        $user = $userModel->getAccountById($_SESSION['user_id']);
+        echo json_encode(['status' => 'success', 'user' => $user]);
         exit();
     }
 
@@ -43,6 +100,22 @@ class UserController {
             $userModel->updateInfo($_SESSION['user_id'], $phone, $address);
             $user = $userModel->getAccountById($_SESSION['user_id']);
             echo json_encode(['status' => 'success', 'user' => $user]);
+            exit();
+        }
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        exit();
+    }
+
+    public function editAccount() {
+        $this->checkAuth('user');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $phone = trim($_POST['phone']);
+            $accountModel = new AccountModel();
+            $accountModel->editAccount($_SESSION['user_id'], $first_name, $last_name, $email, $phone);
+            echo json_encode(['status' => 'success', 'message' => 'Thông tin đã được cập nhật.']);
             exit();
         }
         echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
@@ -172,5 +245,81 @@ class UserController {
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập để tiếp tục.', 'redirect' => BASE_URL . 'login']);
             exit();
         }
+    }
+
+    public function getQuantity() {
+        $this->checkAuth('user');
+        $cartModel = new ModelsCartModel();
+        $quantity = $cartModel->getQuantity($_SESSION['user_id']);
+
+        echo json_encode(['status' => 'success', 'quantity' => $quantity]);
+        exit();
+    }
+
+    public function getDiscountByCode() {
+        $code = $_GET['code'];
+
+        $discountModel = new DiscountModel();
+        $discount = $discountModel->getDiscountByCode($code);
+        if ($discount) {
+            echo json_encode(['status' => 'success', 'discount' => $discount]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Promotion not found!']);
+        }
+        exit();
+    }
+
+    public function getAddresses() {
+        $id = $_SESSION['user_id'];
+        $userModel = new ModelsUserModel();
+        $addresses = $userModel->getAddresses($id);
+
+        echo json_encode(['status' => 'success', 'addresses' => $addresses]);
+        exit();
+    }
+
+    public function addAddress() {
+        $this->checkAuth('user');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_SESSION['user_id'];
+            $address = trim($_POST['address']);
+            $userModel = new ModelsUserModel();
+            $userModel->addAddress($user_id, $address);
+            echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được thêm.']);
+            exit();
+        }
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+        exit();
+    }
+
+    public function deleteAddress() {
+        $this->checkAuth('user');
+        
+        $user_id = $_SESSION['user_id'];
+        $address = trim($_POST['address']);
+        $userModel = new ModelsUserModel();
+        $userModel->deleteAddress($user_id, $address);
+        echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được xóa.']);
+        exit();
+    }
+
+    public function editAddress() {
+        $this->checkAuth('user');
+        
+        $address_id = trim($_POST['address_id']);
+        $address = trim($_POST['address']);
+        $userModel = new ModelsUserModel();
+        $userModel->editAddress($address, $address_id);
+        echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được chỉnh sửa.']);
+        exit();
+    }
+
+    public function getAllOrdersForUser() {
+        $this->checkAuth('user');
+
+        $orderModel = new ModelsOrderModel();
+        $orders = $orderModel->getAllOrdersForUser();
+        echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
     }
 }

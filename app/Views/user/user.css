@@ -150,3 +150,189 @@
 h4 {
     margin: 0;
 }
+
+#address-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#address-modal .btn {
+    width: fit-content;
+    align-self: flex-end;
+}
+
+#add-address-btn, #save-address-btn {
+    background-color: #ED3833;
+}
+
+#cancel-address-btn {
+    background-color: #ccc;
+}
+
+/* Each address item */
+.address-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect on address item */
+.address-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Buttons inside address items */
+.address-item .btn {
+    margin-left: 5px;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+}
+
+/* Add Address Button */
+#add-address-btn {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Add Address Button hover */
+#add-address-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styling */
+#address-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content h3 {
+    margin: 0;
+    color: #333;
+    text-align: center;
+}
+
+.modal-content input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Buttons inside modal */
+.modal-content .btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .btn-success:hover {
+    background-color: #218838;
+}
+
+.modal-content .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.table {
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+th, td {
+    padding: 16px 24px;
+    text-align: left;
+    
+}
+
+thead th {
+    background-color: #e4002b;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+tbody tr:hover td {
+    background-color: #e4002aaf;
+    color: #fffefe !important; 
+    cursor: pointer;
+}
+
+.table select {
+    width: 150px;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 5px;
+    size: 16px;
+}
+
+.table select:focus {
+    outline: none;
+}

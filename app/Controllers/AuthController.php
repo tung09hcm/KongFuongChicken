@@ -3,10 +3,12 @@
 use Models\AccountModel;
 use Models\AdminModel;
 use Models\UserModel;
+use Models\CartModel;
 
 require_once  __DIR__ ."/../Models/AccountModel.php";
 require_once  __DIR__ ."/../Models/UserModel.php";
 require_once  __DIR__ ."/../Models/AdminModel.php";
+require_once  __DIR__ ."/../Models/CartModel.php";
 
 
 class AuthController {
@@ -62,7 +64,7 @@ class AuthController {
                     }
                     else{
                         // TODO nối đến giao diện người dùng
-                        header("Location: index.php?controller=cart&action=Menu");
+                        header("Location: index.php?controller=user&action=Menu");
 
                     }
                     exit();

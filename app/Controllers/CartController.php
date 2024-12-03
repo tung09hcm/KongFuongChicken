@@ -1,19 +1,15 @@
 <?php
 
-
+require_once  __DIR__ ."/../Models/BaseModel.php";
 
 use App\Models\CartModel;
 use App\Models\ProductModel;
 use Models\CartModel as ModelsCartModel;
 
 require_once  __DIR__ ."/../Models/CartModel.php";
+require_once  __DIR__ ."/../Models/ProductModel.php";
 
 class CartController {
-    // TESTING
-    public function Menu()
-    {
-        require __DIR__ . '/../Testing/user_test.php';
-    }
 
 
     public function view() {

@@ -2,15 +2,21 @@
 namespace Models;
 use PDO;
 
+require_once  __DIR__ ."/BaseModel.php";
+require_once  __DIR__ ."/AccountModel.php";
+
+
+
 class OrderModel extends BaseModel {
-    public function createOrder($user_id, $store_id, $discount_id, $address, $total, $status = 'Pending') {
-        $stmt = $this->db->prepare("INSERT INTO `ORDER` (user_id, store_id, discount_id, user_address_id, total, status) VALUES (:user_id, :store_id, :discount_id, :address, :total, :status)");
+    public function createOrder($user_id, $store_id, $discount_id, $address, $order_date, $total, $status = 'Pending') {
+        $stmt = $this->db->prepare("INSERT INTO `ORDER` (user_id, store_id, discount_id, address, total, status, order_date) VALUES (:user_id, :store_id, :discount_id, :address, :total, :status, :order_date)");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_INT);
         $stmt->bindParam(':discount_id', $discount_id, PDO::PARAM_INT);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':total', $total);
         $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':order_date', $order_date);
         $stmt->execute();
         return $this->db->lastInsertId();
     }
@@ -62,7 +68,8 @@ class OrderModel extends BaseModel {
 
     public function getAllOrders() {
         $stmt = $this->db->prepare("
-            SELECT o.id AS order_id, 
+            SELECT 
+                o.id AS order_id, 
                 CONCAT(a.first_name, ' ', a.last_name) AS customer_name,
                 ua.address AS customer_address, 
                 o.total AS order_total,
@@ -70,7 +77,36 @@ class OrderModel extends BaseModel {
             FROM `ORDER` o
             LEFT JOIN `ACCOUNT` a ON o.user_id = a.id
             LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id
-            ORDER BY o.order_date DESC");
+            JOIN `ADMIN_STORE` admin_store ON admin_store.store_id = o.store_id
+            WHERE admin_store.admin_id = :admin_id -- Thay :admin_id bằng giá trị ID của admin
+            ORDER BY o.order_date DESC;
+            "
+        );
+
+        $stmt->bindParam(':admin_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAllOrdersForUser() {
+        $stmt = $this->db->prepare("
+            SELECT 
+                o.id AS order_id, 
+                CONCAT(a.first_name, ' ', a.last_name) AS customer_name,
+                ua.address AS customer_address, 
+                o.total AS order_total,
+                d.percentage,
+                o.status
+            FROM `ORDER` o
+            LEFT JOIN `ACCOUNT` a ON o.user_id = a.id
+            LEFT JOIN `USER_ADDRESS` ua ON o.address = ua.id
+            LEFT JOIN `DISCOUNT` d ON d.id = o.discount_id
+            WHERE o.user_id = :user_id
+            ORDER BY o.order_date DESC;
+            "
+        );
+
+        $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
     }

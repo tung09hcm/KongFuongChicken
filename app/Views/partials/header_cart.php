@@ -12,13 +12,13 @@
 <body>
     <header class="header-cart-page">
         <nav class="navbar-custom">
-            <a href="../../Views/product/index.php" class="header-cart-page-btn">
+            <a href="index.php?controller=user&action=Product" class="header-cart-page-btn">
                 <button class="btn btn-back-menu">Quay lại menu</button>
             </a>
-            <a href="../../Views/homepage/index.php" class="logo hide-on-mobile">
+            <a href="index.php?controller=user&action=Menu" class="logo hide-on-mobile">
                 <img class="header-cart-page-logo" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo-mobile.svg?v=5.0" alt="">
             </a>
-            <a href="../../Views/user/edit-profile.php" class="header-cart-page-user">
+            <a href="index.php?controller=user&action=Profile" class="header-cart-page-user">
                 <i class="fas fa-user-circle profile-icon"></i>
             </a>
         </nav>
@@ -27,6 +27,5 @@
     <!-- Link Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="../../Views/partials/partials.js"></script>
 </body>
 </html>

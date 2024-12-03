@@ -1,6 +1,4 @@
 <?php
-namespace App\Controllers;
-
 
 
 use App\Models\ReviewModel;
@@ -10,8 +8,12 @@ use Models\ReviewModel as ModelsReviewModel;
 
 require_once  __DIR__ ."/../Models/ReviewModel.php";
 require_once  __DIR__ ."/../Models/ProductModel.php";
+require_once __DIR__ . "/../Models/BaseModel.php";
+
 class ReviewController {
-    public function view($product_id) {
+    public function view() {
+        $product_id = $_GET['product_id'];
+        
         $productModel = new ModelsProductModel();
         $reviewModel = new ModelsReviewModel();
         $product = $productModel->getProductById($product_id);

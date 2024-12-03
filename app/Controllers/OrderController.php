@@ -16,11 +16,21 @@ require_once  __DIR__ ."/../Models/OrderModel.php";
 require_once  __DIR__ ."/../Models/CartModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
 require_once  __DIR__ ."/../Models/StoreModel.php";
+require_once  __DIR__ ."/../Models/AccountModel.php";
 class OrderController {
     public function history() {
         $this->checkAuth('user');
         $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
+        echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
+    }
+
+    public function getProductInOrder() {
+        $this->checkAuth('user');
+        $order_id = $_GET['orderId'];
+        $orderModel = new ModelsOrderModel();
+        $orders = $orderModel->getProductInOrder($order_id);
         echo json_encode(['status' => 'success', 'orders' => $orders]);
         exit();
     }

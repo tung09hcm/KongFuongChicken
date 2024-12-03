@@ -158,6 +158,14 @@
     }
 }
 
+@media (max-width: 480px) {
+    .container-recommend-col {
+        flex: 0 0 auto;
+        width: 220px !important;
+        height: 395px !important;
+    }
+}
+
 /* Điện thoại lớn (481px - 767px) */
 @media (min-width: 481px) and (max-width: 767px) {
     body {
