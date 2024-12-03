@@ -72,6 +72,10 @@
             <h5 class="px-3 pt-3">KHUYẾN MÃI</h5>
             <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
         </a>
+        <a href="index.php?controller=user&action=Post" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">TIN TỨC</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
+        </a>
         <hr style="margin: 10px 15px !important;">
 
         <div class="sidebar-mobile-footer">
@@ -104,6 +108,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=user&action=hotDeal">KHUYẾN MÃI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?controller=user&action=Post">TIN TỨC</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">

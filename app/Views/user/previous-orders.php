@@ -222,11 +222,11 @@
                     <div class="sumary">
                         <h3>Tóm tắt đơn hàng</h3>
                         <div class="detail">
-                            ${data.order.items && data.order.items.length > 0 
-                            ? data.order.items.map(detail => `
+                            ${data.orders && data.order.length > 0 
+                            ? data.orders.map(detail => `
                                 <div class="dish-name">
                                     <h5>${detail.quantity}x ${detail.product_name}</h5>
-                                    <h5>${Number(detail.item_total).toLocaleString()}đ</h5>
+                                    <h5>${Number(detail.price * detail.quantity).toLocaleString()}đ</h5>
                                 </div>
                                 `).join('')
                             : ''}

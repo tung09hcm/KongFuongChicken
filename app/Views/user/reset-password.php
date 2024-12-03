@@ -32,7 +32,7 @@
                         <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
                     </div>
                     <div class="col user-edit-sidebar-info-name">
-                        <h3>Xin chào, Bảy Nguyễn!</h3>
+                        <h3>Xin chào</h3>
                         <a class="user-edit-logout" href="#">Đăng xuất</a>
                     </div>
                 </div>
@@ -48,18 +48,18 @@
         <div class="row">
         <div class="form-container">
                 <h2 class="form-title" style="margin-top: 10px;">ĐẶT LẠI MẬT KHẨU</h2>
-                <form>
+                <form id="reset-password-mobile">
                     <div class="mb-3">
-                        <label class="form-label" for="password">Mật khẩu hiện tại *</label>
-                        <input class="form-control" id="password" required="" type="password"/>
+                        <label class="form-label" for="current-password-mobile">Mật khẩu hiện tại *</label>
+                        <input class="form-control" id="current-password-mobile" required type="password" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="password">Mật khẩu *</label>
-                        <input class="form-control" id="password" required="" type="password"/>
+                        <label class="form-label" for="new-password-mobile">Mật khẩu *</label>
+                        <input class="form-control" id="new-password-mobile" required type="password" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="password">Xác nhận mật khẩu *</label>
-                        <input class="form-control" id="password" required="" type="password"/>
+                        <label class="form-label" for="confirm-password-mobile">Xác nhận mật khẩu *</label>
+                        <input class="form-control" id="confirm-password-mobile" required type="password" />
                     </div>
                     <button type="submit" class="submit-btn mt-3">Đổi mật khẩu</button>
                 </form>
@@ -73,7 +73,7 @@
             <div class="col-md-4">
                 <div class="user-edit-sidebar text-center">
                     <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
-                    <h3>Xin chào, Bảy Nguyễn!</h3>
+                    <h3>Xin chào</h3>
                     <a class="user-edit-logout" href="#">Đăng xuất</a>
                     <nav class="nav flex-column mt-4">
                         <a class="user-edit-item" href="index.php?controller=user&action=previousOrders">Đơn hàng đã đặt</a>
@@ -87,18 +87,18 @@
             <div class="col-md-8">
                 <div class="form-container">
                     <h2 class="form-title ">ĐẶT LẠI MẬT KHẨU</h2>
-                    <form>
+                    <form id="reset-password-desktop">
                         <div class="mb-3">
-                            <label class="form-label" for="password">Mật khẩu hiện tại *</label>
-                            <input class="form-control" id="password" required="" type="password"/>
+                            <label class="form-label" for="current-password-desktop">Mật khẩu hiện tại *</label>
+                            <input class="form-control" id="current-password-desktop" required type="password" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="password">Mật khẩu *</label>
-                            <input class="form-control" id="password" required="" type="password"/>
+                            <label class="form-label" for="new-password-desktop">Mật khẩu *</label>
+                            <input class="form-control" id="new-password-desktop" required type="password" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="password">Xác nhận mật khẩu *</label>
-                            <input class="form-control" id="password" required="" type="password"/>
+                            <label class="form-label" for="confirm-password-desktop">Xác nhận mật khẩu *</label>
+                            <input class="form-control" id="confirm-password-desktop" required type="password" />
                         </div>
                         <button type="submit" class="submit-btn mt-3">Đổi mật khẩu</button>
                     </form>
@@ -116,6 +116,61 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="app/Views/user/user.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Xử lý form mobile
+            const mobileForm = document.getElementById("reset-password-mobile");
+            const desktopForm = document.getElementById("reset-password-desktop");
+
+            // Hàm xử lý gửi form
+            const handleSubmit = (event, formType) => {
+                event.preventDefault();
+
+                // Lấy giá trị từ form
+                const currentPassword = document.getElementById(`current-password-${formType}`).value.trim();
+                const newPassword = document.getElementById(`new-password-${formType}`).value.trim();
+                const confirmPassword = document.getElementById(`confirm-password-${formType}`).value.trim();
+
+                // Kiểm tra đầu vào
+                if (!currentPassword || !newPassword || !confirmPassword) {
+                    alert("Vui lòng điền đầy đủ các trường!");
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    alert("Mật khẩu mới và xác nhận mật khẩu không khớp!");
+                    return;
+                }
+
+                // Gửi dữ liệu
+                const formData = new FormData();
+                formData.append("current_password", currentPassword);
+                formData.append("new_password", newPassword);
+
+                fetch("index.php?controller=user&action=changePassword", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Đổi mật khẩu thành công!");
+                        //location.reload();
+                    } else {
+                        alert(`Lỗi: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi gửi form:", error);
+                    alert("Có lỗi xảy ra, vui lòng thử lại.");
+                });
+            };
+
+            // Gắn sự kiện submit cho từng form
+            mobileForm.addEventListener("submit", (event) => handleSubmit(event, "mobile"));
+            desktopForm.addEventListener("submit", (event) => handleSubmit(event, "desktop"));
+        });
+
+    </script>
 </body>
 </html>

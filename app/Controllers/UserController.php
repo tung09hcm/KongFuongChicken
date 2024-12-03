@@ -12,6 +12,7 @@ use Models\OrderModel as ModelsOrderModel;
 use Models\ProductModel as ModelsProductModel;
 use Models\ReviewModel as ModelsReviewModel;
 use Models\StoreModel;
+use Models\PostModel;
 use Models\UserModel as ModelsUserModel;
 
 require_once  __DIR__ ."/../Models/OrderModel.php";
@@ -22,6 +23,7 @@ require_once  __DIR__ ."/../Models/ReviewModel.php";
 require_once  __DIR__ ."/../Models/ProductModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
 require_once  __DIR__ ."/../Models/StoreModel.php";
+require_once  __DIR__ ."/../Models/PostModel.php";
 
 class UserController {
 
@@ -73,6 +75,15 @@ class UserController {
     public function delete() {
         require __DIR__ . '/../Views/user/delete.php';
     }
+
+    public function Post() {
+        require __DIR__ . '/../Views/post/index.php';
+    }
+
+    public function PostDetail() {
+        require __DIR__ . '/../Views/post/post-detail.php';
+    }
+
 
 
     public function dashboard() {
@@ -320,6 +331,31 @@ class UserController {
         $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getAllOrdersForUser();
         echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
+    }
+
+    public function deleteAccount() {
+        $this->checkAuth('user');
+        $id = $_SESSION['user_id'];
+
+        $accountModel = new AccountModel();
+        $accountModel->deleteAccount($id);
+        echo json_encode(['status' => 'success', 'mess' => 'Tài khoảng được xóa thành công.']);
+        exit();
+    }
+
+    public function getAllPost() {
+        $postModel = new PostModel();
+        $posts = $postModel->getAllPosts();
+        echo json_encode(['status' => 'success', 'posts' => $posts]);
+        exit();
+    }
+
+    public function getPostById() {
+        $id = $_GET['idPost'];
+        $postModel = new PostModel();
+        $post = $postModel->getPostById($id);
+        echo json_encode(['status' => 'success', 'post' => $post]);
         exit();
     }
 }

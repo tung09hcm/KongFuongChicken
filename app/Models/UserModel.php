@@ -79,4 +79,5 @@ class UserModel extends AccountModel {
         $stmt->bindParam(':address', $address);
         return $stmt->execute();
     }
+    
 }

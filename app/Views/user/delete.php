@@ -32,7 +32,7 @@
                         <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
                     </div>
                     <div class="col user-edit-sidebar-info-name">
-                        <h3>Xin chào, Bảy Nguyễn!</h3>
+                        <h3>Xin chào</h3>
                         <a class="user-edit-logout" href="#">Đăng xuất</a>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <li>Đơn đặt hàng yêu thích của tôi</li>
                     <li>Địa chỉ giao hàng đã lưu</li>
                 </ul>
-                <button type="submit" class="submit-btn mt-3">Xoá tài khoản</button>
+                <button onclick="deleteAccount()" class="submit-btn mt-3">Xoá tài khoản</button>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
             <div class="col-md-4">
                 <div class="user-edit-sidebar text-center">
                     <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
-                    <h3>Xin chào, Bảy Nguyễn!</h3>
+                    <h3>Xin chào</h3>
                     <a class="user-edit-logout" href="#">Đăng xuất</a>
                     <nav class="nav flex-column mt-4">
                         <a class="user-edit-item" href="index.php?controller=user&action=previousOrders">Đơn hàng đã đặt</a>
@@ -85,7 +85,7 @@
                         <li>Đơn đặt hàng yêu thích của tôi</li>
                         <li>Địa chỉ giao hàng đã lưu</li>
                     </ul>
-                    <button type="submit" class="submit-btn mt-3">Xoá tài khoản</button>
+                    <button onclick="deleteAccount()" class="submit-btn mt-3">Xoá tài khoản</button>
                 </div>
             </div>
         </div>
@@ -100,5 +100,23 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        function deleteAccount() {
+            fetch('index.php?controller=user&action=deleteAccount')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Xóa thành công!');
+                    header('index.php?controller=auth&action=login');
+                } else {
+                    alert('Xóa thất bại: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi cập nhật tài khoản:', error);
+                alert('Có lỗi xảy ra, vui lòng thử lại.');
+            });
+        }
+    </script>
 </body>
 </html>
