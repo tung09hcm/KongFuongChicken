@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+require_once  __DIR__ ."/BaseModel.php";
+
 use PDO;
 
 class CartModel extends BaseModel {

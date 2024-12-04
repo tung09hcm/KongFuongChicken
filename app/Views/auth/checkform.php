@@ -3,11 +3,6 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h3>Dữ liệu nhận được từ form:</h3>";
 
-    // Hiển thị toàn bộ dữ liệu từ $_POST
-    echo "<pre>";
-    var_dump($_POST);
-    echo "</pre>";
-
     // Lấy giá trị cụ thể từ form
     $lastName = $_POST['lastName'] ?? '';
     $firstName = $_POST['firstName'] ?? '';

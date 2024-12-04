@@ -1,10 +1,9 @@
 <?php
 namespace Models;
-use PDO;
-
 require_once  __DIR__ ."/BaseModel.php";
-require_once  __DIR__ ."/AccountModel.php";
 
+
+use PDO;
 
 
 class OrderModel extends BaseModel {

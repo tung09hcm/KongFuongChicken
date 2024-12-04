@@ -1,8 +1,7 @@
 <?php
 namespace Models;
 
-require_once  __DIR__ ."/../Models/AccountModel.php";
-
+require_once  __DIR__ ."/AccountModel.php";
 
 use PDO;
 class UserModel extends AccountModel {
@@ -12,6 +11,7 @@ class UserModel extends AccountModel {
         if ($account) {
             $this->createUser($account['id']);
         }
+        return $account['id'];
     }   
 
     public function getAccountById($id) {
