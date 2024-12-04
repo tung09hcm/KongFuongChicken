@@ -108,7 +108,7 @@
                             <td>${customer.last_name}</td>
                             <td>${customer.phone}</td>
                             <td>${customer.email}</td>
-                        </tr>;
+                        </tr>
                     `;
                 });
             };

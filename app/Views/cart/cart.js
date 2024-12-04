@@ -29,7 +29,7 @@ function renderOrderItems(orderData) {
                 </div>
                 <div class="col-sm products-ordered-check-right">
                     <div>
-                        <div class="products-ordered-check-right-price">${Number(item.price*item.quantity).toLocaleString()}đ</div>
+                        <div class="products-ordered-check-right-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(item.price * item.quantity))}đ</div>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-sm products-ordered-check-right-btn">
                                 <i class="fa-solid fa-minus"></i>
@@ -72,7 +72,7 @@ function renderOrderItems(orderData) {
                         </button>
                     </div>
 
-                    <div class="products-ordered-check-right-price">${Number(item.price*item.quantity).toLocaleString()}đ</div>
+                    <div class="products-ordered-check-right-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(item.price * item.quantity))}đ</div>
                 </div>
             </div>
         `;
@@ -89,7 +89,7 @@ function renderOrderItems(orderData) {
             <hr style="border-top: 2px solid #E5E5E5; margin-top: 0px !important; margin-bottom: 10px !important;">
             <div class="d-flex justify-content-between pb-3">
                 <span>Tổng đơn hàng</span>
-                <span id="total-real">${total.toLocaleString()}</span>
+                <span id="total-real">${new Intl.NumberFormat('vi-VN').format(Math.floor(total))}</span>
             </div>
             <div class="d-flex justify-content-between pb-3">
                 <span>Phí giao hàng</span>
@@ -105,7 +105,7 @@ function renderOrderItems(orderData) {
             </div>
             <div class="d-flex justify-content-between total mt-2 fw-bold">
                 <span>Tổng thanh toán</span>
-                <span id="total">${Number(total+10000).toLocaleString()}</span>
+                <span id="total">${new Intl.NumberFormat('vi-VN').format(Math.floor(total + 10000))}</span>
             </div>
             <hr style="border-top: 2px solid #E5E5E5; margin-top: 5px !important; margin-bottom: 5px !important;">
 
@@ -147,7 +147,7 @@ function renderProducts(products, sectionId) {
                 <img alt="" class="suggestions-card-img" height="100" src="${product.image_link}" width="150"/>
                 <div class="suggestions-card-body">
                     <h5 class="suggestions-card-title">${product.name}</h5>
-                    <p class="suggestions-card-price">${product.price}đ</p>
+                    <p class="suggestions-card-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(product.price))}đ</p>
                     <button onclick="addToCart(${product.id})" class="btn suggestions-card-add w-100">Thêm</button>
                 </div>
             </div>

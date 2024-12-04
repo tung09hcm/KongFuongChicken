@@ -77,10 +77,10 @@
                 productHTML += `
                     <div class="col container-product-col">
                         <a href="index.php?controller=user&action=ProductDetail&id=${product.id}" class="card card-product">
-                            <img src="${product.image_link}" class="card-img-top" alt="${product.name}">
+                            <img src="${product.image_link}" class="card-product-img" alt="${product.name}">
                             <div class="card-product-body">
                                 <h5 class="product-title">${product.name}</h5>
-                                <p class="price-product">${product.price} VNĐ</p>
+                                <p class="price-product">${new Intl.NumberFormat('vi-VN').format(Math.floor(product.price))}đ</p>
                                 <p class="description-product">${product.description}</p>
                                 <button class="btn btn-product-add w-100" id="${product.id}">Thêm</button>
                             </div>

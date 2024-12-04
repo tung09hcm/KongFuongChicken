@@ -217,7 +217,7 @@
                             <img src="${product.image_link}" class="card-recommend-img" alt="${product.name}">
                             <div class="card-recommend-body">
                                 <h5 class="product-recommend-title">${product.name}</h5>
-                                <p class="price-recommend">${new Intl.NumberFormat('vi-VN').format(product.price)}đ</p>                                
+                                <p class="price-recommend">${new Intl.NumberFormat('vi-VN').format(Math.floor(product.price))}đ</p>                                
                                 <p class="description-recommend">${product.description}</p>
                                 <button class="btn btn-recommend-add w-100" id="${product.id}">Thêm</button>
                             </div>
