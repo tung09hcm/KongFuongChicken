@@ -1,21 +1,23 @@
-fetch('index.php?controller=cart&action=view')
-.then(response => response.json())
-.then(data => {
-    renderOrderItems(data.products)
-})
+fetch("index.php?controller=cart&action=view")
+  .then((response) => response.json())
+  .then((data) => {
+    renderOrderItems(data.products);
+  });
 
 function renderOrderItems(orderData) {
-    const container = document.getElementById('order-items-container'); // Lựa chọn container nơi sẽ render các sản phẩm
-    const containerMobile = document.getElementById('products-ordered-card');
+  const container = document.getElementById("order-items-container"); // Lựa chọn container nơi sẽ render các sản phẩm
+  const containerMobile = document.getElementById("products-ordered-card");
 
-    let total = 0;
+  let total = 0;
 
-    orderData.forEach(item => {
-        // Tạo phần tử div cho mỗi sản phẩm
-        const productHTML = `
+  orderData.forEach((item) => {
+    // Tạo phần tử div cho mỗi sản phẩm
+    const productHTML = `
             <div class="row products-ordered-check">
                 <div class="col-sm">
-                    <img class="products-ordered-check-img" alt="${item.name}" height="100" src="${item.image_link}" width="100"/>
+                    <img class="products-ordered-check-img" alt="${
+                      item.name
+                    }" height="100" src="${item.image_link}" width="100"/>
                 </div>
                 <div class="col-sm products-ordered-check-left">
                     <div>
@@ -29,7 +31,9 @@ function renderOrderItems(orderData) {
                 </div>
                 <div class="col-sm products-ordered-check-right">
                     <div>
-                        <div class="products-ordered-check-right-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(item.price * item.quantity))}đ</div>
+                        <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
+                          "vi-VN"
+                        ).format(Math.floor(item.price * item.quantity))}đ</div>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-sm products-ordered-check-right-btn">
                                 <i class="fa-solid fa-minus"></i>
@@ -43,17 +47,21 @@ function renderOrderItems(orderData) {
                 </div>
             </div>
         `;
-        const productHTMLMobile =  `
+    const productHTMLMobile = `
             <div class="row products-ordered-card-info">
                 <div class="col">
-                    <img class="products-ordered-check-img" alt="" height="100" src="${item.image_link}" width="100"/>
+                    <img class="products-ordered-check-img" alt="" height="100" src="${
+                      item.image_link
+                    }" width="100"/>
                 </div>
                 <div class="col products-ordered-check-left">
                     <div>
                         <div class="d-flex align-items-center products-ordered-check-left-title">
                             <span>${item.name}</span>
                         </div>
-                        <div class="text-muted products-ordered-check-left-des">${item.description}</div>
+                        <div class="text-muted products-ordered-check-left-des">${
+                          item.description
+                        }</div>
                     </div>
                 </div>
             </div>
@@ -72,24 +80,27 @@ function renderOrderItems(orderData) {
                         </button>
                     </div>
 
-                    <div class="products-ordered-check-right-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(item.price * item.quantity))}đ</div>
+                    <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
+                      "vi-VN"
+                    ).format(Math.floor(item.price * item.quantity))}đ</div>
                 </div>
             </div>
         `;
-        // Thêm phần tử HTML vào container
-        container.innerHTML += productHTML;
-        containerMobile.innerHTML += productHTMLMobile;
-        total += item.price * item.quantity;
-    });
+    // Thêm phần tử HTML vào container
+    container.innerHTML += productHTML;
+    containerMobile.innerHTML += productHTMLMobile;
+    total += item.price * item.quantity;
+  });
 
-   
-    const summaryContainer = document.querySelectorAll('.summary');
-    summaryContainer.forEach(c => {
-        c.innerHTML += `
+  const summaryContainer = document.querySelectorAll(".summary");
+  summaryContainer.forEach((c) => {
+    c.innerHTML += `
             <hr style="border-top: 2px solid #E5E5E5; margin-top: 0px !important; margin-bottom: 10px !important;">
             <div class="d-flex justify-content-between pb-3">
                 <span>Tổng đơn hàng</span>
-                <span id="total-real">${new Intl.NumberFormat('vi-VN').format(Math.floor(total))}</span>
+                <span id="total-real">${new Intl.NumberFormat("vi-VN").format(
+                  Math.floor(total)
+                )}</span>
             </div>
             <div class="d-flex justify-content-between pb-3">
                 <span>Phí giao hàng</span>
@@ -105,7 +116,9 @@ function renderOrderItems(orderData) {
             </div>
             <div class="d-flex justify-content-between total mt-2 fw-bold">
                 <span>Tổng thanh toán</span>
-                <span id="total">${new Intl.NumberFormat('vi-VN').format(Math.floor(total + 10000))}</span>
+                <span id="total">${new Intl.NumberFormat("vi-VN").format(
+                  Math.floor(total + 10000)
+                )}</span>
             </div>
             <hr style="border-top: 2px solid #E5E5E5; margin-top: 5px !important; margin-bottom: 5px !important;">
 
@@ -126,223 +139,238 @@ function renderOrderItems(orderData) {
             <hr style="border-top: 2px solid #E5E5E5; margin-top: 5px !important; margin-bottom: 5px !important;">
             <button class="btn summary-btn-checkout mt-3" onclick="pay()">Thanh toán</button>
         `;
-    })
+  });
 }
 
-// Sản phẩm gọi ý 
+// Sản phẩm gọi ý
 function renderProducts(products, sectionId) {
-    // Tìm tất cả các section theo ID (sử dụng querySelectorAll vì có thể có nhiều section)
-    const sections = document.querySelectorAll(sectionId);
+  // Tìm tất cả các section theo ID (sử dụng querySelectorAll vì có thể có nhiều section)
+  const sections = document.querySelectorAll(sectionId);
 
-    if (sections.length === 0) {
-        console.error(`Không tìm thấy section với selector: ${sectionId}`);
-        return;
-    }
+  if (sections.length === 0) {
+    console.error(`Không tìm thấy section với selector: ${sectionId}`);
+    return;
+  }
 
-    // Tạo chuỗi HTML cho tất cả sản phẩm
-    let productHTML = '';
-    products.forEach(product => {
-        productHTML += `
+  // Tạo chuỗi HTML cho tất cả sản phẩm
+  let productHTML = "";
+  products.forEach((product) => {
+    productHTML += `
             <div class="suggestions-card">
-                <img alt="" class="suggestions-card-img" height="100" src="${product.image_link}" width="150"/>
+                <img alt="" class="suggestions-card-img" height="100" src="${
+                  product.image_link
+                }" width="150"/>
                 <div class="suggestions-card-body">
                     <h5 class="suggestions-card-title">${product.name}</h5>
-                    <p class="suggestions-card-price">${new Intl.NumberFormat('vi-VN').format(Math.floor(product.price))}đ</p>
-                    <button onclick="addToCart(${product.id})" class="btn suggestions-card-add w-100">Thêm</button>
+                    <p class="suggestions-card-price">${new Intl.NumberFormat(
+                      "vi-VN"
+                    ).format(Math.floor(product.price))}đ</p>
+                    <button onclick="addToCart(${
+                      product.id
+                    })" class="btn suggestions-card-add w-100">Thêm</button>
                 </div>
             </div>
         `;
-    });
+  });
 
-    // Lặp qua tất cả các section và thêm sản phẩm vào trong đó
-    sections.forEach((section) => {
-        section.innerHTML = productHTML;
-    });
+  // Lặp qua tất cả các section và thêm sản phẩm vào trong đó
+  sections.forEach((section) => {
+    section.innerHTML = productHTML;
+  });
 }
 
-
-fetch('index.php?controller=product&action=listSnackProducts')
-.then(response => response.json())
-.then(data => renderProducts(data.products, '.suggestions-card-deck.d-flex'));
+fetch("index.php?controller=product&action=listSnackProducts")
+  .then((response) => response.json())
+  .then((data) =>
+    renderProducts(data.products, ".suggestions-card-deck.d-flex")
+  );
 
 function addToCart(product_id) {
-    const data = new FormData();
-    data.append('product_id', product_id);
-    data.append('quantity', 1);
+  const data = new FormData();
+  data.append("product_id", product_id);
+  data.append("quantity", 1);
 
-    // Gọi API thêm sản phẩm vào giỏ hàng
-    fetch('index.php?controller=user&action=addToCart', {
-        method: 'POST',
-        body: data,
-    })
+  // Gọi API thêm sản phẩm vào giỏ hàng
+  fetch("index.php?controller=user&action=addToCart", {
+    method: "POST",
+    body: data,
+  })
     .then((response) => response.json())
     .then((data) => {
-        if (data.status === 'success') {
-            alert('Đã thêm sản phẩm vào giỏ hàng!');
-            location.reload(); // Tải lại trang sau khi thêm
-        } else {
-            alert('Có lỗi xảy ra, vui lòng thử lại!');
-        }
+      if (data.status === "success") {
+        alert("Đã thêm sản phẩm vào giỏ hàng!");
+        location.reload(); // Tải lại trang sau khi thêm
+      } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+      }
     })
     .catch((error) => {
-        console.error('Error:', error);
-        alert('Có lỗi xảy ra, vui lòng thử lại!');
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
     });
 }
 
-// Discount 
+// Discount
 function addDiscount() {
-    // Lấy tất cả giá trị từ các input có class .form-control
-    const discountCodes = Array.from(document.querySelectorAll('.form-control')).map(e => e.value);
+  // Lấy tất cả giá trị từ các input có class .form-control
+  const discountCodes = Array.from(
+    document.querySelectorAll(".form-control")
+  ).map((e) => e.value);
 
-    // Tạo danh sách các Promise cho từng API gọi
-    const fetchPromises = discountCodes.map(code =>
-        fetch('index.php?controller=user&action=getDiscountByCode&code=' + encodeURIComponent(code))
-            .then(response => response.json())
-    );
+  // Tạo danh sách các Promise cho từng API gọi
+  const fetchPromises = discountCodes.map((code) =>
+    fetch(
+      "index.php?controller=user&action=getDiscountByCode&code=" +
+        encodeURIComponent(code)
+    ).then((response) => response.json())
+  );
 
-    // Đợi tất cả các Promise hoàn thành
-    Promise.all(fetchPromises)
-    .then(results => {
-        let isValidDiscount = false; // Biến kiểm tra có mã giảm giá hợp lệ hay không
-        let validDiscount = null;    // Mã giảm giá hợp lệ
+  // Đợi tất cả các Promise hoàn thành
+  Promise.all(fetchPromises)
+    .then((results) => {
+      let isValidDiscount = false; // Biến kiểm tra có mã giảm giá hợp lệ hay không
+      let validDiscount = null; // Mã giảm giá hợp lệ
 
-        results.forEach(result => {
-            if (result.status === 'success') {
-                isValidDiscount = true;
-                validDiscount = result.discount; // Lưu mã giảm giá hợp lệ
-            }
-        });
-
-        console.log(validDiscount.code);
-        console.log(validDiscount.percentage);
-
-        if (isValidDiscount) {
-            let d = document.querySelectorAll('#discount');
-            d.forEach(e => {
-                e.textContent = Number(validDiscount.percentage*100).toLocaleString() + "%";
-            })
-            let c = document.querySelectorAll('#discount-code');
-            c.forEach(e => {
-                e.textContent = validDiscount.code;
-            })
-            let t = document.querySelectorAll('#total');
-            t.forEach(e => {
-                let r = document.querySelector('#total-real');
-
-                const originalTotal = parseFloat(r.textContent.replace(/[^\d.-]/g, '')); // Lấy giá trị số từ chuỗi
-                const newTotal = originalTotal * (1 - validDiscount.percentage) + 10000; // Áp dụng giảm giá
-                e.textContent = newTotal.toLocaleString() + 'đ'; // Định dạng lại thành chuỗi 
-            })
-        } else {
-            let d = document.querySelectorAll('#discount');
-            d.forEach(e => {
-                e.textContent = Không;
-            })
-            let t = document.querySelectorAll('#total');
-            t.forEach(e => {
-                let r = document.querySelector('#total-real');
-
-                const originalTotal = parseFloat(r.textContent.replace(/[^\d.-]/g, '')); // Lấy giá trị số từ chuỗi
-                const newTotal = originalTotal + 10000; // Áp dụng giảm giá
-                e.textContent = newTotal.toLocaleString() + 'đ'; // Định dạng lại thành chuỗi 
-            })
-            alert('Mã khuyến mãi không chính xác');
+      results.forEach((result) => {
+        if (result.status === "success") {
+          isValidDiscount = true;
+          validDiscount = result.discount; // Lưu mã giảm giá hợp lệ
         }
+      });
+
+      console.log(validDiscount.code);
+      console.log(validDiscount.percentage);
+
+      if (isValidDiscount) {
+        let d = document.querySelectorAll("#discount");
+        d.forEach((e) => {
+          e.textContent =
+            Number(validDiscount.percentage * 100).toLocaleString() + "%";
+        });
+        let c = document.querySelectorAll("#discount-code");
+        c.forEach((e) => {
+          e.textContent = validDiscount.code;
+        });
+        let t = document.querySelectorAll("#total");
+        t.forEach((e) => {
+          let r = document.querySelector("#total-real");
+
+          const originalTotal = parseFloat(
+            r.textContent.replace(/[^\d.-]/g, "")
+          ); // Lấy giá trị số từ chuỗi
+          const newTotal =
+            originalTotal * (1 - validDiscount.percentage) + 10000; // Áp dụng giảm giá
+          e.textContent = newTotal.toLocaleString() + "đ"; // Định dạng lại thành chuỗi
+        });
+      } else {
+        let d = document.querySelectorAll("#discount");
+        d.forEach((e) => {
+          e.textContent = Không;
+        });
+        let t = document.querySelectorAll("#total");
+        t.forEach((e) => {
+          let r = document.querySelector("#total-real");
+
+          const originalTotal = parseFloat(
+            r.textContent.replace(/[^\d.-]/g, "")
+          ); // Lấy giá trị số từ chuỗi
+          const newTotal = originalTotal + 10000; // Áp dụng giảm giá
+          e.textContent = newTotal.toLocaleString() + "đ"; // Định dạng lại thành chuỗi
+        });
+        alert("Mã khuyến mãi không chính xác");
+      }
     })
-    .catch(error => {
-        console.error('Lỗi khi kiểm tra mã giảm giá:', error);
-        alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+    .catch((error) => {
+      console.error("Lỗi khi kiểm tra mã giảm giá:", error);
+      alert("Đã xảy ra lỗi. Vui lòng thử lại!");
     });
 }
 
-fetch('index.php?controller=store&action=getAllStores')
-.then(response => response.json())
-.then(data => {
-    const storeDropdown = document.querySelectorAll('#store-address');
+fetch("index.php?controller=store&action=getAllStores")
+  .then((response) => response.json())
+  .then((data) => {
+    const storeDropdown = document.querySelectorAll("#store-address");
     if (data && data.stores && data.stores.length > 0) {
-        storeDropdown.forEach(e => {
-            // Xóa các option hiện có nếu cần
-            e.innerHTML = '';
+      storeDropdown.forEach((e) => {
+        // Xóa các option hiện có nếu cần
+        e.innerHTML = "";
 
-            // Tạo các option từ dữ liệu fetch
-            data.stores.forEach(store => {
-                const option = document.createElement('option');
-                option.value = store.id; // ID nhà hàng
-                option.textContent = `${store.name} - ${store.address}`; // Tên và địa chỉ
-                e.appendChild(option);
-            });
+        // Tạo các option từ dữ liệu fetch
+        data.stores.forEach((store) => {
+          const option = document.createElement("option");
+          option.value = store.id; // ID nhà hàng
+          option.textContent = `${store.name} - ${store.address}`; // Tên và địa chỉ
+          e.appendChild(option);
         });
+      });
     } else {
-        // Thêm option mặc định nếu không có nhà hàng
-        storeDropdown.forEach(e => {
-            // Xóa các option hiện có nếu cần
-            e.innerHTML = '<option value="">Không có nhà hàng khả dụng</option>';
-        });
+      // Thêm option mặc định nếu không có nhà hàng
+      storeDropdown.forEach((e) => {
+        // Xóa các option hiện có nếu cần
+        e.innerHTML = '<option value="">Không có nhà hàng khả dụng</option>';
+      });
     }
-});
+  });
 
-fetch('index.php?controller=user&action=getAddresses')
-.then(response => response.json())
-.then(data => {
+fetch("index.php?controller=user&action=getAddresses")
+  .then((response) => response.json())
+  .then((data) => {
     console.log(data);
-    const addressDropdown = document.querySelectorAll('#home-address');
+    const addressDropdown = document.querySelectorAll("#home-address");
     if (data && data.addresses && data.addresses.length > 0) {
-        addressDropdown.forEach(e => {
-            // Xóa các option hiện có nếu cần
-            e.innerHTML = '';
+      addressDropdown.forEach((e) => {
+        // Xóa các option hiện có nếu cần
+        e.innerHTML = "";
 
-            // Tạo các option từ dữ liệu fetch
-            data.addresses.forEach(address => {
-                const option = document.createElement('option');
-                option.value = address.id; // ID nhà hàng
-                option.textContent = address.address; // Tên và địa chỉ
-                e.appendChild(option);
-            });
+        // Tạo các option từ dữ liệu fetch
+        data.addresses.forEach((address) => {
+          const option = document.createElement("option");
+          option.value = address.id; // ID nhà hàng
+          option.textContent = address.address; // Tên và địa chỉ
+          e.appendChild(option);
         });
+      });
     } else {
-        // Thêm option mặc định nếu không có nhà hàng
-        addressDropdown.forEach(e => {
-            // Xóa các option hiện có nếu cần
-            e.innerHTML = '<option value="">Không có địa chỉ khả dụng, vui lòng thêm địa chỉ ở profile</option>';
-        });
+      // Thêm option mặc định nếu không có nhà hàng
+      addressDropdown.forEach((e) => {
+        // Xóa các option hiện có nếu cần
+        e.innerHTML =
+          '<option value="">Không có địa chỉ khả dụng, vui lòng thêm địa chỉ ở profile</option>';
+      });
     }
-});
-
+  });
 
 function pay() {
-    const data = new FormData();
+  const data = new FormData();
 
-    const store = document.getElementById('store-address');
-    const store_id = store.value;
-    data.append('store_id', store_id);
+  const store = document.getElementById("store-address");
+  const store_id = store.value;
+  data.append("store_id", store_id);
 
-    const d = document.getElementById('discount-code');
-    const discount = d.textContent;
-    data.append('discount_code', discount);
+  const d = document.getElementById("discount-code");
+  const discount = d.textContent;
+  data.append("discount_code", discount);
 
-    const home = document.getElementById('home-address');
-    const home_id = home.value;
-    data.append('delivery_address', home_id);
+  const home = document.getElementById("home-address");
+  const home_id = home.value;
+  data.append("delivery_address", home_id);
 
-    // Gọi API thêm sản phẩm vào giỏ hàng
-    fetch('index.php?controller=user&action=checkout', {
-        method: 'POST',
-        body: data,
-    })
+  // Gọi API thêm sản phẩm vào giỏ hàng
+  fetch("index.php?controller=user&action=checkout", {
+    method: "POST",
+    body: data,
+  })
     .then((response) => response.json())
     .then((data) => {
-        if (data.status === 'success') {
-            alert('Đã tạo đơn hàng thành công!');
-            location.reload(); // Tải lại trang sau khi thêm
-        } else {
-            alert('Có lỗi xảy ra, vui lòng thử lại!');
-        }
+      if (data.status === "success") {
+        alert("Đã tạo đơn hàng thành công!");
+        location.reload(); // Tải lại trang sau khi thêm
+      } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+      }
     })
     .catch((error) => {
-        console.error('Error:', error);
-        alert('Có lỗi xảy ra, vui lòng thử lại!');
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
     });
 }
-
-

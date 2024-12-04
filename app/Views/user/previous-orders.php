@@ -178,7 +178,7 @@
                                 </select>
             
                             </td>
-                            <td onclick="showPopup('${order.order_id}')">${Number(order.order_total + 10000).toLocaleString()}đ</td>
+                            <td onclick="showPopup('${order.order_id}')">${(Number(order.order_total)+ 10000).toLocaleString()}đ</td>
                         </tr>
                     `;
                     orderList2.innerHTML += `
@@ -196,7 +196,7 @@
                                 </select>
             
                             </td>
-                            <td onclick="showPopup('${order.order_id}')">${Number(order.order_total + 10000).toLocaleString()}đ</td>
+                            <td onclick="showPopup('${order.order_id}')">${(Number(order.order_total)+ 10000).toLocaleString()}đ</td>
                         </tr>
                     `;
                 });
@@ -208,11 +208,17 @@
 
         // Hàm hiển thị popup
         function showPopup(orderId) {
+
+            console.log("orderID: ",orderId)
+            // Chuyển trang đến URL để debug
+            // window.location.href = "index.php?controller=order&action=getProductInOrder&orderId=" + encodeURIComponent(orderId);
+
             fetch("index.php?controller=order&action=getProductInOrder&orderId=" + encodeURIComponent(orderId))
             .then((response) => response.json())
             .then(data => {
+                console.log(data);
                 let orderDetail = document.getElementById('popup');
-
+                console.log("lấy data: ",orderId)
                 orderDetail.innerHTML = `
                     <div class="id-order">
                         <svg onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
@@ -222,9 +228,11 @@
                     <div class="sumary">
                         <h3>Tóm tắt đơn hàng</h3>
                         <div class="detail">
-                            ${data.orders && data.order.length > 0 
+                            ${data.orders 
                             ? data.orders.map(detail => `
                                 <div class="dish-name">
+                                    console.log("detail.quantity: ",detail.quantity)
+
                                     <h5>${detail.quantity}x ${detail.product_name}</h5>
                                     <h5>${Number(detail.price * detail.quantity).toLocaleString()}đ</h5>
                                 </div>
