@@ -46,30 +46,6 @@
         </div>
     </div>
 
-    <!-- Có hàng trong giỏ css đt -->
-    <div class="container products-ordered-mobile hide-on-tablet-desktop">
-        <div class="products-ordered-title">
-            GIỎ HÀNG CỦA TÔI
-        </div>
-
-        <div class="products-ordered-card" id="products-ordered-card"></div>
-        
-        <div class="suggestions">
-            <h3>SẼ NGON HƠN KHI THƯỞNG THỨC CÙNG</h3>
-            <div class="suggestions-card-deck d-flex"></div>
-        </div>
-
-        <div class="summary">
-            <div class="mb-3">
-                <label class="summary-form form-label" for="discount-code">Bạn có Mã giảm giá?</label>
-                <div class="input-group">
-                    <input class="form-control" id="discount-code" placeholder="Mã giảm giá *" type="text"/>
-                    <button class="btn summary-btn-apply" onclick="addDiscount()">Áp dụng</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Có hàng trong giỏ -->
     <div class="container products-ordered hide-on-mobile">
         <div class="products-ordered-title">
@@ -94,6 +70,30 @@
                             <button class="btn summary-btn-apply" onclick="addDiscount()">Áp dụng</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Có hàng trong giỏ css đt -->
+    <div class="container products-ordered-mobile hide-on-tablet-desktop">
+        <div class="products-ordered-title">
+            GIỎ HÀNG CỦA TÔI
+        </div>
+
+        <div class="products-ordered-card" id="products-ordered-card"></div>
+        
+        <div class="suggestions">
+            <h3>SẼ NGON HƠN KHI THƯỞNG THỨC CÙNG</h3>
+            <div class="suggestions-card-deck d-flex"></div>
+        </div>
+
+        <div class="summary">
+            <div class="mb-3">
+                <label class="summary-form form-label" for="discount-code">Bạn có Mã giảm giá?</label>
+                <div class="input-group">
+                    <input class="form-control" id="discount-code" placeholder="Mã giảm giá *" type="text"/>
+                    <button class="btn summary-btn-apply" onclick="addDiscount()">Áp dụng</button>
                 </div>
             </div>
         </div>

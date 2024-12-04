@@ -13,77 +13,85 @@ function renderOrderItems(orderData) {
   orderData.forEach((item) => {
     // Tạo phần tử div cho mỗi sản phẩm
     const productHTML = `
-            <div class="row products-ordered-check">
-                <div class="col-sm">
-                    <img class="products-ordered-check-img" alt="${
-                      item.name
-                    }" height="100" src="${item.image_link}" width="100"/>
-                </div>
-                <div class="col-sm products-ordered-check-left">
-                    <div>
-                        <div class="d-flex align-items-center products-ordered-check-left-title">
-                            <span>${item.name}</span>
-                        </div>
-                        <div class="text-muted products-ordered-check-left-des">
-                            ${item.description}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm products-ordered-check-right">
-                    <div>
-                        <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
-                          "vi-VN"
-                        ).format(Math.floor(item.price * item.quantity))}đ</div>
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-sm products-ordered-check-right-btn">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <span class="mx-2">${item.quantity}</span>
-                            <button class="btn btn-sm products-ordered-check-right-btn">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="big-div">
+              <div class="row products-ordered-check">
+              <div class="col-sm">
+                  <img class="products-ordered-check-img" alt="${
+                    item.name
+                  }" height="100" src="${item.image_link}" width="100"/>
+              </div>
+              <div class="col-sm products-ordered-check-left">
+                  <div>
+                      <div class="d-flex align-items-center products-ordered-check-left-title">
+                          <span>${item.name}</span>
+                      </div>
+                      <div class="text-muted products-ordered-check-left-des">
+                          ${item.description}
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-sm products-ordered-check-right">
+                <div>
+                      <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
+                        "vi-VN"
+                      ).format(Math.floor(item.price * item.quantity))}đ</div>
+                      <div class="d-flex align-items-center">
+                          <input type="hidden" value="${item.id}" style="display: none;">
+                          <button class="btn btn-sm products-ordered-check-right-btn">
+                              <i class="fa-solid fa-minus"></i>
+                          </button>
+                          <span class="mx-2">${item.quantity}</span>
+                          <button class="btn btn-sm products-ordered-check-right-btn">
+                              <i class="fa-solid fa-plus"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
             </div>
         `;
     const productHTMLMobile = `
-            <div class="row products-ordered-card-info">
-                <div class="col">
-                    <img class="products-ordered-check-img" alt="" height="100" src="${
-                      item.image_link
-                    }" width="100"/>
-                </div>
-                <div class="col products-ordered-check-left">
-                    <div>
-                        <div class="d-flex align-items-center products-ordered-check-left-title">
-                            <span>${item.name}</span>
+            <div class="big-div">
+                <div class="row products-ordered-card-info">
+                    <div class="col">
+                      <img class="products-ordered-check-img" alt="" height="100" src="${
+                        item.image_link
+                      }" width="100"/>
+                    </div>
+                        <div class="col products-ordered-check-left">
+                            <div>
+                                <div class="d-flex align-items-center products-ordered-check-left-title">
+                                    <span>${item.name}</span>
+                                </div>
+                                <div class="text-muted products-ordered-check-left-des">${
+                                  item.description
+                                }</div>
+                            </div>
                         </div>
-                        <div class="text-muted products-ordered-check-left-des">${
-                          item.description
-                        }</div>
-                    </div>
-                </div>
-            </div>
-
-            <hr style="margin: 5px 0 !important;">
-
-            <div class="row products-ordered-card-q-p">
-                <div class="col-12 products-ordered-check-right">
-                    <div class="d-flex products-ordered-check-right-card align-items-center">
-                        <button class="btn btn-sm products-ordered-check-right-btn">
-                            <i class="fa-solid fa-minus"></i>
-                        </button>
-                        <span class="mx-2">${item.quantity}</span>
-                        <button class="btn btn-sm products-ordered-check-right-btn">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
                     </div>
 
-                    <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
-                      "vi-VN"
-                    ).format(Math.floor(item.price * item.quantity))}đ</div>
+                      <hr style="margin: 5px 0 !important;">
+
+                    <div class="row products-ordered-card-q-p">
+                        <div class="col-12 products-ordered-check-right">
+                            <div class="d-flex products-ordered-check-right-card align-items-center">
+                                <input type="hidden" value="${item.id}"  style="display: none;">
+                                <button class="btn btn-sm products-ordered-check-right-btn2">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="mx-2">${item.quantity}</span>
+                                <button class="btn btn-sm products-ordered-check-right-btn2">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+
+                            <div class="products-ordered-check-right-price">${new Intl.NumberFormat(
+                              "vi-VN"
+                            ).format(Math.floor(item.price * item.quantity))}đ</div>
+                      </div>
                 </div>
+                      
             </div>
         `;
     // Thêm phần tử HTML vào container
@@ -142,6 +150,122 @@ function renderOrderItems(orderData) {
   });
 }
 
+
+document.addEventListener("click", (event) => {
+  // Xác định nút được nhấn có thuộc class `products-ordered-check-right-btn`
+  const button = event.target.closest(".products-ordered-check-right-btn");
+  if (button) {
+    // Lấy phần tử cha lớn nhất chứa toàn bộ thông tin sản phẩm
+    const productCard = button.closest(".big-div");
+
+    // Lấy thẻ input chứa id sản phẩm
+    const inputId = productCard.querySelector("input[type='hidden']");
+    const productId = inputId?.value; // Lấy giá trị id từ input
+
+    // Lấy div chứa số lượng và giá
+    const parentDiv = button.closest(".col-sm.products-ordered-check-right");
+
+    // Kiểm tra nút là giảm hay tăng
+    const isDecrease = button.querySelector("i").classList.contains("fa-minus");
+
+    // Lấy số lượng hiện tại
+    const quantitySpan = parentDiv.querySelector("span");
+    let quantity = parseInt(quantitySpan.textContent);
+
+    // Lấy giá hiện tại (định dạng số từ nội dung text)
+    const priceDiv = parentDiv.querySelector(".products-ordered-check-right-price");
+    let totalPrice = parseInt(priceDiv.textContent.replace(/\D/g, "")); // Loại bỏ ký tự không phải số
+    const unitPrice = totalPrice / quantity; // Giá từng đơn vị
+
+    // Xử lý tăng/giảm số lượng
+    if (isDecrease) {
+      quantity = Math.max(0, quantity - 1); // Không giảm dưới 0
+    } else {
+      quantity++;
+    }
+
+    // Cập nhật giá tiền và số lượng
+    const newTotalPrice = quantity * unitPrice; // Tổng giá mới
+    priceDiv.textContent = `${new Intl.NumberFormat("vi-VN").format(newTotalPrice)}đ`;
+    quantitySpan.textContent = quantity;
+
+    // Nếu số lượng = 0, xóa div lớn
+    if (quantity === 0 && isDecrease) {
+      productCard.remove(); // Xóa toàn bộ div lớn
+      deleteProductFromDB(productId); // Gọi hàm xóa sản phẩm với id
+    } else {
+      addToCart2(productId, quantity); // Gọi hàm cập nhật số lượng với id
+    }
+  }
+});
+
+document.addEventListener("click", (event) => {
+  // Xác định nút được nhấn có thuộc class `products-ordered-check-right-btn`
+  const button = event.target.closest(".products-ordered-check-right-btn2");
+  if (button) {
+    // Lấy phần tử cha lớn nhất chứa toàn bộ thông tin sản phẩm
+    const productCard = button.closest(".big-div");
+
+    // Lấy thẻ input chứa id sản phẩm
+    const inputId = productCard.querySelector("input[type='hidden']");
+    const productId = inputId?.value; // Lấy giá trị id từ input
+
+    // Lấy div chứa số lượng và giá
+    const parentDiv = button.closest(".products-ordered-card-q-p");
+
+    // Kiểm tra nút là giảm hay tăng
+    const isDecrease = button.querySelector("i").classList.contains("fa-minus");
+
+    // Lấy số lượng hiện tại
+    const quantitySpan = parentDiv.querySelector("span");
+    let quantity = parseInt(quantitySpan.textContent);
+
+    // Lấy giá hiện tại (định dạng số từ nội dung text)
+    const priceDiv = parentDiv.querySelector(".products-ordered-check-right-price");
+    let totalPrice = parseInt(priceDiv.textContent.replace(/\D/g, "")); // Loại bỏ ký tự không phải số
+    const unitPrice = totalPrice / quantity; // Giá từng đơn vị
+
+    // Xử lý tăng/giảm số lượng
+    if (isDecrease) {
+      quantity = Math.max(0, quantity - 1); // Không giảm dưới 0
+    } else {
+      quantity++;
+    }
+
+    // Cập nhật giá tiền và số lượng
+    const newTotalPrice = quantity * unitPrice; // Tổng giá mới
+    priceDiv.textContent = `${new Intl.NumberFormat("vi-VN").format(newTotalPrice)}đ`;
+    quantitySpan.textContent = quantity;
+
+    // Nếu số lượng = 0, xóa div lớn
+    if (quantity === 0 && isDecrease) {
+      productCard.remove(); // Xóa toàn bộ div lớn
+      deleteProductFromDB(productId); // Gọi hàm xóa sản phẩm với id
+    } else {
+      addToCart2(productId, quantity); // Gọi hàm cập nhật số lượng với id
+    }
+  }
+});
+
+
+function deleteProductFromDB(productId) {
+  // Gọi API xóa sản phẩm
+  fetch("index.php?controller=cart&action=remove&idProduct=" + encodeURIComponent(productId))
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        alert("Đã xóa sản phẩm khỏi giỏ hàng!");
+        location.reload(); // Tải lại trang sau khi xóa
+      } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
+    });
+}
+
 // Sản phẩm gọi ý
 function renderProducts(products, sectionId) {
   // Tìm tất cả các section theo ID (sử dụng querySelectorAll vì có thể có nhiều section)
@@ -185,13 +309,38 @@ fetch("index.php?controller=product&action=listSnackProducts")
     renderProducts(data.products, ".suggestions-card-deck.d-flex")
   );
 
-function addToCart(product_id) {
+function addToCart(product_id, quantity = 1) {
   const data = new FormData();
   data.append("product_id", product_id);
-  data.append("quantity", 1);
+  data.append("quantity", quantity);
 
   // Gọi API thêm sản phẩm vào giỏ hàng
   fetch("index.php?controller=user&action=addToCart", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        alert("Đã thêm sản phẩm vào giỏ hàng!");
+        location.reload(); // Tải lại trang sau khi thêm
+      } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
+    });
+}
+
+function addToCart2(product_id, quantity) {
+  const data = new FormData();
+  data.append("product_id", product_id);
+  data.append("quantity", quantity);
+
+  // Gọi API thêm sản phẩm vào giỏ hàng
+  fetch("index.php?controller=cart&action=updateQuantity", {
     method: "POST",
     body: data,
   })

@@ -1,32 +1,3 @@
-<?php
-    // require_once __DIR__ . '/../../Controllers/ProductController.php';
-
-    // use App\Controllers\ProductController;
-
-    // // Tạo instance ProductController và lấy danh sách sản phẩm
-    // $productController = new ProductController();
-
-    // // Lấy danh sách sản phẩm theo từng mục
-    // // Sản phẩm ưu đãi
-    // $promotionProducts = json_decode($productController->listPromotionProducts(), true)['products'];
-    // // Sản phẩm mới
-    // $newProducts = json_decode($productController->listNewProducts(), true)['products'];
-    // // Sản phẩm combo 1
-    // $combo1Products = json_decode($productController->listCombo1Products(), true)['products'];
-    // // Sản phẩm combo nhóm
-    // $comboGroupProducts = json_decode($productController->listComboGroupProducts(), true)['products'];
-    // // Sản phẩm gà rán - gà quay
-    // $chickenProducts = json_decode($productController->listChickenProducts(), true)['products'];
-    // // Sản phẩm burger - cơm - mì ý
-    // $mainDishProducts = json_decode($productController->listMainDishProducts(), true)['products'];
-    // // Sản phẩm snack
-    // $snackProducts = json_decode($productController->listSnackProducts(), true)['products'];
-    // // Sản phẩm thức uống tráng miệng
-    // $drinkDessertProducts = json_decode($productController->listDrinkDessertProducts(), true)['products'];
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

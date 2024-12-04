@@ -86,7 +86,7 @@
     }
 
     .container-product-col {
-        flex: 0 0 auto;
+        flex: 0 0 auto !important;
         width: 220px !important;
         height: 395px !important;
     }
@@ -254,7 +254,7 @@
     }
 
     .container-product-col {
-        flex: 0 0 auto;
+        flex: 0 0 auto !important;
         width: 220px !important;
         height: 395px !important;
     }
