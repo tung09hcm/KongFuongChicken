@@ -107,6 +107,10 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
+
+            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
+            $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+
             $userModel = new ModelsUserModel();
             $userModel->updateInfo($_SESSION['user_id'], $phone, $address);
             $user = $userModel->getAccountById($_SESSION['user_id']);
@@ -124,6 +128,12 @@ class UserController {
             $last_name = trim($_POST['last_name']);
             $email = trim($_POST['email']);
             $phone = trim($_POST['phone']);
+
+            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
+            $first_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $first_name);
+            $last_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $last_name);
+            $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
+
             $accountModel = new AccountModel();
             $accountModel->editAccount($_SESSION['user_id'], $first_name, $last_name, $email, $phone);
             echo json_encode(['status' => 'success', 'message' => 'Thông tin đã được cập nhật.']);
@@ -136,8 +146,14 @@ class UserController {
     public function changePassword() {
         $this->checkAuth('user');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             $current_password = trim($_POST['current_password']);
             $new_password = password_hash(trim($_POST['new_password']), PASSWORD_BCRYPT);
+
+            $current_password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $current_password);
+            $new_password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $new_password);
+
+
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountById($_SESSION['user_id']);
             if ($account && password_verify($current_password, $account['password'])) {
@@ -165,9 +181,15 @@ class UserController {
         $productModel = new ModelsProductModel();
         $reviewModel = new ModelsReviewModel();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             $product_id = intval($_POST['product_id']);
             $content = trim($_POST['content']);
             $rating = intval($_POST['rating']);
+
+            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
+            $content = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $content);
+            $rating = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $rating);
+
             if ($rating >= 1 && $rating <= 5) {
                 $reviewModel->createReview($product_id, $_SESSION['user_id'], $content, $rating);
                 echo json_encode(['status' => 'success', 'message' => 'Đánh giá đã được gửi thành công.']);
@@ -190,6 +212,10 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product_id = intval($_POST['product_id']);
             $quantity = intval($_POST['quantity']);
+
+            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
+            $quantity = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $quantity);
+
             $cartModel = new ModelsCartModel();
             $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             if (!$cart) {
@@ -243,6 +269,11 @@ class UserController {
             $store_id = intval($_POST['store_id']);
             $discount_code = trim($_POST['discount_code']);
             $delivery_address = trim($_POST['delivery_address']);
+
+            $store_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $store_id);
+            $discount_code = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $discount_code);
+            $delivery_address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $delivery_address);
+
             // echo 'store_id: '.$store_id .'<br>';
             // echo 'discount_code: '.$discount_code .'<br>';
             // echo 'delivery_address: '.$delivery_address .'<br>';
@@ -321,6 +352,9 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_id = $_SESSION['user_id'];
             $address = trim($_POST['address']);
+
+            $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+
             $userModel = new ModelsUserModel();
             $userModel->addAddress($user_id, $address);
             echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được thêm.']);
@@ -335,6 +369,9 @@ class UserController {
         
         $user_id = $_SESSION['user_id'];
         $address = trim($_POST['address']);
+
+        $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+
         $userModel = new ModelsUserModel();
         $userModel->deleteAddress($user_id, $address);
         echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được xóa.']);
@@ -346,6 +383,10 @@ class UserController {
         
         $address_id = trim($_POST['address_id']);
         $address = trim($_POST['address']);
+
+        $address_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address_id);
+        $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+
         $userModel = new ModelsUserModel();
         $userModel->editAddress($address, $address_id);
         echo json_encode(['status' => 'success', 'message' => 'Địa chỉ đã được chỉnh sửa.']);
@@ -380,6 +421,7 @@ class UserController {
 
     public function getPostById() {
         $id = $_GET['idPost'];
+        $id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $id);
         $postModel = new PostModel();
         $post = $postModel->getPostById($id);
         echo json_encode(['status' => 'success', 'post' => $post]);

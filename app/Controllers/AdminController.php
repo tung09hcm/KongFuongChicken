@@ -101,7 +101,7 @@ class AdminController {
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật người dùng thành công.']);
             exit();
         }
-        $user = $userModel->getUserById($id);
+        $user = $userModel->getAccountById($id);
         echo json_encode(['status' => 'success', 'user' => $user]);
         exit();
     }
@@ -647,7 +647,7 @@ class AdminController {
 
             exit();
         }
-        $store = $storeModel->getStoreAndAdmin($id);
+        $store = $storeModel->getStoreAndAdmin($idAdmin);
         echo json_encode(['status' => true, 'store' => $store]);
         exit();
     }

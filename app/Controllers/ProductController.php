@@ -87,6 +87,7 @@ class ProductController {
 
     public function detail() {
         $id = $_GET['id'];
+        $id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $id);
         $productModel = new ModelsProductModel();
         $product = $productModel->getProductById($id);
         if ($product) {
@@ -103,6 +104,7 @@ class ProductController {
 
     public function viewDetail() {
         $id = $_GET['id'];
+        $id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $id);
         require __DIR__ . '/../Views/product/detail.php?id=' . $id;
     }
 }

@@ -26,6 +26,8 @@ class CartController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product_id = intval($_POST['product_id']);
             $quantity = intval($_POST['quantity']);
+            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
+            $quantity = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $quantity);
             $cartModel = new ModelsCartModel();
             $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
             if (!$cart) {
