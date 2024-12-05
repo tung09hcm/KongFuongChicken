@@ -135,7 +135,7 @@ class UserController {
             $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
             $first_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $first_name);
             $last_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $last_name);
-            $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
+            // $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
 
             $accountModel = new AccountModel();
             $accountModel->editAccount($_SESSION['user_id'], $first_name, $last_name, $email, $phone);
