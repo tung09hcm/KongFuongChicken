@@ -31,14 +31,15 @@ class AuthController {
                 $_POST = json_decode(file_get_contents("php://input"), true);
             }
             $email = trim($_POST['email']);
-            $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
+            // $email = preg_replace('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', '', $email);
             $password = trim($_POST['password']);
-            $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
+            // $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
             
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountByEmail($email);
             if ($account) {
-                // if (password_verify($password, $account['password'])) 
+                // if (password_verify($password, $account['password']))
+
                 if (($password == $account['password'])) 
                 {
                     

@@ -1,10 +1,5 @@
 <?php
 
-use App\Models\UserModel;
-use App\Models\OrderModel;
-use App\Models\CartModel;
-use App\Models\ProductModel;
-use App\Models\ReviewModel;
 use Models\AccountModel;
 use Models\CartModel as ModelsCartModel;
 use Models\DiscountModel;
@@ -57,6 +52,10 @@ class UserController {
     }
 
     public function Profile() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: index.php?controller=auth&action=index');
+            exit();
+        }
         require __DIR__ . '/../Views/user/edit-profile.php';
     }
 
@@ -274,9 +273,6 @@ class UserController {
             $discount_code = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $discount_code);
             $delivery_address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $delivery_address);
 
-            // echo 'store_id: '.$store_id .'<br>';
-            // echo 'discount_code: '.$discount_code .'<br>';
-            // echo 'delivery_address: '.$delivery_address .'<br>';
             if(isset($discount_code))
             {
                 $discount = $discountModel->getDiscountByCode($discount_code);
