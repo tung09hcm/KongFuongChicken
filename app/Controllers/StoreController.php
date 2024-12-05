@@ -9,7 +9,7 @@ class StoreController {
     public function search() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $location = trim($_POST['location']);
-            $location = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $location);
+            $location = preg_replace('/["\']/', '', $location);
             $storeModel = new ModelsStoreModel();
             $stores = $storeModel->searchStores($location);
             echo json_encode(['status' => 'success', 'stores' => $stores]);

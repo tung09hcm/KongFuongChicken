@@ -111,8 +111,8 @@ class UserController {
             $phone = trim($_POST['phone']);
             $address = trim($_POST['address']);
 
-            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
-            $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+            $phone = preg_replace('/["\']/', '', $phone);
+            $address = preg_replace('/["\']/', '', $address);
 
             $userModel = new ModelsUserModel();
             $userModel->updateInfo($_SESSION['user_id'], $phone, $address);
@@ -132,10 +132,10 @@ class UserController {
             $email = trim($_POST['email']);
             $phone = trim($_POST['phone']);
 
-            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
-            $first_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $first_name);
-            $last_name = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $last_name);
-            // $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
+            $phone = preg_replace('/["\']/', '', $phone);
+            $first_name = preg_replace('/["\']/', '', $first_name);
+            $last_name = preg_replace('/["\']/', '', $last_name);
+            $email = preg_replace('/["\']/', '', $email);
 
             $accountModel = new AccountModel();
             $accountModel->editAccount($_SESSION['user_id'], $first_name, $last_name, $email, $phone);
@@ -153,8 +153,8 @@ class UserController {
             $current_password = trim($_POST['current_password']);
             $new_password = password_hash(trim($_POST['new_password']), PASSWORD_BCRYPT);
 
-            $current_password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $current_password);
-            $new_password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $new_password);
+            $current_password = preg_replace('/["\']/', '', $current_password);
+            $new_password = preg_replace('/["\']/', '', $new_password);
 
 
             $accountModel = new AccountModel();
@@ -189,9 +189,9 @@ class UserController {
             $content = trim($_POST['content']);
             $rating = intval($_POST['rating']);
 
-            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
-            $content = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $content);
-            $rating = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $rating);
+            $product_id = preg_replace('/["\']/', '', $product_id);
+            $content = preg_replace('/["\']/', '', $content);
+            $rating = preg_replace('/["\']/', '', $rating);
 
             if ($rating >= 1 && $rating <= 5) {
                 $reviewModel->createReview($product_id, $_SESSION['user_id'], $content, $rating);
@@ -216,8 +216,8 @@ class UserController {
             $product_id = intval($_POST['product_id']);
             $quantity = intval($_POST['quantity']);
 
-            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
-            $quantity = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $quantity);
+            $product_id = preg_replace('/["\']/', '', $product_id);
+            $quantity = preg_replace('/["\']/', '', $quantity);
 
             $cartModel = new ModelsCartModel();
             $cart = $cartModel->getCartByUserId($_SESSION['user_id']);
@@ -273,9 +273,9 @@ class UserController {
             $discount_code = trim($_POST['discount_code']);
             $delivery_address = trim($_POST['delivery_address']);
 
-            $store_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $store_id);
-            $discount_code = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $discount_code);
-            $delivery_address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $delivery_address);
+            $store_id = preg_replace('/["\']/', '', $store_id);
+            $discount_code = preg_replace('/["\']/', '', $discount_code);
+            $delivery_address = preg_replace('/["\']/', '', $delivery_address);
 
             if(isset($discount_code))
             {
@@ -353,7 +353,7 @@ class UserController {
             $user_id = $_SESSION['user_id'];
             $address = trim($_POST['address']);
 
-            $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+            $address = preg_replace('/["\']/', '', $address);
 
             $userModel = new ModelsUserModel();
             $userModel->addAddress($user_id, $address);
@@ -370,7 +370,7 @@ class UserController {
         $user_id = $_SESSION['user_id'];
         $address = trim($_POST['address']);
 
-        $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+        $address = preg_replace('/["\']/', '', $address);
 
         $userModel = new ModelsUserModel();
         $userModel->deleteAddress($user_id, $address);
@@ -384,8 +384,8 @@ class UserController {
         $address_id = trim($_POST['address_id']);
         $address = trim($_POST['address']);
 
-        $address_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address_id);
-        $address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $address);
+        $address_id = preg_replace('/["\']/', '', $address_id);
+        $address = preg_replace('/["\']/', '', $address);
 
         $userModel = new ModelsUserModel();
         $userModel->editAddress($address, $address_id);
@@ -421,7 +421,7 @@ class UserController {
 
     public function getPostById() {
         $id = $_GET['idPost'];
-        $id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $id);
+        $id = preg_replace('/["\']/', '', $id);
         $postModel = new PostModel();
         $post = $postModel->getPostById($id);
         echo json_encode(['status' => 'success', 'post' => $post]);

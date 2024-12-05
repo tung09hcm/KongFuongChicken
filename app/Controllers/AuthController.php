@@ -33,7 +33,7 @@ class AuthController {
             $email = trim($_POST['email']);
             // $email = preg_replace('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', '', $email);
             $password = trim($_POST['password']);
-            // $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
+            // $password = preg_replace('/["\']/', '', $password);
             
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountByEmail($email);
@@ -101,17 +101,17 @@ class AuthController {
                 $_POST = json_decode(file_get_contents("php://input"), true);
             }
             $firstname = trim($_POST['firstName']);
-            $firstname = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $firstname);
+            $firstname = preg_replace('/["\']/', '', $firstname);
             $lastname = trim($_POST['lastName']);
-            $lastname = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $lastname);
+            $lastname = preg_replace('/["\']/', '', $lastname);
             // $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
             $password = trim($_POST['password']);
-            // $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
+            // $password = preg_replace('/["\']/', '', $password);
             $role = 'user';
             $email = trim($_POST['email']);
-            // $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
+            // $email = preg_replace('/["\']/', '', $email);
             $phone = trim($_POST['phone']);
-            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
+            $phone = preg_replace('/["\']/', '', $phone);
             $accountModel = new AccountModel();
             $userModel = new UserModel();
             if ($accountModel->getAccountByEmail($email)) {
