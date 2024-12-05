@@ -692,10 +692,12 @@ class AdminController {
 
             echo json_encode(['status' => true, 'message' => 'Cập nhật người dùng thành công.']);
 
+            $store = $storeModel->getStoreAndAdmin($account_id);
+            echo json_encode(['status' => true, 'store' => $store]);
             exit();
         }
-        $store = $storeModel->getStoreAndAdmin($id);
-        echo json_encode(['status' => true, 'store' => $store]);
+
+        header("Location: index.php");
         exit();
     }
     public function deleteStoreAndAdmin() {
