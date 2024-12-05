@@ -86,7 +86,7 @@
     }
 
     .container-product-col {
-        flex: 0 0 auto;
+        flex: 0 0 auto !important;
         width: 220px !important;
         height: 395px !important;
     }
@@ -155,6 +155,14 @@
         padding: 20px !important;
         background-color: #fff;
         box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (max-width: 480px) {
+    .container-recommend-col {
+        flex: 0 0 auto;
+        width: 220px !important;
+        height: 395px !important;
     }
 }
 
@@ -246,7 +254,7 @@
     }
 
     .container-product-col {
-        flex: 0 0 auto;
+        flex: 0 0 auto !important;
         width: 220px !important;
         height: 395px !important;
     }

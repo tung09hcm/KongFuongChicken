@@ -3,10 +3,12 @@
 use Models\AccountModel;
 use Models\AdminModel;
 use Models\UserModel;
+use Models\CartModel;
 
 require_once  __DIR__ ."/../Models/AccountModel.php";
 require_once  __DIR__ ."/../Models/UserModel.php";
 require_once  __DIR__ ."/../Models/AdminModel.php";
+require_once  __DIR__ ."/../Models/CartModel.php";
 
 
 class AuthController {
@@ -29,11 +31,15 @@ class AuthController {
                 $_POST = json_decode(file_get_contents("php://input"), true);
             }
             $email = trim($_POST['email']);
+            // $email = preg_replace('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', '', $email);
             $password = trim($_POST['password']);
+            // $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
+            
             $accountModel = new AccountModel();
             $account = $accountModel->getAccountByEmail($email);
             if ($account) {
-                // if (password_verify($password, $account['password'])) 
+                // if (password_verify($password, $account['password']))
+
                 if (($password == $account['password'])) 
                 {
                     
@@ -62,7 +68,7 @@ class AuthController {
                     }
                     else{
                         // TODO nối đến giao diện người dùng
-                        header("Location: index.php?controller=cart&action=Menu");
+                        header("Location: index.php?controller=user&action=Menu");
 
                     }
                     exit();
@@ -95,12 +101,17 @@ class AuthController {
                 $_POST = json_decode(file_get_contents("php://input"), true);
             }
             $firstname = trim($_POST['firstName']);
+            $firstname = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $firstname);
             $lastname = trim($_POST['lastName']);
+            $lastname = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $lastname);
             // $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
             $password = trim($_POST['password']);
+            // $password = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $password);
             $role = 'user';
             $email = trim($_POST['email']);
+            // $email = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $email);
             $phone = trim($_POST['phone']);
+            $phone = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $phone);
             $accountModel = new AccountModel();
             $userModel = new UserModel();
             if ($accountModel->getAccountByEmail($email)) {

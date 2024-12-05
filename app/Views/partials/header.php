@@ -19,22 +19,22 @@
             </button>
         </div>
 
-        <a href="../../Views/homepage/index.php" class="header-mobile-logo">
+        <a href="index.php?controller=user&action=Menu" class="header-mobile-logo">
             <img class="header-mobile-logo-item" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo-mobile.svg?v=5.0" alt="">
         </a>
 
         <ul class="header-mobile-cart-user">
             <!-- User icon -->
             <li class="header-mobile-user">
-                <a class="header-mobile-user-link" href="../../Views/auth/login.php">
+                <a class="header-mobile-user-link" href="index.php?controller=user&action=Profile">
                     <i class="header-mobile-user-link-icon fa-solid fa-user"></i>
                 </a>
             </li>
             <!-- Card icon -->
             <li class="header-mobile-cart">
-                <a class="header-mobile-cart-link" href="../../Views/cart/cart.php"> 
+                <a class="header-mobile-cart-link" href="index.php?controller=user&action=cart"> 
                     <i class="header-mobile-cart-link-icon fa-solid fa-cart-shopping"></i>
-                    <span class="header-mobile-cart-notice">1</span>
+                    <span class="header-mobile-cart-notice"></span>
                 </a>
             </li>
         </ul>
@@ -44,48 +44,30 @@
     <div id="sidebar_mobile" class="sidebar-mobile hide-on-tablet-desktop">
         <div class="sidebar-mobile-header">
             <button id="closeMenu" class="sidebar-mobile-btn-close btn-close" aria-label="Close"></button>
-            <a class="sidebar-mobile-cart-link" href="../../Views/cart/cart.php"> 
+            <a class="sidebar-mobile-cart-link" href="index.php?controller=user&action=cart"> 
                 <i class="sidebar-mobile-cart-link-icon fa-solid fa-cart-shopping"></i>
-                <span class="sidebar-mobile-cart-notice">1</span>
+                <span class="sidebar-mobile-cart-notice"></span>
             </a>
         </div>
         
         <hr style="margin: 5px 15px !important;">
 
         <h2 class="sidebar-mobile-tile">BẮT ĐẦU</h2>
-        <span class="sidebar-mobile-login">
-            <a href="../../Views/auth/login.php" class="sidebar-mobile-link">Đăng nhập</a>
-        </span> 
-        / 
-        <span>
-            <a href="../../Views/auth/register.php" class="sidebar-mobile-link">Đăng ký</a>
-        </span>
-
         <hr>
 
-        <a href="../../Views/product/index.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=user&action=Product" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">THỰC ĐƠN</h5>
             <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/menu.png?v=gOqnPL" alt="">
         </a>
         <hr>
-        <a href="../../Views/product/hotdeal.php" class="sidebar-category-mobile">
+        <a href="index.php?controller=user&action=hotDeal" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">KHUYẾN MÃI</h5>
             <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
         </a>
         <hr>
-        <a href="../../Views/bookparty/index.php" class="sidebar-category-mobile">
-            <h5 class="px-3 pt-3">DỊCH VỤ TIỆC</h5>
-            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/kfc-party.png?v=gOqnPL" alt="">
-        </a>
-        <hr>
-        <a href="" class="sidebar-category-mobile">
-            <h5 class="px-3 pt-3">HỆ THỐNG NHÀ HÀNG</h5>
-            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/find-kfc.png?v=gOqnPL" alt="">
-        </a>
-        <hr>
-        <a href="" class="sidebar-category-mobile">
-            <h5 class="px-3 pt-3">VỀ KFC</h5>
-            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/about-kfc.png?v=gOqnPL" alt="">
+        <a href="index.php?controller=user&action=Post" class="sidebar-category-mobile">
+            <h5 class="px-3 pt-3">TIN TỨC</h5>
+            <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
         </a>
         <hr style="margin: 10px 15px !important;">
 
@@ -106,7 +88,7 @@
     <div class="header hide-on-mobile">
         <nav class="navbar navbar-expand-lg navbar-light navbar-header">
             <div class="container container-header">
-                <a class="navbar-brand" href="../../Views/homepage/index.php">
+                <a class="navbar-brand" href="index.php?controller=user&action=Menu">
                     <img alt="KFC logo" class="navbar-brand-logo" src="https://static.kfcvietnam.com.vn/images/web/kfc-logo.svg?v=5.0"/>
                 </a>
                 <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
@@ -115,28 +97,25 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-list me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="../../Views/product/index.php">THỰC ĐƠN</a>
+                            <a class="nav-link active" href="index.php?controller=user&action=Product">THỰC ĐƠN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../Views/product/hotdeal.php">KHUYẾN MÃI</a>
+                            <a class="nav-link" href="index.php?controller=user&action=hotDeal">KHUYẾN MÃI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../Views/bookparty/index.php">DỊCH VỤ TIỆC</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">HỆ THỐNG NHÀ HÀNG</a>
+                            <a class="nav-link" href="index.php?controller=user&action=Post">TIN TỨC</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         <!-- User icon -->
                         <li class="nav-item navbar-header-user">
-                            <a class="nav-link" href="../../Views/auth/login.php"> <i class="nav-link-icon fa-solid fa-user"></i> </a>
+                            <a class="nav-link" href="index.php?controller=user&action=Profile"> <i class="nav-link-icon fa-solid fa-user"></i> </a>
                         </li>
                         <!-- Card icon -->
                         <li class="nav-item navbar-header-cart">
-                            <a class="nav-link" href="../../Views/cart/cart.php"> 
+                            <a class="nav-link" href="index.php?controller=user&action=Cart"> 
                                 <i class="nav-link-icon fa-solid fa-cart-shopping"></i>
-                                <span class="navbar-header-cart-notice">1</span>
+                                <span class="navbar-header-cart-notice"></span>
                             </a>
                         </li>
                         <!-- Category icon -->
@@ -158,13 +137,13 @@
         <div class="sidebar-category">
             <h5 class="px-3 pt-3">DANH MỤC MÓN ĂN</h5>
             <ul class="list-unstyled px-3">
-                <li><a href="../../Views/product/index.php#monmoi">Món Mới <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#combo1nguoi">Combo 1 Người <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#combonhom">Combo Nhóm <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#garan">Gà Rán - Gà Quay <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#burgercom">Burger - Cơm - Mì Ý <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#thucan">Thức Ăn Nhẹ <i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href="../../Views/product/index.php#thucuong">Thức Uống & Tráng Miệng <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=monmoi">Món Mới <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=combo1nguoi">Combo 1 Người <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=combonhom">Combo Nhóm <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=garan">Gà Rán - Gà Quay <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=burgercom">Burger - Cơm - Mì Ý <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=thucan">Thức Ăn Nhẹ <i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="index.php?controller=user&action=Product&section=thucuong">Thức Uống & Tráng Miệng <i class="fa-solid fa-angle-right"></i></a></li>
             </ul>
         </div>
         <hr>
@@ -212,6 +191,38 @@
     <!-- Link Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="../../Views/partials/partials.js"></script>
+    <script src="app/Views/partials/partials.js"></script>
+    <script>
+        fetch('index.php?controller=user&action=getQuantity')
+        .then(response => response.json())
+        .then(data => {
+            const quantityElement = document.querySelector('.navbar-header-cart-notice'); // Đảm bảo selector chính xác
+            if (quantityElement) {
+                if (data.quantity === null) {
+                    quantityElement.textContent = 0;
+                }
+                else {
+                    quantityElement.textContent = data.quantity.total_quantity; // Sử dụng textContent để thay đổi nội dung
+                }
+            } else {
+                console.error('Không tìm thấy phần tử với selector .navbar-header-cart-notice');
+            }
+
+            const quantityElement1 = document.querySelector('.header-mobile-cart-notice'); // Đảm bảo selector chính xác
+            if (quantityElement1) {
+                if (data.quantity === null) {
+                    quantityElement1.textContent = 0;
+                }
+                else {
+                    quantityElement1.textContent = data.quantity.total_quantity; // Sử dụng textContent để thay đổi nội dung
+                }
+            } else {
+                console.error('Không tìm thấy phần tử với selector .navbar-header-cart-notice');
+            }
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra khi lấy dữ liệu:', error);
+        });
+    </script>
 </body>
 </html>

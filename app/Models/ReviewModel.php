@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+require_once  __DIR__ ."/BaseModel.php";
+
 use PDO;
 
 class ReviewModel extends BaseModel {
@@ -15,7 +17,26 @@ class ReviewModel extends BaseModel {
     }
 
     public function getReviewsByProductId($product_id) {
-        $stmt = $this->db->prepare("SELECT REVIEW.*, ACCOUNT.first_name,ACCOUNT.last_name, FROM REVIEW JOIN USER ON REVIEW.user_id = USER.account_id JOIN ACCOUNT ON USER.account_id = ACCOUNT.id WHERE REVIEW.product_id = :product_id");
+        $stmt = $this->db->prepare("
+            SELECT 
+                REVIEW.*, 
+                ACCOUNT.first_name, 
+                ACCOUNT.last_name, 
+                REVIEW_REPLY.review_id AS review_id,
+                REVIEW_REPLY.reply_content, 
+                REVIEW_REPLY.reply_date, 
+                REVIEW_REPLY.admin_id,
+                ADMIN_ACCOUNT.first_name AS admin_first_name, 
+                ADMIN_ACCOUNT.last_name AS admin_last_name
+            FROM REVIEW 
+            JOIN USER ON REVIEW.user_id = USER.account_id 
+            JOIN ACCOUNT ON USER.account_id = ACCOUNT.id 
+            LEFT JOIN REVIEW_REPLY ON REVIEW.id = REVIEW_REPLY.review_id 
+            LEFT JOIN ACCOUNT AS ADMIN_ACCOUNT ON REVIEW_REPLY.admin_id = ADMIN_ACCOUNT.id 
+            WHERE REVIEW.product_id = :product_id
+        ");
+
+
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();

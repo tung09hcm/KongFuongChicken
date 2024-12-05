@@ -16,11 +16,22 @@ require_once  __DIR__ ."/../Models/OrderModel.php";
 require_once  __DIR__ ."/../Models/CartModel.php";
 require_once  __DIR__ ."/../Models/DiscountModel.php";
 require_once  __DIR__ ."/../Models/StoreModel.php";
+require_once  __DIR__ ."/../Models/AccountModel.php";
 class OrderController {
     public function history() {
         $this->checkAuth('user');
         $orderModel = new ModelsOrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
+        echo json_encode(['status' => 'success', 'orders' => $orders]);
+        exit();
+    }
+
+    public function getProductInOrder() {
+        $this->checkAuth('user');
+        $order_id = $_GET['orderId'];
+        $order_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $order_id);
+        $orderModel = new ModelsOrderModel();
+        $orders = $orderModel->getProductInOrder($order_id);
         echo json_encode(['status' => 'success', 'orders' => $orders]);
         exit();
     }
@@ -45,6 +56,10 @@ class OrderController {
             $store_id = intval($_POST['store_id']);
             $discount_code = trim($_POST['discount_code']);
             $delivery_address = trim($_POST['delivery_address']); 
+
+            $store_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $store_id);
+            $discount_code = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $discount_code);
+            $delivery_address = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $delivery_address);
 
             $discount = $discountModel->getDiscountByCode($discount_code);
             if ($discount) {

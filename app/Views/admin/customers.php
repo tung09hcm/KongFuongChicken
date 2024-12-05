@@ -108,7 +108,7 @@
                             <td>${customer.last_name}</td>
                             <td>${customer.phone}</td>
                             <td>${customer.email}</td>
-                        </tr>;
+                        </tr>
                     `;
                 });
             };
@@ -217,7 +217,7 @@
 
                 // Xác nhận trước khi xóa
                 if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
-                    fetch('index.php?controller=admin&action=deleteUser&id='+${selectedCustomer.id})
+                    fetch('index.php?controller=admin&action=deleteUser&id=' + encodeURIComponent(selectedCustomer.id))
                     .then(response => response.json())
                     .then(data => {
                         alert('Khách hàng đã được xóa!');

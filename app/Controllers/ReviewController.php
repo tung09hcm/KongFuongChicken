@@ -1,6 +1,4 @@
 <?php
-namespace App\Controllers;
-
 
 
 use App\Models\ReviewModel;
@@ -10,8 +8,12 @@ use Models\ReviewModel as ModelsReviewModel;
 
 require_once  __DIR__ ."/../Models/ReviewModel.php";
 require_once  __DIR__ ."/../Models/ProductModel.php";
+require_once __DIR__ . "/../Models/BaseModel.php";
+
 class ReviewController {
-    public function view($product_id) {
+    public function view() {
+        $product_id = $_GET['product_id'];
+        $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
         $productModel = new ModelsProductModel();
         $reviewModel = new ModelsReviewModel();
         $product = $productModel->getProductById($product_id);
@@ -30,6 +32,11 @@ class ReviewController {
             $product_id = intval($_POST['product_id']);
             $content = trim($_POST['content']);
             $rating = intval($_POST['rating']);
+
+            $product_id = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $product_id);
+            $content = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $content);
+            $rating = preg_replace('/[^a-zA-Z0-9!@#$%^&*()_+=\-]/', '', $rating);
+
             if ($rating >= 1 && $rating <= 5) {
                 $reviewModel = new ModelsReviewModel();
                 $reviewModel->createReview($product_id, $_SESSION['user_id'], $content, $rating);

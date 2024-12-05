@@ -1,7 +1,10 @@
 <?php
 namespace Models;
 
+require_once  __DIR__ ."/BaseModel.php";
+
 use PDO;
+
 class CartModel extends BaseModel {
     public function createCart($user_id) {
         $stmt = $this->db->prepare("INSERT INTO CART (user_id) VALUES (:user_id)");
@@ -70,5 +73,17 @@ class CartModel extends BaseModel {
         $stmt->bindParam(':total', $total);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+
+    public function getQuantity($user_id) {
+        $stmt = $this->db->prepare("
+            SELECT SUM(cp.quantity) AS total_quantity
+            FROM CART c
+            JOIN CART_PRODUCT cp ON c.id = cp.cart_id
+            WHERE c.user_id = :user_id AND c.total = 0;
+        ");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

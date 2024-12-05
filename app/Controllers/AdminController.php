@@ -101,7 +101,7 @@ class AdminController {
             echo json_encode(['status' => 'success', 'message' => 'Cập nhật người dùng thành công.']);
             exit();
         }
-        $user = $userModel->getUserById($id);
+        $user = $userModel->getAccountById($id);
         echo json_encode(['status' => 'success', 'user' => $user]);
         exit();
     }
@@ -514,8 +514,7 @@ class AdminController {
             echo json_encode(['status' => 'error', 'message' => 'Email đã được sử dụng.']);
             exit();
         }
-        $account_id = $accountModel->createAccount($firstname, $lastname, $password, $email, $phone);
-        $adminModel->createAdmin($account_id);
+        $account_id = $adminModel->createAccount($firstname, $lastname, $password, $email, $phone);
     }
     public function deleteAdmin($id){
         $this->checkAuth('admin', 'can_delete_admin');
@@ -628,7 +627,6 @@ class AdminController {
 
         $storeModel = new StoreModel();
         $accountModel = new AccountModel();
-        $userModel = new UserModel();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = trim($_POST['name']);
@@ -647,7 +645,7 @@ class AdminController {
 
             exit();
         }
-        $store = $storeModel->getStoreAndAdmin($id);
+        $store = $storeModel->getStoreAndAdmin($idAdmin);
         echo json_encode(['status' => true, 'store' => $store]);
         exit();
     }
@@ -658,9 +656,7 @@ class AdminController {
         $this->checkAuth('admin', 'can_add_admin');
 
         $storeModel = new StoreModel();
-        $accountModel = new AccountModel();
         $adminModel = new AdminModel();
-        $userModel = new UserModel();
         $permissionModel = new AdminPermissionModel(); 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -676,8 +672,7 @@ class AdminController {
             $phone2 = trim($_POST['phone2']);
             $password = trim($_POST['password']);
 
-            $account_id = $accountModel->createAccount($first_name, $last_name, $password, $email, $phone2, 1);
-            $adminModel->createAdmin($account_id);
+            $account_id = $adminModel->createAccount($first_name, $last_name, $password, $email, $phone2);
 
             $permissions = [
                 'can_manage_user' => 1,

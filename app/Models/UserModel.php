@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+require_once  __DIR__ ."/AccountModel.php";
+
 use PDO;
 class UserModel extends AccountModel {
     public function createAccount($first_name, $last_name, $password, $email, $phone, $is_admin = 0) {
@@ -9,10 +11,11 @@ class UserModel extends AccountModel {
         if ($account) {
             $this->createUser($account['id']);
         }
+        return $account['id'];
     }   
 
     public function getAccountById($id) {
-        $sql = "SELECT * FROM USER WHERE id = :id";
+        $sql = "SELECT * FROM ACCOUNT WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -69,4 +72,12 @@ class UserModel extends AccountModel {
         $stmt->bindParam(':address', $address);
         return $stmt->execute();
     }
+
+    public function editAddress($address, $address_id) {
+        $stmt = $this->db->prepare("UPDATE USER_ADDRESS SET address = :address WHERE id = :address_id ");
+        $stmt->bindParam(':address_id', $address_id, PDO::PARAM_INT);
+        $stmt->bindParam(':address', $address);
+        return $stmt->execute();
+    }
+    
 }
