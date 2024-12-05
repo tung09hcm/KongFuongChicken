@@ -32,7 +32,7 @@
                     </div>
                     <div class="col user-edit-sidebar-info-name">
                         <h3>Xin chào</h3>
-                        <a class="user-edit-logout" href="#">Đăng xuất</a>
+                        <a class="user-edit-logout" href="index.php?controller=auth&action=logout">Đăng xuất</a>
                     </div>
                 </div>
                 <nav class="user-select mt-4">
@@ -86,7 +86,7 @@
                 <div class="user-edit-sidebar text-center">
                     <img src="https://tmssl.akamaized.net//images/foto/galerie/cristiano-ronaldo-im-trikot-von-portugal-1718197560-139337.jpg?lm=1718197575" alt="Profile" class="rounded-circle mb-3 user-edit-img">
                     <h3>Xin chào</h3>
-                    <a class="user-edit-logout" href="#">Đăng xuất</a>
+                    <a class="user-edit-logout" href="index.php?controller=auth&action=logout">Đăng xuất</a>
                     <nav class="nav flex-column mt-4">
                         <a class="user-edit-item active" href="index.php?controller=user&action=previousOrders">Đơn hàng đã đặt</a>
                         <a class="user-edit-item" href="index.php?controller=user&action=Addresses">Địa chỉ của bạn</a>
@@ -218,7 +218,7 @@
             .then(data => {
                 console.log(data);
                 let orderDetail = document.getElementById('popup');
-                console.log("lấy data: ",orderId)
+                
                 orderDetail.innerHTML = `
                     <div class="id-order">
                         <svg onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
@@ -231,9 +231,7 @@
                             ${data.orders 
                             ? data.orders.map(detail => `
                                 <div class="dish-name">
-                                    console.log("detail.quantity: ",detail.quantity)
-
-                                    <h5>${detail.quantity}x ${detail.product_name}</h5>
+                                    <h5>${detail.quantity}x ${detail.name}</h5>
                                     <h5>${Number(detail.price * detail.quantity).toLocaleString()}đ</h5>
                                 </div>
                                 `).join('')

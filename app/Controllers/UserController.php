@@ -48,12 +48,16 @@ class UserController {
     }
 
     public function Cart() {
+        if (!isset($_SESSION['user_id'])) {
+            require __DIR__ . '/../Views/auth/login.php';
+            exit();
+        }
         require __DIR__ . '/../Views/cart/cart.php';
     }
 
     public function Profile() {
         if (!isset($_SESSION['user_id'])) {
-            header('Location: index.php?controller=auth&action=index');
+            require __DIR__ . '/../Views/auth/login.php';
             exit();
         }
         require __DIR__ . '/../Views/user/edit-profile.php';
@@ -260,7 +264,7 @@ class UserController {
         // echo '</pre>';
         $total = 0;
         foreach ($products as $product) {
-            $total += $product['price'];
+            $total += $product['price']* $product['quantity'];
         }
         // echo 'price: '.$total;
         // echo '<br>';
@@ -277,7 +281,7 @@ class UserController {
             {
                 $discount = $discountModel->getDiscountByCode($discount_code);
                 if ($discount) {
-                    $total -= ($total * ($discount['percentage'] / 100));
+                    $total -= ($total * ($discount['percentage']));
                     $discount_id = $discount['id'];
                 } else {
                     $discount_id = null;
@@ -296,7 +300,7 @@ class UserController {
             
             $cartModel->clearCart($cart['id']);
             // echo ' đặt hàng thành công';
-            // echo json_encode(['status' => 'success', 'message' => 'Đặt hàng thành công.', 'redirect' => BASE_URL . 'order/history']);
+            echo json_encode(['status' => 'success', 'message' => 'Đặt hàng thành công.', 'redirect' => BASE_URL . 'order/history']);
             exit();
         }
 

@@ -53,14 +53,6 @@
         <hr style="margin: 5px 15px !important;">
 
         <h2 class="sidebar-mobile-tile">BẮT ĐẦU</h2>
-        <span class="sidebar-mobile-login">
-            <a href="index.php?controller=auth&action=index" class="sidebar-mobile-link">Đăng nhập</a>
-        </span> 
-        
-        <span>
-            <a href="index.php?controller=auth&action=registerView" class="sidebar-mobile-link">Đăng ký</a>
-        </span>
-
         <hr>
 
         <a href="index.php?controller=user&action=Product" class="sidebar-category-mobile">
@@ -72,6 +64,7 @@
             <h5 class="px-3 pt-3">KHUYẾN MÃI</h5>
             <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">
         </a>
+        <hr>
         <a href="index.php?controller=user&action=Post" class="sidebar-category-mobile">
             <h5 class="px-3 pt-3">TIN TỨC</h5>
             <img src="https://static.kfcvietnam.com.vn/images/web/hamburger/lg/deal.png?v=gOqnPL" alt="">

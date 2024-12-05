@@ -25,6 +25,112 @@
         include 'app/Views/partials/header.php';
     ?>
 
+    <!-- Main -->
+    <div class="top-bar top-bar-on-mobile d-flex justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center">
+        <div class="d-flex">
+            <span class="icon-text hide-on-mobile">
+                Đặt Ngay
+            </span>
+            <span class="icon-text">
+                <span class="icon-at-home"></span>
+                Giao Hàng
+            </span>
+            <span class="icon-text">
+                <span class="icon-at-pickup"></span>
+                hoặc Mang đi
+            </span>
+        </div>
+            <button class="btn">
+            Bắt đầu đặt hàng
+            </button>
+        </div>
+    </div>
+
+    <div class="container mt-3 product-detail hide-on-tablet-desktop">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center product-detail-image">
+                <img src="" alt="" class="product-detail-image-item" height="500" width="500"/>
+            </div>
+        </div>    
+
+        <hr style="border-top: 2px solid #B6B6B6 !important; margin-top: 15px !important; margin-bottom: 10px !important;">
+        
+        <div class="row justify-content-center mt-3">
+            <div class="col-12">
+                <div class="col-md-6 product-detail-card">
+                    <div class="product-detail-card-item">
+                        <h5></h5>
+                        <p></p>
+                        <p>
+                            <span class="product-detail-card-price">Giá: </span>
+                        </p>
+                        <button class="btn product-detail-btn">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product detail -->
+    <div class="container mt-4 product-detail hide-on-mobile">
+        <div class="row justify-content-center">
+            <div class="col-md-6 product-detail-image">
+                <img src="" alt="" class="product-detail-image-item" height="500" width="500"/>
+            </div>
+            <div class="col-md-6 product-detail-card">
+                <div class="product-detail-card-item">
+                    <h5></h5>
+                    <p></p>
+                    <p class="product-detail-card-item-price">
+                        <span>Giá: </span>
+                    </p>
+                    <button class="btn product-detail-btn">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-comment mt-5">
+        <h2>Bình luận</h2>
+
+        <div class="comment-input">
+            <form action="" method="POST" id="comment-input-user" name="comment-input-user">
+                <input type="hidden" name="product_id" value="<?php echo $id; ?>">
+                <div class="comment-body"> 
+                    <textarea name="content" id="user-comment" placeholder="Nhập bình luận của bạn..." rows="4" style="width: 100%;"></textarea>
+                </div>
+                <!-- Select để chọn đánh giá sao -->
+                <div class="rating-container">
+                    <label for="rating">Đánh giá:</label>
+                    <select id="rating" name="rating">
+                        <option value="1">1 sao</option>
+                        <option value="2">2 sao</option>
+                        <option value="3">3 sao</option>
+                        <option value="4">4 sao</option>
+                        <option value="5">5 sao</option>
+                    </select>
+                </div>
+                <div class="comment-footer">
+                    <button type="submit" class="btn" id="submit-comment">Gửi bình luận</button>
+                </div>
+            </form>
+                
+        </div>
+    </div>
+
+    
+
+    <!-- Footer -->
+    <?php 
+        include 'app/Views/partials/footer.php';
+    ?>
+
+    <!-- Link Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="app/Views/product/product.js"></script>
     <script>
         const id = "<?php echo $id; ?>";
 
@@ -259,112 +365,5 @@
 
 
     </script>
-
-    <!-- Main -->
-    <div class="top-bar top-bar-on-mobile d-flex justify-content-center">
-        <div class="container d-flex justify-content-center align-items-center">
-        <div class="d-flex">
-            <span class="icon-text hide-on-mobile">
-                Đặt Ngay
-            </span>
-            <span class="icon-text">
-                <span class="icon-at-home"></span>
-                Giao Hàng
-            </span>
-            <span class="icon-text">
-                <span class="icon-at-pickup"></span>
-                hoặc Mang đi
-            </span>
-        </div>
-            <button class="btn">
-            Bắt đầu đặt hàng
-            </button>
-        </div>
-    </div>
-
-    <div class="container mt-3 product-detail hide-on-tablet-desktop">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center product-detail-image">
-                <img src="" alt="" class="product-detail-image-item" height="500" width="500"/>
-            </div>
-        </div>    
-
-        <hr style="border-top: 2px solid #B6B6B6 !important; margin-top: 15px !important; margin-bottom: 10px !important;">
-        
-        <div class="row justify-content-center mt-3">
-            <div class="col-12">
-                <div class="col-md-6 product-detail-card">
-                    <div class="product-detail-card-item">
-                        <h5></h5>
-                        <p></p>
-                        <p>
-                            <span class="product-detail-card-price">Giá: </span>
-                        </p>
-                        <button class="btn product-detail-btn">Thêm</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product detail -->
-    <div class="container mt-4 product-detail hide-on-mobile">
-        <div class="row justify-content-center">
-            <div class="col-md-6 product-detail-image">
-                <img src="" alt="" class="product-detail-image-item" height="500" width="500"/>
-            </div>
-            <div class="col-md-6 product-detail-card">
-                <div class="product-detail-card-item">
-                    <h5></h5>
-                    <p></p>
-                    <p class="product-detail-card-item-price">
-                        <span>Giá: </span>
-                    </p>
-                    <button class="btn product-detail-btn">Thêm</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container container-comment mt-5">
-        <h2>Bình luận</h2>
-
-        <div class="comment-input">
-            <form action="" method="POST" id="comment-input-user" name="comment-input-user">
-                <input type="hidden" name="product_id" value="<?php echo $id; ?>">
-                <div class="comment-body"> 
-                    <textarea name="content" id="user-comment" placeholder="Nhập bình luận của bạn..." rows="4" style="width: 100%;"></textarea>
-                </div>
-                <!-- Select để chọn đánh giá sao -->
-                <div class="rating-container">
-                    <label for="rating">Đánh giá:</label>
-                    <select id="rating" name="rating">
-                        <option value="1">1 sao</option>
-                        <option value="2">2 sao</option>
-                        <option value="3">3 sao</option>
-                        <option value="4">4 sao</option>
-                        <option value="5">5 sao</option>
-                    </select>
-                </div>
-                <div class="comment-footer">
-                    <button type="submit" class="btn" id="submit-comment">Gửi bình luận</button>
-                </div>
-            </form>
-                
-        </div>
-    </div>
-
-    
-
-    <!-- Footer -->
-    <?php 
-        include 'app/Views/partials/footer.php';
-    ?>
-
-    <!-- Link Javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="app/Views/product/product.js"></script>
 </body>
 </html>
