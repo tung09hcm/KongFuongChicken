@@ -215,8 +215,9 @@ class AdminController {
             $price = floatval($_POST['price']);
             $description = trim($_POST['description']);
             $image_link = trim($_POST['image_link']);
+            $IsNew = 1;
             $productModel = new ProductModel();
-            $productModel->createProduct($name, $price, $description, $image_link);
+            $productModel->createProduct($name, $price, $description, $image_link, $IsNew);
             echo json_encode(['status' => 'success', 'message' => 'Thêm sản phẩm thành công.']);
             exit();
         }

@@ -75,12 +75,24 @@ class ProductModel extends BaseModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function createProduct($name, $price, $description, $image_link) {
-        $stmt = $this->db->prepare("INSERT INTO PRODUCT (name, price, description, image_link) VALUES (:name, :price, :description, :image_link)");
+    public function createProduct($name, $price, $description, $image_link, $IsNew) {
+        // $stmt = $this->db->prepare("INSERT INTO PRODUCT (name, price, description, image_link) VALUES (:name, :price, :description, :image_link)");
+        $stmt = $this->db->prepare(
+            "INSERT INTO PRODUCT (
+                name, price, description, image_link,
+                IsRecommended, IsDiscounted, IsNew, IsCombo1, IsComboGroup,
+                IsChicken, IsMainDish, IsSnack, IsDrinkDessert
+            ) VALUES (
+                :name, :price, :description, :image_link,
+                0, 0, :IsNew, 0, 0,
+                0, 0, 0, 0
+            )"
+        );
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':image_link', $image_link);
+        $stmt->bindParam(':IsNew', $IsNew, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
