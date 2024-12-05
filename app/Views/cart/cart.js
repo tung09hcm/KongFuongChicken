@@ -407,8 +407,10 @@ function addDiscount() {
           const originalTotal = parseFloat(
             r.textContent.replace(/[^\d.-]/g, "")
           ); // Lấy giá trị số từ chuỗi
-          const newTotal =
-            originalTotal * (1 - validDiscount.percentage) + 10000; // Áp dụng giảm giá
+          console.log(originalTotal);
+          const newTotal = originalTotal * 1000 * (1 - validDiscount.percentage) + 10000; // Áp dụng giảm giá
+          console.log(newTotal);
+          console.log(validDiscount.percentage);
           e.textContent = newTotal.toLocaleString() + "đ"; // Định dạng lại thành chuỗi
         });
       } else {

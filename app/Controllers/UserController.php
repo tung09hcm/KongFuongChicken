@@ -243,7 +243,7 @@ class UserController {
         // echo '</pre>';
         $total = 0;
         foreach ($products as $product) {
-            $total += $product['price'];
+            $total += $product['price']* $product['quantity'];
         }
         // echo 'price: '.$total;
         // echo '<br>';
@@ -258,7 +258,7 @@ class UserController {
             {
                 $discount = $discountModel->getDiscountByCode($discount_code);
                 if ($discount) {
-                    $total -= ($total * ($discount['percentage'] / 100));
+                    $total -= ($total * ($discount['percentage']));
                     $discount_id = $discount['id'];
                 } else {
                     $discount_id = null;

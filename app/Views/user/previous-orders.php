@@ -218,7 +218,7 @@
             .then(data => {
                 console.log(data);
                 let orderDetail = document.getElementById('popup');
-                console.log("lấy data: ",orderId)
+                
                 orderDetail.innerHTML = `
                     <div class="id-order">
                         <svg onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
@@ -231,9 +231,7 @@
                             ${data.orders 
                             ? data.orders.map(detail => `
                                 <div class="dish-name">
-                                    console.log("detail.quantity: ",detail.quantity)
-
-                                    <h5>${detail.quantity}x ${detail.product_name}</h5>
+                                    <h5>${detail.quantity}x ${detail.name}</h5>
                                     <h5>${Number(detail.price * detail.quantity).toLocaleString()}đ</h5>
                                 </div>
                                 `).join('')
